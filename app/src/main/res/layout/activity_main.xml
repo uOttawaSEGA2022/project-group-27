@@ -86,7 +86,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00FFFFFF"
-                android:text="Button"
+                android:text="Sign up"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
