@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:gravity="center"
-            android:text="Mealer App"
+            android:text="Mealer"
             android:textAlignment="center"
             android:textSize="28sp" />
 
