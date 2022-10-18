@@ -15,6 +15,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     protected void onActivityResult(View view){
-
+        // test
     }
 }
