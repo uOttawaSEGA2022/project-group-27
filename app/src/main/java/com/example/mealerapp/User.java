@@ -14,6 +14,10 @@ public class User {
 
     }
 
+    public User(){
+        this.firstName = this.lastName = this.Address = this.Email = this.Password = null;
+    }
+
     public void setName(String firstName, String lastName){
 
         this.firstName = firstName;
