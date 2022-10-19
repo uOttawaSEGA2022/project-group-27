@@ -7,12 +7,16 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="404dp"
-        android:layout_height="506dp"
+        android:layout_width="407dp"
+        android:layout_height="502dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="120dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="83dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -23,39 +27,49 @@
             android:textAlignment="center"
             android:textSize="28sp" />
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="49dp" />
+            android:layout_height="113dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextTextEmailAddress"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="61dp" />
+            android:layout_height="98dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextTextPassword"
-            android:layout_width="349dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
 
-        <Space
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="36dp" />
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="365dp"
-            android:layout_height="wrap_content"
-            android:text="Login" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="336dp"
+                android:layout_height="wrap_content"
+                android:text="Login" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,36 +77,38 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="150dp"
+            <TextView
+                android:id="@+id/signUp"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:layout_weight="1"
+                android:width="150dp"
+                android:gravity="center"
+                android:onClick="register()"
+                android:text="Sign Up"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#00FF0202"
                 android:text="Forget Password"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00FFFFFF"
-                android:text="Sign up"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="11dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
