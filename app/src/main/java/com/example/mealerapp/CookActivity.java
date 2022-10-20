@@ -38,7 +38,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view){
         switch(view.getId()){
             case(R.id.nextButton):
-                Cook cook = new Cook(first.toString(),address.toString(),last.toString(),email.toString(),pass.toString(),desc.toString());
+                Cook cook = new Cook(UserRole.COOK, first.toString(),address.toString(),last.toString(),email.toString(),pass.toString(),desc.toString());
 
         }
     }
