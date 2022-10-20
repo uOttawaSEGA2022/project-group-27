@@ -4,24 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientActivity">
+    tools:context=".AddPaymentMethod">
 
     <LinearLayout
-        android:layout_width="408dp"
-        android:layout_height="732dp"
-        android:gravity="center|center_horizontal"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/editTextNumber"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Full Name"
+            android:hint="Card Number"
+            android:inputType="number" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName3"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name on Card"
             android:inputType="textPersonName" />
 
         <Space
@@ -29,58 +39,34 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/editTextDate"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Address"
-            android:inputType="textPostalAddress" />
+            android:hint="Expiration Date"
+            android:inputType="date" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/editTextNumber2"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:inputType="textPassword" />
+            android:hint="CVV"
+            android:inputType="number" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
         <Button
-            android:id="@+id/addPayment"
+            android:id="@+id/button2"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Add Payment Info" />
+            android:text="Complete Signup" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
