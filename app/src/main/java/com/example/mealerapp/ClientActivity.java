@@ -14,7 +14,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button addPayment;
     private EditText name, address, email, password, confirmPassword;
-    private EditText[] textFields;
+    private String[] textFields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
-        textFields =  new EditText[]{name,address,email, password, confirmPassword};
+        textFields =  new String[]{name.toString(),address.toString(),email.toString(), password.toString(), confirmPassword.toString()};
     }
 
     @Override

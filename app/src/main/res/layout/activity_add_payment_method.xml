@@ -11,11 +11,13 @@
         android:layout_height="729dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/cardNumber"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +29,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/nameOnCard"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -39,10 +41,11 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/expirationDate"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="4"
             android:hint="Expiration Date"
             android:inputType="date" />
 
@@ -51,7 +54,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/editTextNumber2"
+            android:id="@+id/CVV"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -63,7 +66,7 @@
             android:layout_height="15dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/completeSignUp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Complete Signup" />
