@@ -14,15 +14,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.LinkedList;
 
 public class ClientActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button addPayment;
     private EditText editTextName, editTextAddress, editTextEmail, editTextPassword, editTextConfirmPassword;
-    private String[] textFields;
 
     private FirebaseAuth mAuth;
 
@@ -51,25 +50,19 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
         switch(view.getId()){
             case R.id.addPayment:
                 registerUser();
+                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }
 
     private void registerUser() {
-//        String[] textFields = getIntent().getExtras().getStringArray("textFields");
 
-        String name = editTextName.getText().toString();
+        String[] name = editTextName.getText().toString().trim().split(" ");
+        String firstName = name[0];
+        String lastName = name[1];
         String address = editTextAddress.getText().toString();
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
-
-//        CreditCard cc = new CreditCard(
-//                nameOnCard.toString(),
-//                Long.parseLong(cardNumber.toString()),
-//                expirationDate.toString(),
-//                Integer.parseInt(CVV.toString())
-//        );
-
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -77,7 +70,9 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Client client = new Client(
-                                    name,
+                                    "client",
+                                    firstName,
+                                    lastName,
                                     address,
                                     email,
                                     password

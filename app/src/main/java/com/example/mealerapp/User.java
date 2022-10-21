@@ -2,12 +2,12 @@ package com.example.mealerapp;
 
 public class User {
 
-    private UserRole role;
+    private String role;
 
     private String firstName, lastName, Address, Email, Password;
 
-    public User (String name, String Address, String Email, String Password){
-//        this.role = role;
+    public User (String role, String firstName, String lastName, String Address, String Email, String Password){
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.Address = Address;
@@ -54,9 +54,9 @@ public class User {
         return this.Password;
     }
 
-    public void setRole(UserRole role){this.role=role;}
+    public void setRole(String role){this.role=role;}
 
-    public UserRole getRole(){return this.role;}
+    public String getRole(){return this.role;}
 
 
 

@@ -10,6 +10,7 @@ public class CreditCard {
     private long cardNumber;
     private int CVV;
 
+    public CreditCard(){}
     public CreditCard(String nameOnCard, long cardNumber, String expirationDate, int CVV){
         this.cardNumber = cardNumber;
         this.expirationDate = expirationDate;
@@ -22,19 +23,19 @@ public class CreditCard {
     */
 
 
-    protected String getNameOnCard() {
+    public String getNameOnCard() {
         return this.nameOnCard;
     }
 
-    protected String getExpirationDate(){
+    public String getExpirationDate(){
         return this.expirationDate;
     }
 
-    protected long getCardNumber(){
+    public long getCardNumber(){
         return this.cardNumber;
     }
 
-    protected int getCVV(){
+    public int getCVV(){
         return this.CVV;
     }
 
