@@ -1,17 +1,28 @@
 package com.example.mealerapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddPaymentMethod extends AppCompatActivity implements View.OnClickListener {
 
+    private FirebaseAuth mAuth;
+
     private Button completeSignUp;
 
-    private String[] creditCardInfo;
+    private EditText nameOnCard, cardNumber, expirationDate, CVV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +32,13 @@ public class AddPaymentMethod extends AppCompatActivity implements View.OnClickL
         completeSignUp = (Button)findViewById(R.id.completeSignUp);
         completeSignUp.setOnClickListener(this);
 
-        creditCardInfo = new String[]{((EditText)findViewById(R.id.nameOnCard)).toString(),
-                                      ((EditText) findViewById(R.id.cardNumber)).toString(),
-                                      ((EditText)findViewById(R.id.expirationDate)).toString(),
-                                      ((EditText) findViewById(R.id.CVV)).toString()};
+        nameOnCard = (EditText)findViewById(R.id.nameOnCard);
+        cardNumber = (EditText) findViewById(R.id.cardNumber);
+        expirationDate = (EditText)findViewById(R.id.expirationDate);
+        CVV = (EditText) findViewById(R.id.CVV);
+
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
 
@@ -32,26 +46,10 @@ public class AddPaymentMethod extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.completeSignUp:
-                String[] textFields = getIntent().getExtras().getStringArray("textFields");
-
-                String firstName = textFields[0].split(" ")[0];
-                String lastName = textFields[0].split(" ")[1];
-
-                CreditCard cc = new CreditCard(
-                        creditCardInfo[0],
-                        Long.parseLong(creditCardInfo[1]),
-                        creditCardInfo[2],
-                        Integer.parseInt(creditCardInfo[3]));
-                Client client = new Client(
-                        UserRole.CLIENT,
-                        firstName,
-                        lastName,
-                        textFields[1],
-                        textFields[2],
-                        textFields[3],
-                        cc
-                );
+//                registerUser();
                 break;
         }
     }
+
+
 }

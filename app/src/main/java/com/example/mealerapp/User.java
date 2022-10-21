@@ -6,8 +6,8 @@ public class User {
 
     private String firstName, lastName, Address, Email, Password;
 
-    public User (UserRole role, String firstName, String Address, String lastName, String Email, String Password){
-        this.role = role;
+    public User (String name, String Address, String Email, String Password){
+//        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.Address = Address;
