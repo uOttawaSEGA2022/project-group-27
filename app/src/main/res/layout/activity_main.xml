@@ -34,7 +34,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/editTextLoginEmail"
                 android:layout_width="325dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -49,7 +49,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/editTextLoginPassword"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -65,7 +65,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnSignIn"
                 android:layout_width="336dp"
                 android:layout_height="wrap_content"
                 android:text="Login" />

@@ -18,8 +18,8 @@ public class CreditCard {
         this.CVV = CVV;
 
     }
+
     /* No need for setters since credit card information should not be able to be changed once made, a new credit card will need to be instantiated
-    * For now getters are protected, may be changed to public if required later on
     */
 
 

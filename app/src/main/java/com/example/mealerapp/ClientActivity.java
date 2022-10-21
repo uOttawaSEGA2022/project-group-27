@@ -24,6 +24,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextName, editTextAddress, editTextEmail, editTextPassword, editTextConfirmPassword;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
         editTextConfirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
 
