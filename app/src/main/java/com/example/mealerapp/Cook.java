@@ -7,8 +7,8 @@ public class Cook extends User{
     private String description;
     private ArrayList<Meal> meals;
 
-    public Cook(UserRole role, String firstName, String Address, String lastName, String Email, String Password, String desc){
-        super(role, firstName, lastName, Address, Email, Password);
+    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc){
+        super(Role, firstName, lastName, Address, Email, Password);
         description = desc;
     }
 
