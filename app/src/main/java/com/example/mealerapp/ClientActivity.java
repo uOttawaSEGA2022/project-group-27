@@ -53,7 +53,6 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
         switch(view.getId()){
             case R.id.addPayment:
                 registerUser();
-                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }
@@ -62,9 +61,60 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
-        String address = editTextAddress.getText().toString();
-        String email = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
+        String address = editTextAddress.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+        if(firstName.isEmpty()){
+            editTextFirstName.setError("Name is Required");
+            editTextFirstName.requestFocus();
+            return;
+        }
+        if(lastName.isEmpty()){
+            editTextLastName.setError("Name is Required");
+            editTextLastName.requestFocus();
+            return;
+        }
+        if(address.isEmpty()){
+            editTextAddress.setError("Address is Required");
+            editTextAddress.requestFocus();
+            return;
+        }
+        if(email.isEmpty()){
+            editTextEmail.setError("Invalid Email, Email is Required");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if(!email.isEmpty()){
+            if(!(email.contains("@") && (email.contains(".com") || email.contains(".ca")))){
+                editTextEmail.setError("Invalid Email, Email is Required");
+                editTextEmail.requestFocus();
+                return;
+            }
+        }
+
+        if(password.isEmpty()){
+            editTextPassword.setError("Password is Required");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(password.length() < 6){
+            editTextPassword.setError("Password must be at least 6 characters");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(confirmPassword.isEmpty()){
+            editTextConfirmPassword.setError("Please Confirm Password");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
+
+        if(!confirmPassword.equals(password)){
+            editTextConfirmPassword.setError("Passwords do not match");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -103,5 +153,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 });
+        startActivity(new Intent(ClientActivity.this, MainActivity.class));
+
     }
 }

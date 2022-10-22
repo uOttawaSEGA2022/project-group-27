@@ -48,7 +48,6 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         switch(view.getId()){
             case(R.id.nextButton):
                 registerUser();
-                startActivity(new Intent(this, MainActivity.class));
                 break;
 
         }
@@ -60,7 +59,65 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         String address = editTextAddress.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString();
+        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
         String desc = editTextDesc.getText().toString();
+
+        if(firstName.isEmpty()){
+            editTextFirstName.setError("Name is Required");
+            editTextFirstName.requestFocus();
+            return;
+        }
+        if(lastName.isEmpty()){
+            editTextLastName.setError("Name is Required");
+            editTextLastName.requestFocus();
+            return;
+        }
+        if(address.isEmpty()){
+            editTextAddress.setError("Address is Required");
+            editTextAddress.requestFocus();
+            return;
+        }
+        if(email.isEmpty()){
+            editTextEmail.setError("Invalid Email, Email is Required");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if(!email.isEmpty()){
+            if(!(email.contains("@") && (email.contains(".com") || email.contains(".ca")))){
+                editTextEmail.setError("Invalid Email, Email is Required");
+                editTextEmail.requestFocus();
+                return;
+            }
+        }
+
+        if(desc.isEmpty()){
+            editTextDesc.setError("Description is Required");
+            editTextDesc.requestFocus();
+            return;
+        }
+
+        if(password.isEmpty()){
+            editTextPassword.setError("Password is Required");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(password.length() < 6){
+            editTextPassword.setError("Password must be at least 6 characters");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(confirmPassword.isEmpty()){
+            editTextConfirmPassword.setError("Please Confirm Password");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
+
+        if(!confirmPassword.equals(password)){
+            editTextConfirmPassword.setError("Passwords do not match");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -68,7 +125,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Cook cook = new Cook(
-                                    "cook",
+                                    "Cook",
                                     firstName,
                                     lastName,
                                     address,
@@ -100,5 +157,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+        startActivity(new Intent(CookActivity.this, MainActivity.class));
+
     }
 }
