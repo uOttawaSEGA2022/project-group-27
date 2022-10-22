@@ -7,16 +7,29 @@
     tools:context=".landingPage">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
+        android:id="@+id/textViewWelcome"
+        android:layout_width="279dp"
+        android:layout_height="82dp"
         android:layout_marginTop="356dp"
-        android:layout_marginEnd="176dp"
         android:layout_marginBottom="356dp"
         android:text="Welcome"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="277dp"
+        android:text="logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(MainActivity.this, landingPage.class));
 
                         }else{
-                            Toast.makeText(MainActivity.this, "Invalid Login, " + task.getException().getMessage(), Toast.LENGTH_LONG);
+                            Toast.makeText(MainActivity.this, "Invalid Login", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

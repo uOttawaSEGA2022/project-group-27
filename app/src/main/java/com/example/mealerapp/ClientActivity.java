@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ClientActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button addPayment;
-    private EditText editTextName, editTextAddress, editTextEmail, editTextPassword, editTextConfirmPassword;
+    private EditText editTextFirstName, editTextLastName, editTextAddress, editTextEmail, editTextPassword, editTextConfirmPassword;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -36,7 +36,8 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
         addPayment = (Button)findViewById(R.id.addPayment);
         addPayment.setOnClickListener(this);
 
-        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
+        editTextLastName = (EditText) findViewById(R.id.editTextLastName);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -59,9 +60,8 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser() {
 
-        String[] name = editTextName.getText().toString().trim().split(" ");
-        String firstName = name[0];
-        String lastName = name[1];
+        String firstName = editTextFirstName.getText().toString().trim();
+        String lastName = editTextLastName.getText().toString().trim();
         String address = editTextAddress.getText().toString();
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
@@ -72,7 +72,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Client client = new Client(
-                                    "client",
+                                    "Client",
                                     firstName,
                                     lastName,
                                     address,
@@ -87,18 +87,18 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(ClientActivity.this,
-                                                        "Registeration Succussful",
+                                                        "Registration Successful",
                                                         Toast.LENGTH_LONG).show();
                                             }else{
                                                 Toast.makeText(ClientActivity.this,
-                                                        "Registeration Failed",
+                                                        "Registration Failed " + task.getException().getMessage(),
                                                         Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                         }else{
                             Toast.makeText(ClientActivity.this,
-                                    "Registeration Failed",
+                                    "Registeration Failed " + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }

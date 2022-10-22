@@ -25,10 +25,13 @@ public class User {
         this.lastName = lastName;
 
     }
+    public String getFirstName() { return this.firstName; }
 
-    public String getName(){
-        return this.firstName + " " + this.lastName;
-    }
+    public String getLastName() { return this.lastName;}
+
+//    public String getName(){
+//        return this.firstName + " " + this.lastName;
+//    }
 
     public void setAddress (String Address) {
         this.Address = Address;
