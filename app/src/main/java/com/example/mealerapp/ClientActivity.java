@@ -1,21 +1,28 @@
 package com.example.mealerapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class ClientActivity extends AppCompatActivity implements View.OnClickListener{
@@ -25,6 +32,8 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
 
     }
 
@@ -121,6 +131,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            CreditCard cc = new CreditCard("name",1234567890, "10/22", 424);
                             Client client = new Client(
                                     "Client",
                                     firstName,
@@ -130,22 +141,56 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                                     password
                             );
 
-                            FirebaseDatabase.getInstance().getReference("users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+                                    .set(client).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(ClientActivity.this,
-                                                        "Registration Successful",
-                                                        Toast.LENGTH_LONG).show();
-                                            }else{
-                                                Toast.makeText(ClientActivity.this,
-                                                        "Registration Failed " + task.getException().getMessage(),
-                                                        Toast.LENGTH_LONG).show();
-                                            }
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Registration Successful",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Registration Failed " + task.getException().getMessage(),
+                                                    Toast.LENGTH_LONG).show();
                                         }
                                     });
+
+                            db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("creditCards")
+                                    .add(cc)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(ClientActivity.this, "Added Payment Method Successfully", Toast.LENGTH_LONG).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Card Failed " + task.getException().getMessage(),
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+//                            FirebaseDatabase.getInstance().getReference("users")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if(task.isSuccessful()){
+//                                                Toast.makeText(ClientActivity.this,
+//                                                        "Registration Successful",
+//                                                        Toast.LENGTH_LONG).show();
+//                                            }else{
+//                                                Toast.makeText(ClientActivity.this,
+//                                                        "Registration Failed " + task.getException().getMessage(),
+//                                                        Toast.LENGTH_LONG).show();
+//                                            }
+//                                        }
+//                                    });
                         }else{
                             Toast.makeText(ClientActivity.this,
                                     "Registeration Failed " + task.getException().getMessage(),
