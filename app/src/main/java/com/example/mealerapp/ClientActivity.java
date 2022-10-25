@@ -175,22 +175,6 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                                         }
                                     });
 
-//                            FirebaseDatabase.getInstance().getReference("users")
-//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if(task.isSuccessful()){
-//                                                Toast.makeText(ClientActivity.this,
-//                                                        "Registration Successful",
-//                                                        Toast.LENGTH_LONG).show();
-//                                            }else{
-//                                                Toast.makeText(ClientActivity.this,
-//                                                        "Registration Failed " + task.getException().getMessage(),
-//                                                        Toast.LENGTH_LONG).show();
-//                                            }
-//                                        }
-//                                    });
                         }else{
                             Toast.makeText(ClientActivity.this,
                                     "Registeration Failed " + task.getException().getMessage(),
