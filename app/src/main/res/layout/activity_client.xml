@@ -10,35 +10,72 @@
     <LinearLayout
         android:layout_width="413dp"
         android:layout_height="731dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.166">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="100px"
+            android:text="Create an Account"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="413dp"
+            android:layout_height="84dp"
+            android:dividerPadding="20px"
+            android:orientation="horizontal"
+            android:padding="20px">
 
             <EditText
                 android:id="@+id/editTextFirstName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/input_bg"
+                android:elevation="10dp"
                 android:ems="10"
                 android:hint="First Name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:paddingLeft="25px"
+                android:textColorHint="#D6D3D3"
+                android:textSize="14sp"
+                android:translationX="30dp" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
 
             <EditText
                 android:id="@+id/editTextLastName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/input_bg"
+                android:elevation="10dp"
                 android:ems="10"
                 android:hint="Last Name"
-                android:inputType="textPersonName" />
+                android:includeFontPadding="false"
+                android:inputType="textPersonName"
+                android:paddingLeft="25px"
+                android:textColorHint="#D6D3D3"
+                android:textSize="14sp"
+                android:translationX="-30dp" />
         </LinearLayout>
 
         <Space
@@ -48,56 +85,78 @@
         <EditText
             android:id="@+id/editTextAddress"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/input_bg"
+            android:elevation="10dp"
             android:ems="10"
             android:hint="Address"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:paddingLeft="20dp"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="22dp" />
 
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/input_bg"
+            android:elevation="10dp"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="18dp" />
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/input_bg"
+            android:elevation="10dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="26dp" />
 
         <EditText
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/input_bg"
+            android:elevation="10dp"
             android:ems="10"
             android:hint="Confirm Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="34dp" />
 
         <Button
             android:id="@+id/addPayment"
-            android:layout_width="350dp"
+            android:layout_width="281dp"
             android:layout_height="wrap_content"
-            android:text="Complete Registration" />
+            android:background="@drawable/button_bg"
+            android:text="Complete Registration"
+            android:textColor="@color/grey_100" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

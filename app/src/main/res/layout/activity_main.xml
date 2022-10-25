@@ -57,7 +57,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="20dp"
                 android:textColorHint="#D6D3D3"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,10 +73,11 @@
                 android:background="@drawable/input_bg"
                 android:elevation="10dp"
                 android:ems="10"
-                android:hint="••••••••••"
+                android:hint="••••••••••••••"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
-                android:textColorHint="#D6D3D3" />
+                android:textColorHint="#D6D3D3"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -92,6 +93,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_weight="1"
+                android:paddingRight="15px"
                 android:text="FORGOT MY PASSWORD"
                 android:textAlignment="center"
                 android:textSize="10sp"
