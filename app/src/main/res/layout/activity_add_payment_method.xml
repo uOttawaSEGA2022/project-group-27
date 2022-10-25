@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_100"
     tools:context=".AddPaymentMethod">
 
     <LinearLayout
@@ -45,9 +46,9 @@
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:maxLength="4"
             android:hint="Expiration Date"
-            android:inputType="date" />
+            android:inputType="date"
+            android:maxLength="4" />
 
         <Space
             android:layout_width="match_parent"
