@@ -141,18 +141,18 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(CookActivity.this,
-                                                        "Registeration Succussful",
+                                                        "Registration Successful",
                                                         Toast.LENGTH_LONG).show();
                                             }else{
                                                 Toast.makeText(CookActivity.this,
-                                                        "Registeration Failed" + task.getException().getMessage(),
+                                                        "Registration Failed" + task.getException().getMessage(),
                                                         Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                         }else{
                             Toast.makeText(CookActivity.this,
-                                    "Registeration Failed" + task.getException().getMessage(),
+                                    "Registration Failed" + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }

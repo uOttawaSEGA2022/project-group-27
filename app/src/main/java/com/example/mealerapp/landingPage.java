@@ -19,6 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
+    //we should edit this to say if we got the admin credentials we will land on adminLanding
+    //and we need a landing for cook and a landing for client since each will have diff services
+
     private Button btnLogout;
     private TextView textViewWelcome;
 
@@ -56,7 +59,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(landingPage.this, "Error Occured", Toast.LENGTH_LONG).show();
+                Toast.makeText(landingPage.this, "Error Occurred", Toast.LENGTH_LONG).show();
             }
         });
 

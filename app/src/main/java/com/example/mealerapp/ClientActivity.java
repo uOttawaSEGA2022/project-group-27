@@ -177,7 +177,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
 
                         }else{
                             Toast.makeText(ClientActivity.this,
-                                    "Registeration Failed " + task.getException().getMessage(),
+                                    "Registration Failed " + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }
