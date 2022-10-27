@@ -4,27 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_100"
+    android:background="@color/white"
     tools:context=".CookActivity">
 
     <Button
         android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="162dp"
+        android:layout_width="166dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_bg"
         android:onClick="onNext"
         android:text="Next"
+        android:textColor="@color/grey_100"
+        android:textStyle="bold"
+        android:translationY="-30px"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="413dp"
-        android:layout_height="657dp"
+        android:layout_width="414dp"
+        android:layout_height="640dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -36,8 +47,9 @@
             android:text="Create an Account"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:translationY="-20px" />
 
         <Space
             android:layout_width="match_parent"
@@ -45,11 +57,15 @@
 
         <EditText
             android:id="@+id/textFirst"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(Please enter your first name)"
-            android:inputType="textPersonName" />
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -57,11 +73,15 @@
 
         <EditText
             android:id="@+id/textLast"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(Please enter your last name)"
-            android:inputType="textPersonName" />
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -69,11 +89,15 @@
 
         <EditText
             android:id="@+id/textUser"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(This will be your username)"
-            android:inputType="textPersonName" />
+            android:hint="Email"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -81,11 +105,15 @@
 
         <EditText
             android:id="@+id/textPass"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(This will be your password)"
-            android:inputType="textPersonName" />
+            android:hint="Password"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -93,11 +121,15 @@
 
         <EditText
             android:id="@+id/textConfirm"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(Please confirm your password)"
-            android:inputType="textPersonName" />
+            android:hint="Confirm Password"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -105,11 +137,15 @@
 
         <EditText
             android:id="@+id/textAddress"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/input_bg"
             android:ems="10"
-            android:hint="(Please enter your address)"
-            android:inputType="textPersonName" />
+            android:hint="Address"
+            android:inputType="textPersonName"
+            android:paddingLeft="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -117,33 +153,40 @@
 
         <EditText
             android:id="@+id/textDesc"
-            android:layout_width="335dp"
+            android:layout_width="300dp"
             android:layout_height="100dp"
+            android:background="@drawable/logout"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="(Please enter a short description of yourself)"
-            android:inputType="textMultiLine" />
+            android:hint="Enter a short description about yourself"
+            android:inputType="textMultiLine"
+            android:paddingLeft="30px"
+            android:paddingTop="30px"
+            android:textColorHint="#D6D3D3"
+            android:textSize="14sp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:text="Please Upload a Photo of a Void Cheque:" />
+            android:layout_height="51dp"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imgView"
-            android:layout_width="73dp"
-            android:layout_height="73dp"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:editable="false"
+                android:text="Attach a picture of your void cheque"
+                android:textColor="#B6B6B6"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgView"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+        </LinearLayout>
 
     </LinearLayout>
 
