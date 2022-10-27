@@ -29,7 +29,7 @@
 
         <EditText
             android:id="@+id/cardNumber"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -45,7 +45,7 @@
 
         <EditText
             android:id="@+id/nameOnCard"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/expirationDate"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -78,7 +78,7 @@
 
         <EditText
             android:id="@+id/CVV"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -111,7 +111,7 @@
 
             <Button
                 android:id="@+id/completeSignUp"
-                android:layout_width="330dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/button_bg"

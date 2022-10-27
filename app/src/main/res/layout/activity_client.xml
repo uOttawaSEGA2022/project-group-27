@@ -40,7 +40,7 @@
 
             <EditText
                 android:id="@+id/editTextFirstName"
-                android:layout_width="110dp"
+                android:layout_width="50dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -51,7 +51,7 @@
                 android:paddingLeft="25px"
                 android:textColorHint="#D6D3D3"
                 android:textSize="14sp"
-                android:translationX="30dp" />
+                android:translationX="50dp" />
 
             <Space
                 android:layout_width="20dp"
@@ -61,7 +61,7 @@
 
             <EditText
                 android:id="@+id/editTextLastName"
-                android:layout_width="110dp"
+                android:layout_width="50dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -73,7 +73,7 @@
                 android:paddingLeft="25px"
                 android:textColorHint="#D6D3D3"
                 android:textSize="14sp"
-                android:translationX="-30dp" />
+                android:translationX="-50dp" />
         </LinearLayout>
 
         <Space
@@ -82,7 +82,7 @@
 
         <EditText
             android:id="@+id/editTextAddress"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -98,7 +98,7 @@
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -114,7 +114,7 @@
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
@@ -130,7 +130,7 @@
 
         <EditText
             android:id="@+id/editTextConfirmPassword"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:background="@drawable/input_bg"
             android:ems="10"
