@@ -23,16 +23,17 @@
             android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
         <ListView
             android:id="@+id/message_Box"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:background="#D8D5D5" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
