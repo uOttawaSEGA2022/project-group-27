@@ -8,17 +8,19 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class Complaints {
-    public Cook complained_cook;  //added by Carl because the activity is needed
-    public String description;
+    private Cook complained_cook;  //added by Carl because the activity is needed
+    private String details;
 
-    public Complaints(Cook target_cook, String description){
+    public Complaints(Cook target_cook, String details){
         this.complained_cook = target_cook;
-        this.description = description;
+        this.details = details;
     }
 
-    public Cook get_Cook(){ return complained_cook; }
-    public String getDescription(){ return description; }
+    public Cook get_Cook(){ return this.complained_cook; }
+    public String getDetails(){ return this.details; }
 
+//there should be a list of complaints that the admin can view and it is added to the database
+//with an add_complaints() method, each time a client makes a complaint, it's added here
 
 
 }
