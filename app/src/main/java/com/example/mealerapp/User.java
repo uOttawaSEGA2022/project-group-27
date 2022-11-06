@@ -1,10 +1,15 @@
 package com.example.mealerapp;
 
+import java.util.Date;
+
 public class User {
 
     private String role;
 
     private String firstName, lastName, Address, Email, Password;
+
+    public boolean suspended = false;
+    public Date until = null;
 
     public User (String role, String firstName, String lastName, String Address, String Email, String Password){
         this.role = role;
@@ -61,8 +66,12 @@ public class User {
 
     public String getRole(){return this.role;}
 
+    public boolean getSuspended(){return suspended;}
 
+    public Date getUntil(){return until;}
 
+    public void setSuspended(boolean s){suspended = s;}
 
+    public void setUntil(Date d){until = d;}
 
 }

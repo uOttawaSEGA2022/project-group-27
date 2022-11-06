@@ -3,6 +3,7 @@ package com.example.mealerapp;
 import java.util.Date;
 
 public class Administrator extends User {
+
     public Administrator(String Role, String firstName, String lastName, String Address, String Email, String Password){
         super(Role, firstName, lastName, Address, Email, Password);
 
@@ -14,8 +15,8 @@ public class Administrator extends User {
 
     public void tempSus(Cook c, Date d){
 
-        c.suspended = true;
-        c.until = d;
+        c.setSuspended(true);
+        c.setUntil(d);
     }
 
     public void permSus(Cook c){

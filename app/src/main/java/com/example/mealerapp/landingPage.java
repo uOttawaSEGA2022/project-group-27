@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
     //we should edit this to say if we got the admin credentials we will land on adminLanding
@@ -52,8 +54,20 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                 User user = snapshot.getValue(User.class);
 
                 if(user != null){
-                    textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-                                            ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+
+                    if(user.getSuspended() == true){
+                        if(user.until == null){
+                            Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
+                        }else if(Calendar.getInstance().after(user.getUntil())){
+                            user.suspended = false;
+                            user.until = null;
+                        }else{
+                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
+                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+                    }
                 }
             }
 
