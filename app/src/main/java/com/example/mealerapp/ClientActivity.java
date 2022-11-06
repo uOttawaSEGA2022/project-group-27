@@ -91,14 +91,14 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
         if(email.isEmpty()){
-            editTextEmail.setError("Invalid Email, Email is Required");
+            editTextEmail.setError("Invalid Email");
             editTextEmail.requestFocus();
             return;
         }
 
         if(!email.isEmpty()){
             if(!(email.contains("@") && (email.contains(".com") || email.contains(".ca")))){
-                editTextEmail.setError("Invalid Email, Email is Required");
+                editTextEmail.setError("Invalid Email");
                 editTextEmail.requestFocus();
                 return;
             }
