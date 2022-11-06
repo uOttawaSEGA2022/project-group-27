@@ -8,7 +8,7 @@
     tools:context=".CookActivity">
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/btnNext"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginStart="160dp"
@@ -33,7 +33,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -56,7 +56,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textFirst"
+            android:id="@+id/editTextFirstNameCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -72,7 +72,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textLast"
+            android:id="@+id/editTextLastNameCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -88,7 +88,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textUser"
+            android:id="@+id/editTextEmailCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -104,7 +104,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textPass"
+            android:id="@+id/editTextPasswordCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -120,7 +120,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textConfirm"
+            android:id="@+id/editTextConfirmPasswordCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -136,7 +136,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textAddress"
+            android:id="@+id/editTextAddressCook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/input_bg"
@@ -152,7 +152,7 @@
             android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/textDesc"
+            android:id="@+id/editTextDescription"
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:background="@drawable/logout"

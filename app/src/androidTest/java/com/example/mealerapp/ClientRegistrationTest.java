@@ -5,6 +5,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -24,7 +25,7 @@ public class ClientRegistrationTest {
 
 
     @Test
-    public void testEmail() {
+    public void testEmail1() {
 
         onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
         onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
@@ -34,20 +35,43 @@ public class ClientRegistrationTest {
 
         onView(withId(R.id.editTextEmail)).perform(typeText("email@"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Invalid Email")).check(matches(isDisplayed()));
-
-        onView(withId(R.id.editTextEmail)).perform(typeText("email"), closeSoftKeyboard());
-        onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Invalid Email")).check(matches(isDisplayed()));
-
-        onView(withId(R.id.editTextEmail)).perform(typeText("email.com"), closeSoftKeyboard());
-        onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Invalid Email")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextEmail)).check(matches(hasErrorText("Invalid Email")));
 
     }
 
     @Test
-    public void testName() {
+    public void testEmail2(){
+        onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextConfirmPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+
+
+        onView(withId(R.id.editTextEmail)).perform(typeText(""), closeSoftKeyboard());
+        onView(withId(R.id.editTextEmail)).perform(typeText("email"), closeSoftKeyboard());
+        onView(withId(R.id.addPayment)).perform(click());
+        onView(withId(R.id.editTextEmail)).check(matches(hasErrorText("Invalid Email")));
+
+    }
+
+    @Test
+    public void testEmail3(){
+        onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextConfirmPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+
+
+        onView(withId(R.id.editTextEmail)).perform(typeText(""), closeSoftKeyboard());
+        onView(withId(R.id.editTextEmail)).perform(typeText("email.com"), closeSoftKeyboard());
+        onView(withId(R.id.addPayment)).perform(click());
+        onView(withId(R.id.editTextEmail)).check(matches(hasErrorText("Invalid Email")));
+    }
+
+    @Test
+    public void testName1() {
 
         onView(withId(R.id.editTextEmail)).perform(typeText("emailTest" + Math.random() + "@gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
@@ -57,17 +81,25 @@ public class ClientRegistrationTest {
 
         onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Name is Required")).check(matches(isDisplayed()));
-
-        onView(withId(R.id.editTextFirstName)).perform(typeText(""), closeSoftKeyboard());
-        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
-        onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Name is Required")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextLastName)).check(matches(hasErrorText("Name is Required")));
 
     }
 
     @Test
-    public void testPassword() {
+    public void testName2(){
+        onView(withId(R.id.editTextEmail)).perform(typeText("emailTest" + Math.random() + "@gmail.com"), closeSoftKeyboard());
+        onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextConfirmPassword)).perform(typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+
+        onView(withId(R.id.editTextFirstName)).perform(typeText(""), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.addPayment)).perform(click());
+        onView(withId(R.id.editTextFirstName)).check(matches(hasErrorText("Name is Required")));
+    }
+
+    @Test
+    public void testPassword1() {
 
         onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
         onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
@@ -78,24 +110,52 @@ public class ClientRegistrationTest {
 
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Please Confirm Password")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextConfirmPassword)).check(matches(hasErrorText("Please Confirm Password")));
+
+
+
+
+    }
+
+    @Test
+    public void testPassword2(){
+        onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+        onView(withId(R.id.editTextEmail)).perform(typeText("emailTest" + Math.random() + "@gmail.com"), closeSoftKeyboard());
+
 
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.editTextConfirmPassword)).perform(typeText("1234567"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Passwords do not match")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextConfirmPassword)).check(matches(hasErrorText("Passwords do not match")));
+
+    }
+
+    @Test
+    public void testPassword3(){
+        onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+        onView(withId(R.id.editTextEmail)).perform(typeText("emailTest" + Math.random() + "@gmail.com"), closeSoftKeyboard());
 
         onView(withId(R.id.editTextPassword)).perform(typeText("12345"), closeSoftKeyboard());
         onView(withId(R.id.editTextConfirmPassword)).perform(typeText("12345"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Passwords must be at least 6 characters")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextPassword)).check(matches(hasErrorText("Password must be at least 6 characters")));
+    }
+
+    @Test
+    public void testPassword4(){
+        onView(withId(R.id.editTextFirstName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextLastName)).perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAddress)).perform(typeText("address"),closeSoftKeyboard());
+        onView(withId(R.id.editTextEmail)).perform(typeText("emailTest" + Math.random() + "@gmail.com"), closeSoftKeyboard());
 
         onView(withId(R.id.editTextPassword)).perform(typeText(""), closeSoftKeyboard());
         onView(withId(R.id.editTextConfirmPassword)).perform(typeText("12345"), closeSoftKeyboard());
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Password is required")).check(matches(isDisplayed()));
-
-
+        onView(withId(R.id.editTextPassword)).check(matches(hasErrorText("Password is Required")));
     }
 
     @Test
@@ -108,7 +168,8 @@ public class ClientRegistrationTest {
 
 
         onView(withId(R.id.addPayment)).perform(click());
-        onView(withText("Address is Required")).check(matches(isDisplayed()));
+        onView(withId(R.id.editTextAddress)).check(matches(hasErrorText("Address is Required")));
+
     }
 
 
