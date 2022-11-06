@@ -13,13 +13,13 @@ public class Administrator extends User {
     //If it is, then if until is undefined then toast with like ur suspended
     //else if Calander.getTime <= c.until then change suspended = false and login.
 
-    public void tempSus(Cook c, Date d){
+    public void tempSuspend(Cook c, Date d){
 
         c.setSuspended(true);
         c.setUntil(d);
     }
 
-    public void permSus(Cook c){
+    public void permSuspend(Cook c){
 
         c.suspended = true;
     }
