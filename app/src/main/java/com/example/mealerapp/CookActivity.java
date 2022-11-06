@@ -118,6 +118,8 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
