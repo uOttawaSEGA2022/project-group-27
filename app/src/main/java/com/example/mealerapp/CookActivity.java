@@ -144,6 +144,19 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                                                 Toast.makeText(CookActivity.this,
                                                         "Registration Successful",
                                                         Toast.LENGTH_LONG).show();
+
+
+                                                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                                        startActivity(new Intent(CookActivity.this, landingPage.class));
+
+                                                    }
+                                                });
+
+
+
                                             }else{
                                                 Toast.makeText(CookActivity.this,
                                                         "Registration Failed" + task.getException().getMessage(),
@@ -158,7 +171,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
-        startActivity(new Intent(CookActivity.this, MainActivity.class));
+//        startActivity(new Intent(CookActivity.this, MainActivity.class));
 
     }
 }
