@@ -7,8 +7,6 @@ public class Cook extends User{
 
     private String description;
     private ArrayList<Meal> meals;
-    public boolean suspended = false;
-    public Date until;
 
     public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc){
         super(Role, firstName, lastName, Address, Email, Password);
