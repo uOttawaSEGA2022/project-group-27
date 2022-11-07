@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String email;
     private String password;
 
+    
+
 
 
     @Override
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnSignIn:
                 login();
+
+
         }
     }
 
@@ -83,5 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
     }
+
+
+
+
 }
 

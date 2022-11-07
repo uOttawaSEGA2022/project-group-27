@@ -3,6 +3,7 @@ package com.example.mealerapp;
 import java.util.Date;
 
 public class Administrator extends User {
+
     public Administrator(String Role, String firstName, String lastName, String Address, String Email, String Password){
         super(Role, firstName, lastName, Address, Email, Password);
 
@@ -12,13 +13,13 @@ public class Administrator extends User {
     //If it is, then if until is undefined then toast with like ur suspended
     //else if Calander.getTime <= c.until then change suspended = false and login.
 
-    public void tempSus(Cook c, Date d){
+    public void tempSuspend(Cook c, Date d){
 
-        c.suspended = true;
-        c.until = d;
+        c.setSuspended(true);
+        c.setUntil(d);
     }
 
-    public void permSus(Cook c){
+    public void permSuspend(Cook c){
 
         c.suspended = true;
     }
