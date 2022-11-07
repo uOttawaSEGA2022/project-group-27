@@ -1,1 +1,3 @@
-Administrator Login Credentials: Email: admin@email.com Password: adminPassword
+Administrator Login Credentials: Email: admin@email.com Password: 123456
+
+The implementation for CircleCI has been completed but I do not know how to demenostrate that here, the YAML file is included for our CircleCI pipleine. 
