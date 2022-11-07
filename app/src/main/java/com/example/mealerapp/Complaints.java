@@ -9,24 +9,25 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Complaints {
 
-    public Cook complained_cook;  //added by Carl because the activity is needed
+    public String complained_cook_id;  //added by Carl because the activity is needed
     public String description;
-    public  String _id;
+    public String _id;
 
 
 
 
 
-    public Complaints(Cook target_cook, String details, String id) {
+    public Complaints(){}
 
-        this.complained_cook = target_cook;
+    public Complaints(String target_cook_id, String details, String id) {
+        this.complained_cook_id = target_cook_id;
         this.description = details;
         this._id = id;
     }
 
 
 
-    public Cook get_Cook(){ return complained_cook; }
+    public String get_Cook_ID(){ return complained_cook_id; }
     public String getDescription(){ return description; }
     public void setId(String id) {
         _id = id;
@@ -34,7 +35,8 @@ public class Complaints {
     public String getId() {
         return _id;
     }
-    public String getName() { return complained_cook.getFirstName() + complained_cook.getLastName(); }
+
+//    public String getName() { return complained_cook.getFirstName() + complained_cook.getLastName(); }
 
 
 

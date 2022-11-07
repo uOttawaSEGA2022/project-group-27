@@ -73,7 +73,12 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                 User user = snapshot.getValue(User.class);
 
                 if(user != null){
+                    if(user.getRole() == "Admin"){
+                        Administrator admin = new Administrator("Admin", "admin", "admin", "uOttawa", "admin@email.com", "123456");
 
+                        startActivity(new Intent(landingPage.this, MainActivity.class));
+
+                    }
                     if(user.getSuspended() == true){
                         if(user.until == null){
                             Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();

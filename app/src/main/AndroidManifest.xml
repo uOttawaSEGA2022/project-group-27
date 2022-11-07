@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <application
         android:allowBackup="true"
@@ -11,59 +11,66 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealerApp"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".AdminScreen"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".sus_decision"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SuspensionMessageActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".landingPage"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".AddPaymentMethod"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ClientActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SelectUserType"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".CookActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
