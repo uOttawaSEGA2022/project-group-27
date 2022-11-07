@@ -182,7 +182,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 });
-        startActivity(new Intent(ClientActivity.this, MainActivity.class));
+//        startActivity(new Intent(ClientActivity.this, MainActivity.class));
 
     }
 }

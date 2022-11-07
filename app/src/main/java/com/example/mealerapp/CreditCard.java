@@ -11,16 +11,16 @@ public class CreditCard {
     private int CVV;
 
     public CreditCard(){}
+
     public CreditCard(String nameOnCard, long cardNumber, String expirationDate, int CVV){
-        this.cardNumber = cardNumber;
+        this.nameOnCard = nameOnCard;
         this.expirationDate = expirationDate;
         this.cardNumber = cardNumber;
         this.CVV = CVV;
 
     }
 
-    /* No need for setters since credit card information should not be able to be changed once made, a new credit card will need to be instantiated
-    */
+
 
 
     public String getNameOnCard() {

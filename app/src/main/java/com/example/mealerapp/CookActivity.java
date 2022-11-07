@@ -11,16 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CookActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button next;
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextPassword, editTextConfirmPassword, editTextAddress, editTextDesc;
     private FirebaseAuth mAuth;
+
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         editTextDesc = (EditText)findViewById(R.id.editTextDescription);
 
         mAuth = FirebaseAuth.getInstance();
+
+        db = FirebaseFirestore.getInstance();
 
     }
 
@@ -135,35 +142,59 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                                     desc
                             );
 
-                            FirebaseDatabase.getInstance().getReference("users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(cook).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+                                            .set(cook).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(CookActivity.this,
-                                                        "Registration Successful",
-                                                        Toast.LENGTH_LONG).show();
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(CookActivity.this,
+                                                    "Registration Successful",
+                                                    Toast.LENGTH_LONG).show();
 
-
-                                                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                                        startActivity(new Intent(CookActivity.this, landingPage.class));
-
-                                                    }
-                                                });
-
-
-
-                                            }else{
-                                                Toast.makeText(CookActivity.this,
-                                                        "Registration Failed" + task.getException().getMessage(),
-                                                        Toast.LENGTH_LONG).show();
-                                            }
+                                            mAuth.signInWithEmailAndPassword(email, password)
+                                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            startActivity(new Intent(CookActivity.this, landingPage.class));
+                                                        }
+                                                    });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(CookActivity.this,
+                                                    "Registration Failed",
+                                                    Toast.LENGTH_LONG).show();
                                         }
                                     });
+//                            FirebaseDatabase.getInstance().getReference("users")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(cook).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if(task.isSuccessful()){
+//                                                Toast.makeText(CookActivity.this,
+//                                                        "Registration Successful",
+//                                                        Toast.LENGTH_LONG).show();
+//
+//
+//                                                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                                                        startActivity(new Intent(CookActivity.this, landingPage.class));
+//
+//                                                    }
+//                                                });
+
+
+//
+//                                            }else{
+//                                                Toast.makeText(CookActivity.this,
+//                                                        "Registration Failed" + task.getException().getMessage(),
+//                                                        Toast.LENGTH_LONG).show();
+//                                            }
+//                                        }
+//                                    });
                         }else{
                             Toast.makeText(CookActivity.this,
                                     "Registration Failed" + task.getException().getMessage(),
