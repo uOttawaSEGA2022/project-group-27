@@ -111,7 +111,7 @@ public class SuspensionMessageActivity extends AppCompatActivity {
 
 
     private void accept_complaint(String id, Complaints c){
-        c.get_Cook().suspended = true;  //set suspend to cook
+        FirebaseDatabase.getInstance().getReference("users").child(c.get_Cook_ID()).child("suspended").setValue(true);
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("complaints").child(id);
 
         dr.removeValue();

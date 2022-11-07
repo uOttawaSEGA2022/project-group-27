@@ -74,9 +74,9 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
                 if(user != null){
                     if(user.getRole() == "Admin"){
-                        Administrator admin = new Administrator("Admin", "admin", "admin", "uOttawa", "admin@email.com", "123456");
+                        Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
 
-                        startActivity(new Intent(landingPage.this, MainActivity.class));
+                        startActivity(new Intent(landingPage.this, AdminScreen.class));
 
                     }
                     if(user.getSuspended() == true){
