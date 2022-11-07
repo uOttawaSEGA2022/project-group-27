@@ -3,7 +3,6 @@ package com.example.mealerapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,16 +27,16 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cook);
 
-        next = (Button)findViewById(R.id.nextButton);
+        next = (Button)findViewById(R.id.btnNext);
         next.setOnClickListener(this);
 
-        editTextFirstName = (EditText) findViewById(R.id.textFirst);
-        editTextLastName = (EditText)findViewById(R.id.textLast);
-        editTextAddress = (EditText)findViewById(R.id.textAddress);
-        editTextEmail = (EditText)findViewById(R.id.textUser);
-        editTextPassword = (EditText)findViewById(R.id.textPass);
-        editTextConfirmPassword = (EditText)findViewById(R.id.textConfirm);
-        editTextDesc = (EditText)findViewById(R.id.textDesc);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstNameCook);
+        editTextLastName = (EditText)findViewById(R.id.editTextLastNameCook);
+        editTextAddress = (EditText)findViewById(R.id.editTextAddressCook);
+        editTextEmail = (EditText)findViewById(R.id.editTextEmailCook);
+        editTextPassword = (EditText)findViewById(R.id.editTextPasswordCook);
+        editTextConfirmPassword = (EditText)findViewById(R.id.editTextConfirmPasswordCook);
+        editTextDesc = (EditText)findViewById(R.id.editTextDescription);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -46,7 +45,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view){
         switch(view.getId()){
-            case(R.id.nextButton):
+            case(R.id.btnNext):
                 registerUser();
                 break;
 
@@ -78,14 +77,14 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         if(email.isEmpty()){
-            editTextEmail.setError("Invalid Email, Email is Required");
+            editTextEmail.setError("Invalid Email");
             editTextEmail.requestFocus();
             return;
         }
 
         if(!email.isEmpty()){
             if(!(email.contains("@") && (email.contains(".com") || email.contains(".ca")))){
-                editTextEmail.setError("Invalid Email, Email is Required");
+                editTextEmail.setError("Invalid Email");
                 editTextEmail.requestFocus();
                 return;
             }
@@ -118,6 +117,8 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
             editTextConfirmPassword.requestFocus();
             return;
         }
+
+
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
