@@ -14,12 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
@@ -35,6 +38,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
+
+    private FirebaseFirestore db;
 
     private String userID;
 
@@ -65,6 +70,20 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
         userID = mAuth.getCurrentUser().getUid();
 
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("users")
+                        .document(mAuth.getCurrentUser().getUid())
+                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+
+                        if(user.getRole().equals("Admin")){
+
+                        }
+                    }
+                });
 
 
         mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
