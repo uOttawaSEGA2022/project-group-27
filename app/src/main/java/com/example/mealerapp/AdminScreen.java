@@ -80,7 +80,7 @@ public class AdminScreen extends AppCompatActivity {
                 }else{
 
                     Calendar c = Calendar.getInstance();
-                    c.add(Calendar.DAY_OF_YEAR,Integer.parseInt(_textUntil.toString());
+                    c.add(Calendar.DAY_OF_YEAR,Integer.parseInt(_textUntil.toString()));
                     dR.child("until").setValue(c.getTime());
                 }
             }
