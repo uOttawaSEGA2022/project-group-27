@@ -1,5 +1,6 @@
 package com.example.mealerapp;
 
+import androidx.annotation.BinderThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +26,10 @@ import java.util.List;
 public class SuspensionMessageActivity extends AppCompatActivity {
 
     DatabaseReference databaseSus;
-    Button buttonAgreeComplaints;
-    ListView listViewProducts;
+    Button buttonAgreeComplaints, btn_Delete, btn_TmpSus, btn_InfSus;
+    ListView listViewComplaints;
     List<Complaints> complaints;
+
 
 
     @Override
@@ -35,6 +37,16 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suspension_message);
         databaseSus = FirebaseDatabase.getInstance().getReference("complaints");
+
+        listViewComplaints.setOnClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Complaints complaint = complaints.get(i);
+                show_decision_site(complaint.getId(), complaint);
+                return true;
+            }
+        });
+
     }
 
     protected void onStart() {
@@ -58,26 +70,60 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         });
     }
 
-//    private void show_decision_site(final String complaint_id, String cook_name){
-//
-//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        final View dialogView = inflater.inflate(R.layout.update_dialog, null);
-//        dialogBuilder.setView(dialogView);
-//    }
+    private void show_decision_site(final String complaint_id, Complaints cook_name){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_sus_decision, null);
+        dialogBuilder.setView(dialogView);
+        btn_Delete = (Button) findViewById(R.id.btnDelete);
+        btn_TmpSus = (Button) findViewById(R.id.btnTmpSus);
+        btn_InfSus = (Button) findViewById(R.id.btnInfSus);
+        databaseSus =FirebaseDatabase.getInstance().getReference("complaints");
+
+        final AlertDialog b =dialogBuilder.create();
+        b.show();
+        btn_Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteComplaint(complaint_id);
+                b.dismiss();
+            }
+        });
+        btn_TmpSus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accept_complaint(complaint_id, cook_name);
+                deleteComplaint(complaint_id);
+                b.dismiss();
+            }
+        });
+        btn_InfSus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accept_complaint(complaint_id, cook_name);
+                deleteComplaint(complaint_id);
+                b.dismiss();
+            }
+        });
+
+    }
 
 
-    private void accept_complaint(Complaints c, String id){
+    private void accept_complaint(String id, Complaints c){
         c.get_Cook().suspended = true;  //set suspend to cook
         DatabaseReference dr = FirebaseDatabase.getInstance().getReference("complaints").child(id);
+
         dr.removeValue();
         Toast.makeText(getApplicationContext(), "Suspend Successful", Toast.LENGTH_LONG).show();
     }
-    private void refuse_complaint(Complaints c, String id){
-        DatabaseReference dr = FirebaseDatabase.getInstance().getReference("complaints").child(id);
-        dr.removeValue();
-        Toast.makeText(getApplicationContext(), "Complaint deleted", Toast.LENGTH_LONG).show();
+
+    private  void deleteComplaint(String id){
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("complaints").child(id);
+        dR.removeValue();
+        Toast.makeText(getApplicationContext(), "Complaint Deleted", Toast.LENGTH_LONG).show();
     }
+
 
 
 }
