@@ -38,7 +38,7 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         setContentView(R.layout.suspension_message);
         databaseSus = FirebaseDatabase.getInstance().getReference("complaints");
 
-        listViewComplaints.setOnClickListener(new AdapterView.OnItemLongClickListener() {
+        listViewComplaints.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Complaints complaint = complaints.get(i);
