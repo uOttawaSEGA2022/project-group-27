@@ -78,9 +78,9 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         User user = documentSnapshot.toObject(User.class);
-
                         if(user.getRole().equals("Admin")){
-
+                            Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
+                            startActivity(new Intent(landingPage.this, AdminScreen.class));
                         }
                     }
                 });

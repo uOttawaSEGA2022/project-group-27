@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             currentUser = mAuth.getCurrentUser();
+
                             startActivity(new Intent(MainActivity.this, landingPage.class));
 
                         }else{
