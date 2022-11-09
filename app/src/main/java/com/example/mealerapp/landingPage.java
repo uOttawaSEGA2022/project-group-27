@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -83,42 +84,47 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                             startActivity(new Intent(landingPage.this, AdminScreen.class));
                         }
                     }
-                });
-
-
-        mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-
-                if(user != null){
-                    if(user.getRole() == "Admin"){
-                        Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
-
-                        startActivity(new Intent(landingPage.this, AdminScreen.class));
-
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        findViewById(R.id.editTextLoginEmail).setError()
                     }
-                    if(user.getSuspended() == true){
-                        if(user.until == null){
-                            Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
-                        }else if(Calendar.getInstance().after(user.getUntil())){
-                            user.suspended = false;
-                            user.until = null;
-                        }else{
-                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
-                        }
-                    }else{
-                        textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
-                    }
-                }
-            }
+                })
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(landingPage.this, "Error Occurred", Toast.LENGTH_LONG).show();
-            }
-        });
+
+//        mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                User user = snapshot.getValue(User.class);
+//
+//                if(user != null){
+//                    if(user.getRole() == "Admin"){
+//                        Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
+//
+//                        startActivity(new Intent(landingPage.this, AdminScreen.class));
+//
+//                    }
+//                    if(user.getSuspended() == true){
+//                        if(user.until == null){
+//                            Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
+//                        }else if(Calendar.getInstance().after(user.getUntil())){
+//                            user.suspended = false;
+//                            user.until = null;
+//                        }else{
+//                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
+//                        }
+//                    }else{
+//                        textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
+//                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(landingPage.this, "Error Occurred", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
     }
 

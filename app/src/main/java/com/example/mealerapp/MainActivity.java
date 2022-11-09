@@ -1,5 +1,6 @@
 package com.example.mealerapp;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         signUp = (TextView)findViewById(R.id.signUp);
         signUp.setOnClickListener(this);
 
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             currentUser = mAuth.getCurrentUser();
-
                             startActivity(new Intent(MainActivity.this, landingPage.class));
 
                         }else{
