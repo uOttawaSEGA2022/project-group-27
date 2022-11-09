@@ -139,7 +139,8 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                                     address,
                                     email,
                                     password,
-                                    desc
+                                    desc,
+                                    mAuth.getCurrentUser().getUid()
                             );
 
                             db.collection("users").document(mAuth.getCurrentUser().getUid())

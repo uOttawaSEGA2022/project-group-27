@@ -1,11 +1,12 @@
 package com.example.mealerapp;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Administrator extends User {
 
-    public Administrator(String Role, String firstName, String lastName, String Address, String Email, String Password){
-        super(Role, firstName, lastName, Address, Email, Password);
+    public Administrator(String Role, String firstName, String lastName, String Address, String Email, String Password, String UID){
+        super(Role, firstName, lastName, Address, Email, Password, UID);
 
     }
 

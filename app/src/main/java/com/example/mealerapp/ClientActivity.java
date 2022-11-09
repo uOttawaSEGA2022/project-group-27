@@ -138,7 +138,8 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
                                     lastName,
                                     address,
                                     email,
-                                    password
+                                    password,
+                                    mAuth.getCurrentUser().getUid()
                             );
 
                             db.collection("users").document(mAuth.getCurrentUser().getUid())

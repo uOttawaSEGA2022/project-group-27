@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 
@@ -80,16 +84,48 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         User user = documentSnapshot.toObject(User.class);
                         if(user.getRole().equals("Admin")){
-                            Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
-                            startActivity(new Intent(landingPage.this, AdminScreen.class));
+                            Administrator admin = new Administrator(
+                                    user.getRole(),
+                                    user.getFirstName(),
+                                    user.getLastName(),
+                                    user.getAddress(),
+                                    user.getEmail(),
+                                    user.getPassword(),
+                                    user.getUID()
+                            );
+                            db.collection("users").document(admin.getUID())
+                                    .collection("complaints")
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                           if(task.isSuccessful()){
+                                               for(QueryDocumentSnapshot document : task.getResult()){
+
+                                               }
+                                           }
+                                        }
+                                    });
                         }
+                        if(user.getSuspended() == true){
+                            if(user.until == null){
+                                Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
+                            }else if(Calendar.getInstance().after(user.getUntil())){
+                                user.suspended = false;
+                                user.until = null;
+                            }else{
+                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
+                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+                        }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        findViewById(R.id.editTextLoginEmail).setError()
                     }
-                })
+                });
 
 
 //        mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {

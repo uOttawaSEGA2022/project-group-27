@@ -13,20 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView signUp;
     private Button btnSignIn;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
     private EditText editTextEmail, editTextPassword;
     private String email;
@@ -50,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSignIn.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-
+        db = FirebaseFirestore.getInstance();
         editTextEmail = (EditText)findViewById(R.id.editTextLoginEmail);
         editTextPassword = (EditText)findViewById(R.id.editTextLoginPassword);
 
@@ -80,8 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            currentUser = mAuth.getCurrentUser();
-                            startActivity(new Intent(MainActivity.this, landingPage.class));
+                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            startActivity(new Intent(MainActivity.this, landingPage.class));
+                                        }
+                                    });
 
                         }else{
                             Toast.makeText(MainActivity.this, "Invalid Login", Toast.LENGTH_LONG).show();
