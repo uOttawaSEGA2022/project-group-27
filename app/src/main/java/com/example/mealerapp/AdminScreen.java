@@ -1,5 +1,6 @@
 package com.example.mealerapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -13,8 +14,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +32,9 @@ public class AdminScreen extends AppCompatActivity {
 
     private ListView listViewComplaints;
     private DatabaseReference dataBaseComplaints;
-    List<Complaints> c;
+    private FirebaseFirestore db;
+    private List<Complaints> c;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,22 @@ public class AdminScreen extends AppCompatActivity {
         setContentView(R.layout.activity_admin_screen);
 
         listViewComplaints = (ListView) findViewById(R.id.listViewComplaints);
-        dataBaseComplaints = FirebaseDatabase.getInstance().getReference("complaints");
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(mAuth.getCurrentUser().getUid())
+                .collection("complaints")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            c.add(
+                                    document.toObject(Complaints.class)
+                            );
+                        }
+                    }
+                });
 
         c = new ArrayList<>();
 
