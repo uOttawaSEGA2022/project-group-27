@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -30,13 +31,16 @@ public class SuspensionMessageActivity extends AppCompatActivity {
     ListView listViewComplaints;
     List<Complaints> complaints;
 
+    private FirebaseFirestore db;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suspension_message);
-        databaseSus = FirebaseDatabase.getInstance().getReference("complaints");
+
+        db = FirebaseFirestore.getInstance();
 
         listViewComplaints.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -79,14 +83,14 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         btn_Delete = (Button) findViewById(R.id.btnDelete);
         btn_TmpSus = (Button) findViewById(R.id.btnTmpSus);
         btn_InfSus = (Button) findViewById(R.id.btnInfSus);
-        databaseSus =FirebaseDatabase.getInstance().getReference("complaints");
+
 
         final AlertDialog b =dialogBuilder.create();
         b.show();
         btn_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteComplaint(complaint_id);
+                db.collection("complaints").document(complaint_id).delete();
                 b.dismiss();
             }
         });

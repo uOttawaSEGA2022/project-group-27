@@ -30,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +46,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     private DatabaseReference mDatabaseRef;
 
     private FirebaseFirestore db;
+
+    private List<Complaints> complaints;
 
     private String userID;
 
@@ -93,14 +96,15 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                                     user.getPassword(),
                                     user.getUID()
                             );
-                            db.collection("users").document(admin.getUID())
-                                    .collection("complaints")
+                            db.collection("complaints")
                                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                            if(task.isSuccessful()){
                                                for(QueryDocumentSnapshot document : task.getResult()){
-
+                                                    complaints.add(
+                                                            document.toObject(Complaints.class)
+                                                    );
                                                }
                                            }
                                         }
