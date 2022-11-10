@@ -46,8 +46,7 @@ public class AdminScreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        db.collection("users").document(mAuth.getCurrentUser().getUid())
-                .collection("complaints")
+        db.collection("complaints")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
