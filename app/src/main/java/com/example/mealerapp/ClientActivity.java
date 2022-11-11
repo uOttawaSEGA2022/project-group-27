@@ -33,7 +33,6 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    private Proxy proxy;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -126,86 +125,64 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
             editTextConfirmPassword.requestFocus();
             return;
         }
-        //TODO test proxy and remove commented code
 
-       if(proxy.registerUser(email, password)){
-           CreditCard cc = new CreditCard("name",1234567890, "10/22", 424); // TODO Create Credit Card Registration Form
-           Client client = new Client(
-                   "Client",
-                   firstName,
-                   lastName,
-                   address,
-                   email,
-                   password,
-                   proxy.getCurrentUserUID()
-           );
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            CreditCard cc = new CreditCard("name",1234567890, "10/22", 424);
+                            Client client = new Client(
+                                    "Client",
+                                    firstName,
+                                    lastName,
+                                    address,
+                                    email,
+                                    password,
+                                    mAuth.getCurrentUser().getUid()
+                            );
 
-           proxy.saveUser(client);
-           proxy.addCreditCard(proxy.getCurrentUserUID(), cc);
+                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+                                    .set(client).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Registration Successful",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Registration Failed " + task.getException().getMessage(),
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
 
-           if(proxy.login(email, password)){
-               startActivity(new Intent(ClientActivity.this, landingPage.class));
-           }
+                            db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("creditCards")
+                                    .add(cc)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(ClientActivity.this, "Added Payment Method Successfully", Toast.LENGTH_LONG).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(ClientActivity.this,
+                                                    "Card Failed " + task.getException().getMessage(),
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
 
-       }
-
-//        mAuth.createUserWithEmailAndPassword(email,password)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()){
-//                            CreditCard cc = new CreditCard("name",1234567890, "10/22", 424);
-//                            Client client = new Client(
-//                                    "Client",
-//                                    firstName,
-//                                    lastName,
-//                                    address,
-//                                    email,
-//                                    password,
-//                                    mAuth.getCurrentUser().getUid()
-//                            );
-//
-//                            db.collection("users").document(mAuth.getCurrentUser().getUid())
-//                                    .set(client).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void unused) {
-//                                            Toast.makeText(ClientActivity.this,
-//                                                    "Registration Successful",
-//                                                    Toast.LENGTH_LONG).show();
-//                                        }
-//                                    })
-//                                    .addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Toast.makeText(ClientActivity.this,
-//                                                    "Registration Failed " + task.getException().getMessage(),
-//                                                    Toast.LENGTH_LONG).show();
-//                                        }
-//                                    });
-//
-//                            db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("creditCards")
-//                                    .add(cc)
-//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                        @Override
-//                                        public void onSuccess(DocumentReference documentReference) {
-//                                            Toast.makeText(ClientActivity.this, "Added Payment Method Successfully", Toast.LENGTH_LONG).show();
-//                                        }
-//                                    }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Toast.makeText(ClientActivity.this,
-//                                                    "Card Failed " + task.getException().getMessage(),
-//                                                    Toast.LENGTH_LONG).show();
-//                                        }
-//                                    });
-//
-//                        }else{
-//                            Toast.makeText(ClientActivity.this,
-//                                    "Registration Failed " + task.getException().getMessage(),
-//                                    Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                });
+                        }else{
+                            Toast.makeText(ClientActivity.this,
+                                    "Registration Failed " + task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 //        startActivity(new Intent(ClientActivity.this, MainActivity.class));
 
     }

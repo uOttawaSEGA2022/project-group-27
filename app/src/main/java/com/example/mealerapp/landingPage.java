@@ -53,10 +53,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     private List<Complaints> complaints;
 
-    private Proxy proxy;
-
-    private User user;
-
     private String userID;
 
 
@@ -73,7 +69,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         //navigationView.bringToFront();
         drawer = findViewById(R.id.drawer_layout);
-
+        navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -88,11 +84,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.hamb1);
-
-        navigationView =(NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -104,107 +95,56 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         db = FirebaseFirestore.getInstance();
 
-        //TODO Test Proxy functionality and delete all commented code pertaining to the database
-        proxy = new Proxy();
+        db.collection("users")
+                        .document(mAuth.getCurrentUser().getUid())
+                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        if(user.getRole().equals("Admin")){
+                            Administrator admin = new Administrator(
+                                    user.getRole(),
+                                    user.getFirstName(),
+                                    user.getLastName(),
+                                    user.getAddress(),
+                                    user.getEmail(),
+                                    user.getPassword(),
+                                    user.getUID()
+                            );
+                            db.collection("complaints")
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                           if(task.isSuccessful()){
+                                               for(QueryDocumentSnapshot document : task.getResult()){
+                                                    complaints.add(
+                                                            document.toObject(Complaints.class)
+                                                    );
+                                               }
+                                           }
+                                        }
+                                    });
+                        }
+                        if(user.getSuspended() == true){
+                            if(user.until == null){
+                                Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
+                            }else if(Calendar.getInstance().after(user.getUntil())){
+                                user.suspended = false;
+                                user.until = null;
+                            }else{
+                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
+                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+                        }
 
-        user = proxy.getUser(proxy.getCurrentUserUID());
-
-        if(user.getRole().equals("Admin")){
-            user = new Administrator(
-                    user.getRole(),
-                    user.getFirstName(),
-                    user.getLastName(),
-                    user.getAddress(),
-                    user.getEmail(),
-                    user.getPassword(),
-                    user.getUID()
-            );
-
-            complaints = proxy.getComplaints();
-
-
-
-//            db.collection("complaints")
-//                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for(QueryDocumentSnapshot document : task.getResult()){
-//                                    complaints.add(
-//                                            document.toObject(Complaints.class)
-//                                    );
-//                                }
-//                            }
-//                        }
-//                    });
-        }
-
-        if(user.getSuspended() == true){
-            if(user.until == null){
-                Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
-            }else if(Calendar.getInstance().after(user.getUntil())){
-                user.suspended = false;
-                user.until = null;
-            }else{
-                Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
-            }
-        }else{
-            textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-                    ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
-        }
-
-    }
-
-//        db.collection("users")
-//                        .document(mAuth.getCurrentUser().getUid())
-//                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        User user = documentSnapshot.toObject(User.class);
-//                        if(user.getRole().equals("Admin")){
-//                            Administrator admin = new Administrator(
-//                                    user.getRole(),
-//                                    user.getFirstName(),
-//                                    user.getLastName(),
-//                                    user.getAddress(),
-//                                    user.getEmail(),
-//                                    user.getPassword(),
-//                                    user.getUID()
-//                            );
-//                            db.collection("complaints")
-//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                           if(task.isSuccessful()){
-//                                               for(QueryDocumentSnapshot document : task.getResult()){
-//                                                    complaints.add(
-//                                                            document.toObject(Complaints.class)
-//                                                    );
-//                                               }
-//                                           }
-//                                        }
-//                                    });
-//                        }
-//                        if(user.getSuspended() == true){
-//                            if(user.until == null){
-//                                Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
-//                            }else if(Calendar.getInstance().after(user.getUntil())){
-//                                user.suspended = false;
-//                                user.until = null;
-//                            }else{
-//                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
-//                            }
-//                        }else{
-//                            textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-//                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
-//                        }
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                    }
-//                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
 
 
 //        mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -241,7 +181,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 //            }
 //        });
 
-
+    }
 
     @Override
     public void onBackPressed(){

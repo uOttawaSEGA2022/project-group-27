@@ -13,9 +13,6 @@ import java.util.List;
 
 import kotlin.collections.ArrayDeque;
 
-
-// TODO Whoever made this activity please let use know its purpose or delete it
-
 public class ComplaintsActivity extends AppCompatActivity {
 
     DatabaseReference databaseComplaints;
@@ -26,12 +23,10 @@ public class ComplaintsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
 
         listViewComplaints = (ListView) findViewById(R.id.listViewComplaints);
-
         databaseComplaints = FirebaseDatabase.getInstance().getReference("complaints");
 
         //complaints = new ArrayList<>();

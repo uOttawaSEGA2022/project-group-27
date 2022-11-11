@@ -36,12 +36,8 @@ public class AdminScreen extends AppCompatActivity {
     private List<Complaints> c;
     private FirebaseAuth mAuth;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //TODO either delete this activity or implement proxies; wait on Lama to complete design for inboxes
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
 
