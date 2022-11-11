@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -96,5 +97,22 @@ public class Proxy {
         return mAuth.getCurrentUser().getUid();
     }
 
+    public boolean addCreditCard(String UID, CreditCard CC){
+
+        final boolean[] flag = {false};
+
+        db.collection("users").document(UID)
+                .collection("creditCards").add(CC)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        flag[0] = true;
+                    }
+                });
+
+        return flag[0];
+
+
+    }
 
 }
