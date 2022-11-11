@@ -27,6 +27,7 @@ public class ComplaintsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_complaints);
 
         listViewComplaints = (ListView) findViewById(R.id.listViewComplaints);
+
         databaseComplaints = FirebaseDatabase.getInstance().getReference("complaints");
 
         //complaints = new ArrayList<>();

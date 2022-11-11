@@ -26,10 +26,12 @@ import java.util.List;
 
 public class SuspensionMessageActivity extends AppCompatActivity {
 
-    DatabaseReference databaseSus;
-    Button buttonAgreeComplaints, btn_Delete, btn_TmpSus, btn_InfSus;
-    ListView listViewComplaints;
-    List<Complaints> complaints;
+    private DatabaseReference databaseSus;
+    private Button buttonAgreeComplaints, btn_Delete, btn_TmpSus, btn_InfSus;
+    private ListView listViewComplaints;
+    private List<Complaints> complaints;
+
+    private Proxy proxy;
 
     private FirebaseFirestore db;
 
@@ -40,7 +42,7 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suspension_message);
 
-        db = FirebaseFirestore.getInstance();
+        proxy = new Proxy();
 
         listViewComplaints.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -55,6 +57,9 @@ public class SuspensionMessageActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
+
+        //TODO Create Proxy method for event listener
+
         databaseSus.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,7 +95,7 @@ public class SuspensionMessageActivity extends AppCompatActivity {
         btn_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.collection("complaints").document(complaint_id).delete();
+                deleteComplaint(complaint_id);
                 b.dismiss();
             }
         });
@@ -115,16 +120,24 @@ public class SuspensionMessageActivity extends AppCompatActivity {
 
 
     private void accept_complaint(String id, Complaints c){
-        FirebaseDatabase.getInstance().getReference("users").child(c.get_Cook_ID()).child("suspended").setValue(true);
-        DatabaseReference dr = FirebaseDatabase.getInstance().getReference("complaints").child(id);
+        proxy.updateCookSuspension(c.get_Cook_ID(), true);
+        deleteComplaint(id);
 
-        dr.removeValue();
+//        FirebaseDatabase.getInstance().getReference("users").child(c.get_Cook_ID()).child("suspended").setValue(true);
+//        DatabaseReference dr = FirebaseDatabase.getInstance().getReference("complaints").child(id);
+//
+//        dr.removeValue();
+
         Toast.makeText(getApplicationContext(), "Suspend Successful", Toast.LENGTH_LONG).show();
     }
 
     private  void deleteComplaint(String id){
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("complaints").child(id);
-        dR.removeValue();
+
+        proxy.deleteComplaint(id);
+
+//        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("complaints").child(id);
+//        dR.removeValue();
+
         Toast.makeText(getApplicationContext(), "Complaint Deleted", Toast.LENGTH_LONG).show();
     }
 

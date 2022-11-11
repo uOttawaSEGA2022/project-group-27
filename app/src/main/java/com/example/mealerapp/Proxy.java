@@ -115,4 +115,22 @@ public class Proxy {
 
     }
 
+    public boolean deleteComplaint(String complaint_id) {
+        final boolean[] flag = {false};
+
+        db.collection("complaints").document(complaint_id)
+                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        flag[0] = true;
+                    }
+                });
+
+        return flag[0];
+    }
+
+    public void updateCookSuspension(String cook_id, boolean suspended) {
+        db.collection("users").document(cook_id)
+                .update("suspended", suspended);
+    }
 }
