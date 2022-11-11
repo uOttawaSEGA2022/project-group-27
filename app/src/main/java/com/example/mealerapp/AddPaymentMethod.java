@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddPaymentMethod extends AppCompatActivity implements View.OnClickListener {
 
+    //TODO Create payment field fragment and delete this activity
     private FirebaseAuth mAuth;
 
     private Button completeSignUp;

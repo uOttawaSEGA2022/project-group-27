@@ -13,8 +13,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.collections.ArrayDeque;
 
 public class Proxy {
 
@@ -97,6 +102,17 @@ public class Proxy {
         return mAuth.getCurrentUser().getUid();
     }
 
+    public User getCurrentUser(){
+        final User[] user = {new User()};
+        db.collection("users").document(mAuth.getCurrentUser().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        user[0] = documentSnapshot.toObject(User.class);
+                    }
+                });
+        return user[0];
+    }
     public boolean addCreditCard(String UID, CreditCard CC){
 
         final boolean[] flag = {false};
@@ -132,5 +148,25 @@ public class Proxy {
     public void updateCookSuspension(String cook_id, boolean suspended) {
         db.collection("users").document(cook_id)
                 .update("suspended", suspended);
+    }
+
+    public List<Complaints> getComplaints(){
+        List<Complaints> complaints = new ArrayList<>();
+
+        db.collection("complaints")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                complaints.add(
+                                        document.toObject(Complaints.class)
+                                );
+                            }
+                        }
+                    }
+                });
+
+        return complaints;
     }
 }

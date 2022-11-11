@@ -126,6 +126,7 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
             editTextConfirmPassword.requestFocus();
             return;
         }
+        //TODO test proxy and remove commented code
 
        if(proxy.registerUser(email, password)){
            CreditCard cc = new CreditCard("name",1234567890, "10/22", 424); // TODO Create Credit Card Registration Form

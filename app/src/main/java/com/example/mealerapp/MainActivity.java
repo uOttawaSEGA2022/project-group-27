@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String email;
     private String password;
 
+    private Proxy proxy;
     
 
 
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText)findViewById(R.id.editTextLoginEmail);
         editTextPassword = (EditText)findViewById(R.id.editTextLoginPassword);
 
+        proxy = new Proxy();
+
 
     }
 
@@ -73,27 +76,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void login() {
+        
+        //TODO test proxy login and delete commented code
+
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        mAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            db.collection("users").document(mAuth.getCurrentUser().getUid())
-                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            startActivity(new Intent(MainActivity.this, landingPage.class));
-                                        }
-                                    });
+        if(proxy.login(email,password))
+            startActivity(new Intent(MainActivity.this, landingPage.class));
+        else
+            Toast.makeText(MainActivity.this, "Invalid Login", Toast.LENGTH_LONG).show();
 
-                        }else{
-                            Toast.makeText(MainActivity.this, "Invalid Login", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+
+//        mAuth.signInWithEmailAndPassword(email,password)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if(task.isSuccessful()){
+//                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+//                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                                        @Override
+//                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                                            startActivity(new Intent(MainActivity.this, landingPage.class));
+//                                        }
+//                                    });
+//
+//                        }else{
+//                        }
+//                    }
+//                });
     }
 
 

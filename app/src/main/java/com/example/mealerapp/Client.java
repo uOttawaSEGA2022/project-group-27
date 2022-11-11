@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Client extends User{
 
+    //TODO implement credit cards
 
 //    private List<CreditCard> CreditCards;
 

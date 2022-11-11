@@ -128,6 +128,7 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
             editTextConfirmPassword.requestFocus();
             return;
         }
+        //TODO test proxy and delete commented code
 
         if(proxy.registerUser(email, password)){
             Cook cook = new Cook(
