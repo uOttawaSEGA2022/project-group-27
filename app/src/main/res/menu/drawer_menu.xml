@@ -8,9 +8,60 @@
             android:icon="@drawable/ic_inbox"
             android:title="Inbox" />
 
-        <item android:id="@+id/nav_profile"
+        <item android:id="@+id/nav_orders"
+            android:title="Orders"/>
+
+        <item android:id="@+id/nav_fav"
+            android:icon="@drawable/ic_favs"
+            android:title="Favourites" />
+
+        <item android:id="@+id/nav_menu"
+            android:icon="@drawable/ic_menu"
+            android:title="Menu" /> <!--cooks only-->
+
+        <item android:id="@+id/nav_cooks"
             android:icon="@drawable/ic_profile"
-            android:title="Profile" />
+            android:title="Cooks" /> <!--admin only-->
+
+    </group>
+
+
+
+    <group android:checkableBehavior="single">
+        <item android:title="More">
+            <menu>
+
+                <item android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="Settings" />
+
+                <item android:id="@+id/nav_support"
+                    android:icon="@drawable/ic_support"
+                    android:title="Support" />
+
+                <item android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_about"
+                    android:title="About us" />
+
+            </menu>
+        </item>
+
+
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Log out">
+            <menu>
+
+                <item android:id="@+id/btnLogout"
+                    android:icon="@drawable/logout"
+                    android:paddingBottom="30px"
+                    android:title="Log out" />
+
+            </menu>
+        </item>
+
 
 
     </group>

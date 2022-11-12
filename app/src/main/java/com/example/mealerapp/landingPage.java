@@ -93,6 +93,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
 
 
+
+
         mAuth = FirebaseAuth.getInstance();
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
@@ -199,7 +201,18 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+    public boolean onNavigationItemSelected(@NonNull MenuItem item){
+
+        switch(item.getItemId()){
+            case R.id.btnLogout:
+                mAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+
+                break;
+
+
+            
+        }
         return true;
     }
 
