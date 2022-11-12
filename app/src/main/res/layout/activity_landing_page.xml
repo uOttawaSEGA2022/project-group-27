@@ -30,7 +30,6 @@
                 android:orientation="vertical">
 
 
-
                 <TextView
                     android:id="@+id/textViewWelcome"
                     android:layout_width="358dp"
@@ -38,9 +37,12 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
+                    android:paddingLeft="15dp"
                     android:text="Welcome"
                     android:textAlignment="textStart"
-                    android:textSize="18sp"
+                    android:textColor="#e9982c"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     android:translationY="-40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +127,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cuisine"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
+                        android:layout_height="115dp"
                         android:paddingLeft="25dp" />
 
                     <Space
@@ -143,7 +145,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="115dp"
                         android:paddingLeft="25dp" />
                 </LinearLayout>
 

@@ -44,22 +44,16 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-    //we should edit this to say if we got the admin credentials we will land on adminLanding
-    //and we need a landing for cook and a landing for client since each will have diff services
-
     private Button btnLogout;
     private TextView textViewWelcome;
     private RecyclerView.Adapter adapter;
     private RecyclerView cuisineList;
 
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
-
     private FirebaseFirestore db;
 
     private List<Complaints> complaints;
-
     private String userID;
 
 
@@ -93,12 +87,11 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.hamb1);
-
         navigationView =(NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
 
 
 
@@ -151,8 +144,25 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                             Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
                             }
                         }else{
-                            textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
+                            textViewWelcome.setText("Welcome " + user.getFirstName() + "!");
+                        }
+
+                        if (user.getRole().equalsIgnoreCase("admin")){
+                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(true);
+                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(true);
+                        } else{
+                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(false);
+
+                        }
+
+                        if (user.getRole().equalsIgnoreCase("cook")){
+                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(true);
+
+                        } else{
+                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(false);
+
+
                         }
 
                     }
@@ -231,15 +241,19 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
 
         switch(item.getItemId()){
-            case R.id.btnLogout:
+            case R.id.btnLogout:{
                 mAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
-
                 break;
+            }
 
-
-
+            case R.id.nav_inbox:{
+                //we will open this on a fragment
+                break;
+            }
         }
+
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

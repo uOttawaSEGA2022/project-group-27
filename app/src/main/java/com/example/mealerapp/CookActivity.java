@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -25,9 +26,10 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextPassword, editTextConfirmPassword, editTextAddress, editTextDesc;
     private FirebaseAuth mAuth;
 
-    private FirebaseFirestore db;
 
-    private Proxy proxy;
+    private DatabaseReference mDatabase;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,8 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         editTextDesc = (EditText)findViewById(R.id.editTextDescription);
 
         mAuth = FirebaseAuth.getInstance();
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
-
-        Proxy proxy = new Proxy();
 
     }
 
@@ -129,82 +129,82 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        if(proxy.registerUser(email, password)){
-            Cook cook = new Cook(
-                    "Cook",
-                    firstName,
-                    lastName,
-                    address,
-                    email,
-                    password,
-                    desc,
-                   proxy.getCurrentUserUID()
-            );
-
-            if(proxy.saveUser(cook)){
-                Toast.makeText(
-                        CookActivity.this,
-                        "Registration Successful",
-                        Toast.LENGTH_LONG
-                ).show();
-
-                if(proxy.login(email, password)){
-                    startActivity(new Intent(CookActivity.this, landingPage.class));
-                }
-
-
-            }
-
-        }
-
-//        mAuth.createUserWithEmailAndPassword(email,password)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()){
-//                            Cook cook = new Cook(
-//                                    "Cook",
-//                                    firstName,
-//                                    lastName,
-//                                    address,
-//                                    email,
-//                                    password,
-//                                    desc,
-//                                    mAuth.getCurrentUser().getUid()
-//                            );
+//        if(proxy.registerUser(email, password)){
+//            Cook cook = new Cook(
+//                    "Cook",
+//                    firstName,
+//                    lastName,
+//                    address,
+//                    email,
+//                    password,
+//                    desc,
+//                   proxy.getCurrentUserUID()
+//            );
 //
-//                            db.collection("users").document(mAuth.getCurrentUser().getUid())
-//                                            .set(cook).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void unused) {
-//                                            Toast.makeText(CookActivity.this,
-//                                                    "Registration Successful",
-//                                                    Toast.LENGTH_LONG).show();
+//            if(proxy.saveUser(cook)){
+//                Toast.makeText(
+//                        CookActivity.this,
+//                        "Registration Successful",
+//                        Toast.LENGTH_LONG
+//                ).show();
 //
-//                                            mAuth.signInWithEmailAndPassword(email, password)
-//                                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                                                        @Override
-//                                                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                                                            startActivity(new Intent(CookActivity.this, landingPage.class));
-//                                                        }
-//                                                    });
-//                                        }
-//                                    }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Toast.makeText(CookActivity.this,
-//                                                    "Registration Failed",
-//                                                    Toast.LENGTH_LONG).show();
-//                                        }
-//                                    });
-//                        }else{
-//                            Toast.makeText(CookActivity.this,
-//                                    "Registration Failed" + task.getException().getMessage(),
-//                                    Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                });
-//        startActivity(new Intent(CookActivity.this, MainActivity.class));
+//                if(proxy.login(email, password)){
+//                    startActivity(new Intent(CookActivity.this, landingPage.class));
+//                }
+//
+//
+//            }
+
+//        }
+
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Cook cook = new Cook(
+                                    "Cook",
+                                    firstName,
+                                    lastName,
+                                    address,
+                                    email,
+                                    password,
+                                    desc,
+                                    mAuth.getCurrentUser().getUid()
+                            );
+
+                            db.collection("users").document(mAuth.getCurrentUser().getUid())
+                                            .set(cook).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(CookActivity.this,
+                                                    "Registration Successful",
+                                                    Toast.LENGTH_LONG).show();
+
+                                            mAuth.signInWithEmailAndPassword(email, password)
+                                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            startActivity(new Intent(CookActivity.this, landingPage.class));
+                                                        }
+                                                    });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(CookActivity.this,
+                                                    "Registration Failed",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                        }else{
+                            Toast.makeText(CookActivity.this,
+                                    "Registration Failed" + task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+        startActivity(new Intent(CookActivity.this, MainActivity.class));
 
     }
 }
