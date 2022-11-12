@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,6 +49,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     private Button btnLogout;
     private TextView textViewWelcome;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView cuisineList;
 
 
     private FirebaseAuth mAuth;
@@ -67,6 +72,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         btnLogout.setOnClickListener(this);
 
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
+        cuisineList();
 
 
 
@@ -203,6 +209,24 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    private void cuisineList(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        cuisineList=findViewById(R.id.cuisine);
+        cuisineList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
+        cuisine.add(new CuisineDomain("Italian","cat_1"));
+        cuisine.add(new CuisineDomain("Chinese","cat_2"));
+        cuisine.add(new CuisineDomain("Greek","cat_3"));
+        cuisine.add(new CuisineDomain("Mexican","cat_4"));
+        cuisine.add(new CuisineDomain("Arabic","cat_5"));
+
+        adapter=new CuisineAdapter(cuisine);
+        cuisineList.setAdapter(adapter);
+
+
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
 
@@ -214,7 +238,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                 break;
 
 
-            
+
         }
         return true;
     }
