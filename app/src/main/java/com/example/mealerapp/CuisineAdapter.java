@@ -12,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolder>{
@@ -69,7 +71,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
         int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(iconUrl,"drawable",holder.itemView.getContext().getPackageName());
 
-       //Glide.with(holder.itemView.getContext().load(drawableResourceId).into(holder.cuisineIcon);
+        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
 
     }
 
