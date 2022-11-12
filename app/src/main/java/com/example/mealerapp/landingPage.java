@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     private Button btnLogout;
     private TextView textViewWelcome;
 
+
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
 
@@ -65,6 +67,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         btnLogout.setOnClickListener(this);
 
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
+
 
 
 

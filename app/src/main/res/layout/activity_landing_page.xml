@@ -8,7 +8,7 @@
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:context=".landingPage"
-    tools:openDrawer="start">
+    tools:openDrawer="">
 
 
 
@@ -28,9 +28,10 @@
                 android:layout_width="match_parent"
 
                 android:layout_height="?attr/actionBarSize" />
+
             <TextView
                 android:id="@+id/textViewWelcome"
-                android:layout_width="279dp"
+                android:layout_width="358dp"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
@@ -82,6 +83,7 @@
                 android:textColor="#B6B6B6"
                 android:textStyle="bold"
                 android:translationY="400dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.47"
@@ -91,69 +93,61 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:translationY="-120dp">
+
+                <ImageView
+                    android:id="@+id/homepage_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/hamb_menu"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="282dp"
                 android:orientation="vertical"
-                android:translationY="-70dp">
+                android:translationY="-90dp">
 
                 <TextView
                     android:id="@+id/cuisines"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="25dp"
-                    android:text="Cuisines"
+                    android:text="Shop by cuisine"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                    android:layout_height="90dp"
+                    android:paddingLeft="25dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="136dp"
-                android:orientation="vertical">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
 
                 <TextView
-                    android:id="@+id/popular"
+                    android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="25dp"
-                    android:text="Popular"
+                    android:text="Shop by meal type"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:paddingLeft="25dp" />
             </LinearLayout>
 
 
         </LinearLayout>
 
     </ScrollView>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-
-
-
-
-
-        <!--        <FrameLayout-->
-        <!--            android:id="@+id/fragment_container"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="316dp" />-->
-
-    </LinearLayout>
-
-
 
 
     <RelativeLayout
