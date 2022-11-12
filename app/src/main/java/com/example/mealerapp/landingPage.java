@@ -97,7 +97,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         mAuth = FirebaseAuth.getInstance();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
+//        mDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
         userID = mAuth.getCurrentUser().getUid();
 
         db = FirebaseFirestore.getInstance();
@@ -108,30 +108,30 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         User user = documentSnapshot.toObject(User.class);
-                        if(user.getRole().equals("Admin")){
-                            Administrator admin = new Administrator(
-                                    user.getRole(),
-                                    user.getFirstName(),
-                                    user.getLastName(),
-                                    user.getAddress(),
-                                    user.getEmail(),
-                                    user.getPassword(),
-                                    user.getUID()
-                            );
-                            db.collection("complaints")
-                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                           if(task.isSuccessful()){
-                                               for(QueryDocumentSnapshot document : task.getResult()){
-                                                    complaints.add(
-                                                            document.toObject(Complaints.class)
-                                                    );
-                                               }
-                                           }
-                                        }
-                                    });
-                        }
+//                        if(user.getRole().equals("Admin")){
+//                            Administrator admin = new Administrator(
+//                                    user.getRole(),
+//                                    user.getFirstName(),
+//                                    user.getLastName(),
+//                                    user.getAddress(),
+//                                    user.getEmail(),
+//                                    user.getPassword(),
+//                                    user.getUID()
+//                            );
+//                            db.collection("complaints")
+//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                           if(task.isSuccessful()){
+//                                               for(QueryDocumentSnapshot document : task.getResult()){
+//                                                    complaints.add(
+//                                                            document.toObject(Complaints.class)
+//                                                    );
+//                                               }
+//                                           }
+//                                        }
+//                                    });
+//                        }
                         if(user.getSuspended() == true){
                             if(user.until == null){
                                 Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
