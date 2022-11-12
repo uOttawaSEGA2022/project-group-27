@@ -67,7 +67,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
 
 
-        //navigationView.bringToFront();
+
         drawer = findViewById(R.id.drawer_layout);
 
         toolbar = findViewById(R.id.toolbar);

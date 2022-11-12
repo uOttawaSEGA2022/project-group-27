@@ -27,9 +27,10 @@
 
 
 
-    <group android:checkableBehavior="single">
+
         <item android:title="More">
             <menu>
+                <group android:checkableBehavior="single">
 
                 <item android:id="@+id/nav_settings"
                     android:icon="@drawable/ic_settings"
@@ -42,29 +43,32 @@
                 <item android:id="@+id/nav_about"
                     android:icon="@drawable/ic_about"
                     android:title="About us" />
+                </group>
 
             </menu>
         </item>
 
 
 
-    </group>
 
-    <group android:checkableBehavior="single">
+
+
         <item android:title="Log out">
             <menu>
+                <group android:checkableBehavior="single">
 
                 <item android:id="@+id/btnLogout"
                     android:icon="@drawable/logout"
                     android:paddingBottom="30px"
                     android:title="Log out" />
+                </group>
 
             </menu>
         </item>
 
 
 
-    </group>
+
 
 
 </menu>
