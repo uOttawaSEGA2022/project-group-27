@@ -69,7 +69,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         //navigationView.bringToFront();
         drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -84,6 +84,11 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.hamb1);
+
+        navigationView =(NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
