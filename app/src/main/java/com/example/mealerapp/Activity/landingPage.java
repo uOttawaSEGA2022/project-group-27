@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mealerapp.Fragment.AdminProfile;
+import com.example.mealerapp.Fragment.CartFragment;
 import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Fragment.HomeFragment;
 import com.example.mealerapp.Fragment.InboxFragment;
@@ -79,9 +81,17 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     case R.id.inbox:
                         selectFragment=new InboxFragment();
                         break;
+
+                    case R.id.cart:
+                        selectFragment=new CartFragment();
+                        break;
+
+                    case R.id.profile:
+                        selectFragment=new AdminProfile();
+                        break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
-                return false;
+                return true;
             }
         });
 
