@@ -1,4 +1,4 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Domain;
 
 public class CuisineDomain {
 

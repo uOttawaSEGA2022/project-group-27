@@ -1,13 +1,7 @@
-package com.example.mealerapp;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+package com.example.mealerapp.Objects;
 
 
-public class Complaints {
+public class Complaint {
 
     public String complained_cook_id;  //added by Carl because the activity is needed
     public String description;
@@ -17,9 +11,9 @@ public class Complaints {
 
 
 
-    public Complaints(){}
+    public Complaint(){}
 
-    public Complaints(String target_cook_id, String details, String id) {
+    public Complaint(String target_cook_id, String details, String id) {
         this.complained_cook_id = target_cook_id;
         this.description = details;
         this._id = id;

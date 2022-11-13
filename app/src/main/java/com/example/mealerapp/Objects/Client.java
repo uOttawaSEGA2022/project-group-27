@@ -1,9 +1,6 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Client extends User{
+public class Client extends User {
 
 
 //    private List<CreditCard> CreditCards;

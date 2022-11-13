@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
-    tools:context=".landingPage"
+    tools:context=".Activity.landingPage"
     tools:openDrawer="start">
 
     <LinearLayout

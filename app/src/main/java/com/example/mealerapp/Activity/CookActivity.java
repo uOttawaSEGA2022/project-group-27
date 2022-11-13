@@ -1,18 +1,17 @@
-package com.example.mealerapp;
-
-import static android.content.ContentValues.TAG;
+package com.example.mealerapp.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mealerapp.Objects.Cook;
+import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,16 +20,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+public class CookActivity extends AppCompatActivity implements View.OnClickListener{
 
-public class ClientActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private Button addPayment;
-    private EditText editTextFirstName, editTextLastName, editTextAddress, editTextEmail, editTextPassword, editTextConfirmPassword;
-
+    private Button next;
+    private EditText editTextFirstName, editTextLastName, editTextEmail, editTextPassword, editTextConfirmPassword, editTextAddress, editTextDesc;
     private FirebaseAuth mAuth;
+
+
     private DatabaseReference mDatabase;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -38,19 +36,18 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client);
+        setContentView(R.layout.cook);
 
+        next = (Button)findViewById(R.id.btnNext);
+        next.setOnClickListener(this);
 
-
-        addPayment = (Button)findViewById(R.id.addPayment);
-        addPayment.setOnClickListener(this);
-
-        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
-        editTextLastName = (EditText) findViewById(R.id.editTextLastName);
-        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextConfirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstNameCook);
+        editTextLastName = (EditText)findViewById(R.id.editTextLastNameCook);
+        editTextAddress = (EditText)findViewById(R.id.editTextAddressCook);
+        editTextEmail = (EditText)findViewById(R.id.editTextEmailCook);
+        editTextPassword = (EditText)findViewById(R.id.editTextPasswordCook);
+        editTextConfirmPassword = (EditText)findViewById(R.id.editTextConfirmPasswordCook);
+        editTextDesc = (EditText)findViewById(R.id.editTextDescription);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -59,22 +56,24 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view){
         switch(view.getId()){
-            case R.id.addPayment:
+            case(R.id.btnNext):
                 registerUser();
                 break;
+
         }
     }
-
     private void registerUser() {
 
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
         String address = editTextAddress.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String password = editTextPassword.getText().toString();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+        String desc = editTextDesc.getText().toString();
+
         if(firstName.isEmpty()){
             editTextFirstName.setError("Name is Required");
             editTextFirstName.requestFocus();
@@ -104,6 +103,12 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
 
+        if(desc.isEmpty()){
+            editTextDesc.setError("Description is Required");
+            editTextDesc.requestFocus();
+            return;
+        }
+
         if(password.isEmpty()){
             editTextPassword.setError("Password is Required");
             editTextPassword.requestFocus();
@@ -126,64 +131,82 @@ public class ClientActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+//        if(proxy.registerUser(email, password)){
+//            Cook cook = new Cook(
+//                    "Cook",
+//                    firstName,
+//                    lastName,
+//                    address,
+//                    email,
+//                    password,
+//                    desc,
+//                   proxy.getCurrentUserUID()
+//            );
+//
+//            if(proxy.saveUser(cook)){
+//                Toast.makeText(
+//                        CookActivity.this,
+//                        "Registration Successful",
+//                        Toast.LENGTH_LONG
+//                ).show();
+//
+//                if(proxy.login(email, password)){
+//                    startActivity(new Intent(CookActivity.this, landingPage.class));
+//                }
+//
+//
+//            }
+
+//        }
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            CreditCard cc = new CreditCard("name",1234567890, "10/22", 424);
-                            Client client = new Client(
-                                    "Client",
+                            Cook cook = new Cook(
+                                    "Cook",
                                     firstName,
                                     lastName,
                                     address,
                                     email,
                                     password,
+                                    desc,
                                     mAuth.getCurrentUser().getUid()
                             );
 
                             db.collection("users").document(mAuth.getCurrentUser().getUid())
-                                    .set(client).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            .set(cook).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            Toast.makeText(ClientActivity.this,
+                                            Toast.makeText(CookActivity.this,
                                                     "Registration Successful",
                                                     Toast.LENGTH_LONG).show();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ClientActivity.this,
-                                                    "Registration Failed " + task.getException().getMessage(),
-                                                    Toast.LENGTH_LONG).show();
-                                        }
-                                    });
 
-                            db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("creditCards")
-                                    .add(cc)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(ClientActivity.this, "Added Payment Method Successfully", Toast.LENGTH_LONG).show();
+                                            mAuth.signInWithEmailAndPassword(email, password)
+                                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            startActivity(new Intent(CookActivity.this, landingPage.class));
+                                                        }
+                                                    });
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ClientActivity.this,
-                                                    "Card Failed " + task.getException().getMessage(),
+                                            Toast.makeText(CookActivity.this,
+                                                    "Registration Failed",
                                                     Toast.LENGTH_LONG).show();
                                         }
                                     });
-
                         }else{
-                            Toast.makeText(ClientActivity.this,
-                                    "Registration Failed " + task.getException().getMessage(),
+                            Toast.makeText(CookActivity.this,
+                                    "Registration Failed" + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-//        startActivity(new Intent(ClientActivity.this, MainActivity.class));
+        startActivity(new Intent(CookActivity.this, MainActivity.class));
 
     }
 }

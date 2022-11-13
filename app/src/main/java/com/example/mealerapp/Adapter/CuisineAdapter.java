@@ -1,4 +1,4 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Adapter;
 
 
 import android.view.LayoutInflater;
@@ -13,6 +13,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.bumptech.glide.Glide;
+
+import com.example.mealerapp.Domain.CuisineDomain;
+import com.example.mealerapp.R;
 
 import java.util.ArrayList;
 

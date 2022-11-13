@@ -1,9 +1,8 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Objects;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Cook extends User{
+public class Cook extends User {
 
     private String description;
     private ArrayList<Meal> meals;

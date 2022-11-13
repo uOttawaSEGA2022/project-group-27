@@ -1,4 +1,4 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Objects;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

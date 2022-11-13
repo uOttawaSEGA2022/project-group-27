@@ -1,4 +1,4 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.mealerapp.Activity.ClientActivity;
+import com.example.mealerapp.Activity.CookActivity;
+import com.example.mealerapp.R;
 
 public class SelectUserType extends AppCompatActivity implements View.OnClickListener{
 

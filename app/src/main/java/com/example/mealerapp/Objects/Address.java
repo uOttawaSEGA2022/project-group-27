@@ -1,4 +1,4 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Objects;
 
 public class Address {
 

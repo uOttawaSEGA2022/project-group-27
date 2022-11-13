@@ -1,7 +1,6 @@
-package com.example.mealerapp;
+package com.example.mealerapp.Objects;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Administrator extends User {
 
