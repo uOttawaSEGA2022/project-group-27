@@ -18,5 +18,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_cart, container, false);
+
+
     }
 }

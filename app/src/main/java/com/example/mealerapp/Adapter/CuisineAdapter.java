@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.Glide;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.R;
 
@@ -74,7 +75,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
         int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(iconUrl,"drawable",holder.itemView.getContext().getPackageName());
 
-//        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
+       Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
 
     }
 
