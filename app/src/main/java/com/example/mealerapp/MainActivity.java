@@ -64,7 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.signUp:
-                startActivity(new Intent(this, SelectUserType.class));
+                try{
+                    startActivity(new Intent(this, SelectUserType.class));
+
+                }catch(Exception e){
+                    Toast.makeText(MainActivity.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.btnSignIn:
                 login();

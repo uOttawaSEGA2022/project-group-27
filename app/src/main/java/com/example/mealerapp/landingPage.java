@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,18 +65,18 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+//        btnLogout = (Button) findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
 
-        textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
+//        textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
         cuisineList();
 
 
 
 
-        drawer = findViewById(R.id.drawer_layout);
+//        drawer = findViewById(R.id.drawer_layout);
 
-        toolbar = findViewById(R.id.toolbar);
+//        toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -89,7 +90,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView =(NavigationView) findViewById(R.id.nav_view);
+        navigationView =(NavigationView) findViewById(R.id.bottom_nav);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -101,7 +102,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         mAuth = FirebaseAuth.getInstance();
 
-//        mDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
         userID = mAuth.getCurrentUser().getUid();
 
         db = FirebaseFirestore.getInstance();
@@ -112,30 +112,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         User user = documentSnapshot.toObject(User.class);
-//                        if(user.getRole().equals("Admin")){
-//                            Administrator admin = new Administrator(
-//                                    user.getRole(),
-//                                    user.getFirstName(),
-//                                    user.getLastName(),
-//                                    user.getAddress(),
-//                                    user.getEmail(),
-//                                    user.getPassword(),
-//                                    user.getUID()
-//                            );
-//                            db.collection("complaints")
-//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                           if(task.isSuccessful()){
-//                                               for(QueryDocumentSnapshot document : task.getResult()){
-//                                                    complaints.add(
-//                                                            document.toObject(Complaints.class)
-//                                                    );
-//                                               }
-//                                           }
-//                                        }
-//                                    });
-//                        }
+
                         if(user.getSuspended() == true){
                             if(user.until == null){
                                 Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
@@ -173,42 +150,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
-
-
-//        mDatabaseRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                User user = snapshot.getValue(User.class);
-//
-//                if(user != null){
-//                    if(user.getRole() == "Admin"){
-//                        Administrator admin = new Administrator("Admin", user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword());
-//
-//                        startActivity(new Intent(landingPage.this, AdminScreen.class));
-//
-//                    }
-//                    if(user.getSuspended() == true){
-//                        if(user.until == null){
-//                            Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
-//                        }else if(Calendar.getInstance().after(user.getUntil())){
-//                            user.suspended = false;
-//                            user.until = null;
-//                        }else{
-//                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
-//                        }
-//                    }else{
-//                        textViewWelcome.setText("Welcome " + user.getFirstName() + "! You are logged in as a " + user.getRole() +
-//                                ". Your Email is " + user.getEmail() + " and your Address is " + user.getAddress());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(landingPage.this, "Error Occurred", Toast.LENGTH_LONG).show();
-//            }
-//        });
-
     }
 
     @Override
@@ -243,21 +184,32 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
 
         switch(item.getItemId()){
-            case R.id.btnLogout:{
-                mAuth.signOut();
-                startActivity(new Intent(this, MainActivity.class));
+            case R.id.home:
+                setFragment(new HomeFragment());
                 break;
-            }
-
-            case R.id.nav_inbox:{
-                //we will open this on a fragment
+            case R.id.cart:
                 break;
-            }
+            case R.id.inbox:
+                setFragment(new InboxFragment());
+                break;
+            case R.id.profile:
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void setFragment(Fragment fragment){
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+
+    }
+
+
+
 
     @Override
     public void onClick(View view) {
