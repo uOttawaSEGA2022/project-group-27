@@ -77,4 +77,8 @@ public class User {
 
     public String getUID() { return this.UID; }
 
+    public String toString(){
+        return "Name: " + firstName + " " + lastName + " UserID: " + UID + " Role: " + role;
+    }
+
 }

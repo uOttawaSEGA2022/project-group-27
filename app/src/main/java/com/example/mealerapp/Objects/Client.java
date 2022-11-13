@@ -9,6 +9,7 @@ public class Client extends User {
 
     public Client(){}
 
+
     public Client (String Role, String firstName, String lastName, String Address, String Email, String Password, String UID){
         super(Role, firstName, lastName, Address, Email, Password, UID);
 //        this.CreditCards.add(CC);

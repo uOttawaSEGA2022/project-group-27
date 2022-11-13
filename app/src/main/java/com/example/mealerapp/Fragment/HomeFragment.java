@@ -16,7 +16,7 @@ import com.example.mealerapp.R;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView cuisineList;
@@ -52,4 +52,8 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

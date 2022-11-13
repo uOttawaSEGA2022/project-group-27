@@ -15,9 +15,14 @@ import android.widget.Toast;
 
 import com.example.mealerapp.Fragment.AdminProfile;
 import com.example.mealerapp.Fragment.CartFragment;
+import com.example.mealerapp.Fragment.ClientProfile;
+import com.example.mealerapp.Fragment.CookProfile;
+import com.example.mealerapp.Objects.Administrator;
+import com.example.mealerapp.Objects.Client;
 import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Fragment.HomeFragment;
 import com.example.mealerapp.Fragment.InboxFragment;
+import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.R;
 import com.example.mealerapp.Objects.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,17 +50,20 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     BottomNavigationView bottomNavigationView;
 
-    HomeFragment homeFragment = new HomeFragment();
-    InboxFragment inboxFragment = new InboxFragment();
+    private HomeFragment homeFragment;
+    private InboxFragment inboxFragment;
+    private CartFragment cartFragment;
+    private Fragment profileFragment;
+
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabaseRef;
     private FirebaseFirestore db;
 
-    private List<Complaint> complaints;
-    private String userID;
+    private User user;
 
-    //now we no longer want to use the side navbar so we only want the bottom navbar
+    private Cook cook;
+
+
 
 
     @Override
@@ -68,7 +76,19 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
+        homeFragment = new HomeFragment();
+        inboxFragment = new InboxFragment(); //TODO Implement logic for dynamically creating user inbox
+        cartFragment = new CartFragment();
+        profileFragment = new CookProfile();
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,homeFragment).commit();
+
+
+
+
+//        initializeUser();
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Fragment selectFragment = null;
@@ -76,18 +96,18 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
             public boolean onNavigationItemSelected(MenuItem item){
                 switch(item.getItemId()){
                     case R.id.home:
-                        selectFragment=new HomeFragment();
+                        selectFragment = homeFragment;
                         break;
                     case R.id.inbox:
-                        selectFragment=new InboxFragment();
+                        selectFragment = inboxFragment;
                         break;
 
                     case R.id.cart:
-                        selectFragment=new CartFragment();
+                        selectFragment = cartFragment;
                         break;
 
                     case R.id.profile:
-                        selectFragment=new AdminProfile();
+                        selectFragment = profileFragment;
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
@@ -95,149 +115,33 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-//        textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
-        //cuisineList();
-
-
-
-
-//        drawer = findViewById(R.id.drawer_layout);
-
-//        toolbar = findViewById(R.id.toolbar);
-
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
-
-
-
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        navigationView =(NavigationView) findViewById(R.id.bottom_nav);
-//        navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
-
-
-
-
         mAuth = FirebaseAuth.getInstance();
-
-        userID = mAuth.getCurrentUser().getUid();
 
         db = FirebaseFirestore.getInstance();
 
-        db.collection("users")
-                        .document(mAuth.getCurrentUser().getUid())
-                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
-
-                        if(user.getSuspended() == true){
-                            if(user.until == null){
-                                Toast.makeText(landingPage.this, "Your account has been permanently suspended", Toast.LENGTH_LONG).show();
-                            }else if(Calendar.getInstance().after(user.getUntil())){
-                                user.suspended = false;
-                                user.until = null;
-                            }else{
-                            Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
-                            }
-                        }else{
-                            //textViewWelcome.setText("Welcome " + user.getFirstName() + "!");
-                        }
-
-//                        if (user.getRole().equalsIgnoreCase("admin")){
-//                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(true);
-//                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(true);
-//                        } else{
-//                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(false);
-//                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(false);
-//
-//                        }
-//
-//                        if (user.getRole().equalsIgnoreCase("cook")){
-//                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(true);
-//
-//                        } else{
-//                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(false);
-//
-//
-//                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
-    }
-
-//    @Override
-//    public void onBackPressed(){
-//        if(drawer.isDrawerOpen(GravityCompat.START)){
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else{
-//            super.onBackPressed();
-//        }
-//
-//    }
-
-//    private void cuisineList(){
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-//        cuisineList=findViewById(R.id.cuisine);
-//        cuisineList.setLayoutManager(linearLayoutManager);
-//
-//        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
-//        cuisine.add(new CuisineDomain("Italian","cat_1"));
-//        cuisine.add(new CuisineDomain("Chinese","cat_2"));
-//        cuisine.add(new CuisineDomain("Greek","cat_3"));
-//        cuisine.add(new CuisineDomain("Mexican","cat_4"));
-//        cuisine.add(new CuisineDomain("Arabic","cat_5"));
-//
-//        adapter=new CuisineAdapter(cuisine);
-//        cuisineList.setAdapter(adapter);
-//
-//
-//    }
-
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item){
-//
-//        switch(item.getItemId()){
-//            case R.id.home:
-//                setFragment(new HomeFragment());
-//                break;
-//            case R.id.cart:
-//                break;
-//            case R.id.inbox:
-//                setFragment(new InboxFragment());
-//                break;
-//            case R.id.profile:
-//                break;
-//        }
-//
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
-
-    private void setFragment(Fragment fragment){
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .commit();
 
     }
 
+/* TODO Reimplement recycler for home page fragment
+
+    private void cuisineList(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        cuisineList=findViewById(R.id.cuisine);
+        cuisineList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
+        cuisine.add(new CuisineDomain("Italian","cat_1"));
+        cuisine.add(new CuisineDomain("Chinese","cat_2"));
+        cuisine.add(new CuisineDomain("Greek","cat_3"));
+        cuisine.add(new CuisineDomain("Mexican","cat_4"));
+        cuisine.add(new CuisineDomain("Arabic","cat_5"));
+
+        adapter=new CuisineAdapter(cuisine);
+        cuisineList.setAdapter(adapter);
 
 
-
+   }
+*/
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -245,5 +149,42 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                 mAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
         }
+    }
+
+    private void initializeUser() {
+        db.collection("users")
+                .document(mAuth.getCurrentUser().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        user = documentSnapshot.toObject(User.class);
+
+                       switch(user.getRole()){
+                           case "Admin":
+                               user = new Administrator(user);
+                                profileFragment = new AdminProfile();
+                               break;
+                           case "Cook":
+                                user = documentSnapshot.toObject(Cook.class);
+                                cook = documentSnapshot.toObject(Cook.class); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
+                                profileFragment = new CookProfile();
+                                break;
+                           case "Client":
+                               user =  documentSnapshot.toObject(Client.class);
+                               profileFragment = new ClientProfile();
+                               break;
+
+                       }
+
+                    }
+                });
+    }
+
+    public User getUser(){
+        return this.user;
+    }
+
+    public Cook getCook(){
+        return this.cook;
     }
 }
