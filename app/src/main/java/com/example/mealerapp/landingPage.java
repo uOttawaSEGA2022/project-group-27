@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,16 +41,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class landingPage extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
-    private DrawerLayout drawer;
-    private NavigationView navigationView;
-    private Toolbar toolbar;
+//    private DrawerLayout drawer;
+//    private NavigationView navigationView;
+//    private Toolbar toolbar;
 
     private Button btnLogout;
     private TextView textViewWelcome;
     private RecyclerView.Adapter adapter;
     private RecyclerView cuisineList;
+
+    BottomNavigationView bottomNavigationView;
+
+    HomeFragment homeFragment = new HomeFragment();
+    InboxFragment inboxFragment = new InboxFragment();
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
@@ -65,11 +72,32 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-//        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout = (Button) findViewById(R.id.btnLogout2);
         btnLogout.setOnClickListener(this);
 
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,homeFragment).commit();
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Fragment selectFragment = null;
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item){
+                switch(item.getItemId()){
+                    case R.id.home:
+                        selectFragment=new HomeFragment();
+                        break;
+                    case R.id.inbox:
+                        selectFragment=new InboxFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
+                return false;
+            }
+        });
+
 //        textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
-        cuisineList();
+        //cuisineList();
 
 
 
@@ -78,20 +106,20 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
 //        toolbar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
 
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView =(NavigationView) findViewById(R.id.bottom_nav);
-        navigationView.setNavigationItemSelectedListener(this);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        navigationView =(NavigationView) findViewById(R.id.bottom_nav);
+//        navigationView.setNavigationItemSelectedListener(this);
 
 
 
@@ -123,26 +151,26 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                             Toast.makeText(landingPage.this, "Your account has been suspended until " + user.until, Toast.LENGTH_LONG).show();
                             }
                         }else{
-                            textViewWelcome.setText("Welcome " + user.getFirstName() + "!");
+                            //textViewWelcome.setText("Welcome " + user.getFirstName() + "!");
                         }
 
-                        if (user.getRole().equalsIgnoreCase("admin")){
-                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(true);
-                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(true);
-                        } else{
-                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(false);
-                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(false);
-
-                        }
-
-                        if (user.getRole().equalsIgnoreCase("cook")){
-                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(true);
-
-                        } else{
-                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(false);
-
-
-                        }
+//                        if (user.getRole().equalsIgnoreCase("admin")){
+//                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(true);
+//                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(true);
+//                        } else{
+//                            navigationView.getMenu().findItem(R.id.nav_cooks).setVisible(false);
+//                            navigationView.getMenu().findItem(R.id.nav_complaints).setVisible(false);
+//
+//                        }
+//
+//                        if (user.getRole().equalsIgnoreCase("cook")){
+//                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(true);
+//
+//                        } else{
+//                            navigationView.getMenu().findItem(R.id.nav_menu).setVisible(false);
+//
+//
+//                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -152,53 +180,53 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                 });
     }
 
-    @Override
-    public void onBackPressed(){
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        } else{
-            super.onBackPressed();
-        }
+//    @Override
+//    public void onBackPressed(){
+//        if(drawer.isDrawerOpen(GravityCompat.START)){
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else{
+//            super.onBackPressed();
+//        }
+//
+//    }
 
-    }
+//    private void cuisineList(){
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+//        cuisineList=findViewById(R.id.cuisine);
+//        cuisineList.setLayoutManager(linearLayoutManager);
+//
+//        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
+//        cuisine.add(new CuisineDomain("Italian","cat_1"));
+//        cuisine.add(new CuisineDomain("Chinese","cat_2"));
+//        cuisine.add(new CuisineDomain("Greek","cat_3"));
+//        cuisine.add(new CuisineDomain("Mexican","cat_4"));
+//        cuisine.add(new CuisineDomain("Arabic","cat_5"));
+//
+//        adapter=new CuisineAdapter(cuisine);
+//        cuisineList.setAdapter(adapter);
+//
+//
+//    }
 
-    private void cuisineList(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        cuisineList=findViewById(R.id.cuisine);
-        cuisineList.setLayoutManager(linearLayoutManager);
-
-        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
-        cuisine.add(new CuisineDomain("Italian","cat_1"));
-        cuisine.add(new CuisineDomain("Chinese","cat_2"));
-        cuisine.add(new CuisineDomain("Greek","cat_3"));
-        cuisine.add(new CuisineDomain("Mexican","cat_4"));
-        cuisine.add(new CuisineDomain("Arabic","cat_5"));
-
-        adapter=new CuisineAdapter(cuisine);
-        cuisineList.setAdapter(adapter);
-
-
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item){
-
-        switch(item.getItemId()){
-            case R.id.home:
-                setFragment(new HomeFragment());
-                break;
-            case R.id.cart:
-                break;
-            case R.id.inbox:
-                setFragment(new InboxFragment());
-                break;
-            case R.id.profile:
-                break;
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem item){
+//
+//        switch(item.getItemId()){
+//            case R.id.home:
+//                setFragment(new HomeFragment());
+//                break;
+//            case R.id.cart:
+//                break;
+//            case R.id.inbox:
+//                setFragment(new InboxFragment());
+//                break;
+//            case R.id.profile:
+//                break;
+//        }
+//
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     private void setFragment(Fragment fragment){
 
@@ -214,7 +242,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.btnLogout:
+            case R.id.btnLogout2:
                 mAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
         }

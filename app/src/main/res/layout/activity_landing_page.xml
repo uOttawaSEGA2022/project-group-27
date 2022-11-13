@@ -9,6 +9,28 @@
     <!--    android:id="@+id/drawer_layout"-->
     <!--    android:fitsSystemWindows="true"-->
 
+    <Button
+        android:id="@+id/btnLogout2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/grey_unfilled_box"
+        android:text="LOGOUT"
+        android:textColor="#B6B6B6"
+        android:textStyle="bold"
+        android:translationX="150dp"
+        android:translationY="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
