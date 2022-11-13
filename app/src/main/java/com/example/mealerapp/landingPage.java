@@ -56,6 +56,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     private List<Complaints> complaints;
     private String userID;
 
+    //now we no longer want to use the side navbar so we only want the bottom navbar
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
