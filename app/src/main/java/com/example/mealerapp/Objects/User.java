@@ -8,8 +8,6 @@ public class User {
 
     private String firstName, lastName, Address, Email, Password, UID;
 
-    public boolean suspended = false;
-    public Date until = null;
 
     public User (String role, String firstName, String lastName, String Address, String Email, String Password, String UID){
         this.UID = UID;
@@ -66,14 +64,6 @@ public class User {
     public void setRole(String role){this.role=role;}
 
     public String getRole(){return this.role;}
-
-    public boolean getSuspended(){return suspended;}
-
-    public Date getUntil(){return until;}
-
-    public void setSuspended(boolean s){suspended = s;}
-
-    public void setUntil(Date d){until = d;}
 
     public String getUID() { return this.UID; }
 

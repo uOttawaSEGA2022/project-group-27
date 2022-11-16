@@ -17,6 +17,7 @@ import com.example.mealerapp.Fragment.AdminProfile;
 import com.example.mealerapp.Fragment.CartFragment;
 import com.example.mealerapp.Fragment.ClientProfile;
 import com.example.mealerapp.Fragment.CookProfile;
+import com.example.mealerapp.Fragment.SuspendedFragment;
 import com.example.mealerapp.Objects.Administrator;
 import com.example.mealerapp.Objects.Client;
 import com.example.mealerapp.Objects.Complaint;
@@ -167,7 +168,27 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                            case "Cook":
                                 user = documentSnapshot.toObject(Cook.class);
                                 cook = documentSnapshot.toObject(Cook.class); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
-                                profileFragment = new CookProfile();
+                               if(cook.getSuspended() == true){
+                                   if(cook.getUntil() == null){
+                                       //Suspended Permanently
+
+                                       profileFragment = new SuspendedFragment();
+                                       mAuth.signOut();
+                                       break;
+                                   }else{
+                                       if(Calendar.getInstance().after(cook.getUntil())){
+                                           //Suspended temporarily, done.
+                                           cook.setSuspended(false);
+                                           cook.setUntil(null);
+                                       }else{
+                                           //Suspended temporarily, not done.
+                                           profileFragment = new SuspendedFragment();
+                                           mAuth.signOut();
+                                           break;//TODO Check the Suspended Fragment please, idk what im doing
+                                       }
+                                   }
+                               }
+                               profileFragment = new CookProfile();
                                 break;
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);

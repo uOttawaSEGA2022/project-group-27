@@ -2,11 +2,14 @@ package com.example.mealerapp.Objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Cook extends User implements Serializable {
 
     private String description;
     private ArrayList<Meal> meals;
+    private boolean suspended = false;
+    private Date until = null;
 
     public Cook() {}
 
@@ -19,6 +22,15 @@ public class Cook extends User implements Serializable {
         super(user.getRole(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword(), user.getUID());
         this.description = desc;
     }
+
+
+    public boolean getSuspended(){return suspended;}
+
+    public Date getUntil(){return until;}
+
+    public void setSuspended(boolean s){suspended = s;}
+
+    public void setUntil(Date d){until = d;}
 
     public void addMeal(Meal m){
         meals.add(m);
