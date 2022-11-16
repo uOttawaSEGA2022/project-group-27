@@ -27,7 +27,7 @@ public class Administrator extends User {
 
     public void permSuspend(Cook c){
 
-        c.suspended = true;
+        c.setSuspended(true);
     }
     /*
     Ill leave this for now because the complaint class isnt complete.

@@ -34,6 +34,8 @@ public class SuspendedFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        //TODO Go back to main activity
+
+        startActivity(new Intent(getActivity(), MainActivity.class));
     }
+
 }
