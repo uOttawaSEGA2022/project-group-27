@@ -23,10 +23,10 @@ public class CookProfile extends Fragment implements View.OnClickListener {
     private Button btnManageMenu;
     private View view;
 
-    private Cook cook;
+    private String UID;
 
-    public CookProfile(Cook cook){
-        this.cook = cook;
+    public CookProfile(String UID){
+        this.UID = UID;
     }
 
     @Override
@@ -46,6 +46,7 @@ public class CookProfile extends Fragment implements View.OnClickListener {
         switch (view.getId()){
             case(R.id.btnManageMenu):
                 Intent intent = new Intent(getActivity(), ManageMenuActivity.class);
+                intent.putExtra("Cook_UID", UID);
                 startActivity(intent);
                 break;
         }

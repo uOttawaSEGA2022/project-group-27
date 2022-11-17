@@ -10,10 +10,12 @@ public class Meal {
     protected String cuisine;
     protected ArrayList<String> ingredients;
     protected ArrayList<String> allergens;
-    protected BigDecimal price;
+    protected Double price;
     protected String description;
 
-    public Meal(String name, String course, String cuisine, ArrayList<String> ingredients, ArrayList<String> allergens, BigDecimal price, String description) {
+    public Meal(){}
+
+    public Meal(String name, String course, String cuisine, ArrayList<String> ingredients, ArrayList<String> allergens, Double price, String description) {
         this.name = name;
         this.course = course;
         this.cuisine = cuisine;

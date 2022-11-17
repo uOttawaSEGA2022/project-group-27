@@ -35,12 +35,12 @@ public class ManageMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_menu);
 
+
         String cook_uid = getIntent().getStringExtra("Cook_UID");
 
-
-        Log.d(TAG, cook_uid);
-
-//        getCook(cook_uid);
+//
+//
+        getCook(cook_uid);
 
 
     }
@@ -73,8 +73,8 @@ public class ManageMenuActivity extends AppCompatActivity {
                             for(QueryDocumentSnapshot document: task.getResult()){
                                 menu.add(document.toObject(Meal.class));
                             }
-                        }else
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
 

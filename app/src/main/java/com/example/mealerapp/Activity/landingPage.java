@@ -81,10 +81,29 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         inboxFragment = new InboxFragment(); //TODO Implement logic for dynamically creating user inbox
         cartFragment = new CartFragment();
 
-        initializeUser();
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,homeFragment).commit();
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+
+        db.collection("users")
+                .document(mAuth.getCurrentUser().getUid())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        user = documentSnapshot.toObject(Cook.class) ;
+                        profileFragment = new CookProfile(user.getUID());
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        profileFragment = new ClientProfile();
+                    }
+                });
 
 
 
@@ -117,33 +136,11 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
 
-        db = FirebaseFirestore.getInstance();
 
 
     }
 
-/* TODO Reimplement recycler for home page fragment
-
-    private void cuisineList(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        cuisineList=findViewById(R.id.cuisine);
-        cuisineList.setLayoutManager(linearLayoutManager);
-
-        ArrayList<CuisineDomain> cuisine = new ArrayList<>();
-        cuisine.add(new CuisineDomain("Italian","cat_1"));
-        cuisine.add(new CuisineDomain("Chinese","cat_2"));
-        cuisine.add(new CuisineDomain("Greek","cat_3"));
-        cuisine.add(new CuisineDomain("Mexican","cat_4"));
-        cuisine.add(new CuisineDomain("Arabic","cat_5"));
-
-        adapter=new CuisineAdapter(cuisine);
-        cuisineList.setAdapter(adapter);
-
-
-   }
-*/
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -169,7 +166,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                            case "Cook":
                                 user = documentSnapshot.toObject(Cook.class);
                                 cook = documentSnapshot.toObject(Cook.class);
-                                profileFragment = new CookProfile(cook); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
+                                profileFragment = new CookProfile(cook.getUID()); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
                                if(cook.getSuspended() == true){
                                    if(cook.getUntil() == null){
                                        //Suspended Permanently
@@ -190,7 +187,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                                        }
                                    }
                                }
-                               profileFragment = new CookProfile(cook);
+                               profileFragment = new CookProfile(user.getUID());
                                 break;
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);
