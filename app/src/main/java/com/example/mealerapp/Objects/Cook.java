@@ -1,5 +1,7 @@
 package com.example.mealerapp.Objects;
 
+import android.widget.ArrayAdapter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +37,9 @@ public class Cook extends User implements Serializable {
     public void addMeal(Meal m){
         meals.add(m);
     }
+
+    public ArrayList<Meal> get_mealList(){ return meals; }
+    public void setMeals(ArrayList<Meal> new_meals) { meals = new_meals; }
 
 
 }

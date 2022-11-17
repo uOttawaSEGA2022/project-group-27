@@ -1,6 +1,8 @@
 package com.example.mealerapp.Objects;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class Meal {
@@ -24,5 +26,12 @@ public class Meal {
         this.price = price;
         this.description = description;
     }
+    public String getName() { return name; }
+    public String getCourse() { return course; }
+    public String getCuisine() { return cuisine; }
+    public ArrayList<String> getIngredients() { return ingredients; }
+    public ArrayList<String> getAllergens() { return allergens; }
+    public BigDecimal getPrice() { return price; }
+    public String getDescription() { return description; }
 
 }
