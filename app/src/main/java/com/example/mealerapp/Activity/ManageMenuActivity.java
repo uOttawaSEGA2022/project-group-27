@@ -35,18 +35,22 @@ public class ManageMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_menu);
 
+        String cook_uid = getIntent().getStringExtra("Cook_UID");
 
-        getCook();
+
+        Log.d(TAG, cook_uid);
+
+//        getCook(cook_uid);
 
 
     }
 
-    private void getCook() {
+    private void getCook(String UID) {
 
         FirebaseFirestore.getInstance().
             collection("users")
                     .document(
-                            FirebaseAuth.getInstance().getCurrentUser().getUid()
+                        UID
                     ).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {

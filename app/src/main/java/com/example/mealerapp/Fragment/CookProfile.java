@@ -23,7 +23,11 @@ public class CookProfile extends Fragment implements View.OnClickListener {
     private Button btnManageMenu;
     private View view;
 
-    private Cook user;
+    private Cook cook;
+
+    public CookProfile(Cook cook){
+        this.cook = cook;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,9 +38,6 @@ public class CookProfile extends Fragment implements View.OnClickListener {
 
         btnManageMenu.setOnClickListener(this);
 
-        user = ((landingPage) getActivity()).getCook();
-
-
         return view;
     }
 
@@ -45,11 +46,7 @@ public class CookProfile extends Fragment implements View.OnClickListener {
         switch (view.getId()){
             case(R.id.btnManageMenu):
                 Intent intent = new Intent(getActivity(), ManageMenuActivity.class);
-
-                intent.putExtra("Cook",user);
-
                 startActivity(intent);
-//                startActivity(new Intent(getActivity(), ManageMenuActivity.class));
                 break;
         }
     }
