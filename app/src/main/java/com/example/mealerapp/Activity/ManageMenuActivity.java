@@ -49,11 +49,17 @@ public class ManageMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_menu);
 
+
         btnAdd = (Button) findViewById(R.id.btnAdd);
         listView_meal = (ListView) findViewById(R.id.meal_list);
 
 
-        getCook();
+        String cook_uid = getIntent().getStringExtra("Cook_UID");
+
+
+        Log.d(TAG, cook_uid);
+
+        getCook(cook_uid);
         list_meal = cook.get_mealList();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +128,9 @@ public class ManageMenuActivity extends AppCompatActivity {
         });
 
 
+
     }
+
 
     private void showUpdateMealDialog(Meal meal){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -199,12 +207,13 @@ public class ManageMenuActivity extends AppCompatActivity {
     }
 
 
-    private void getCook() {
+
+    private void getCook(String UID) {
 
         FirebaseFirestore.getInstance().
             collection("users")
                     .document(
-                            FirebaseAuth.getInstance().getCurrentUser().getUid()
+                        UID
                     ).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {

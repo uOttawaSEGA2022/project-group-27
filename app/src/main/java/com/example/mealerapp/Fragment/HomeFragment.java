@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         cuisine.add(new CuisineDomain("Arabic","cat_5"));
 
         adapter=new CuisineAdapter(cuisine);
+
         cuisineList.setAdapter(adapter);
 
 

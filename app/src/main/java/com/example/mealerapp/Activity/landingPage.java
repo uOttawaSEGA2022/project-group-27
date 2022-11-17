@@ -49,7 +49,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     private RecyclerView.Adapter adapter;
     private RecyclerView cuisineList;
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     private HomeFragment homeFragment;
     private InboxFragment inboxFragment;
@@ -80,7 +80,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         homeFragment = new HomeFragment();
         inboxFragment = new InboxFragment(); //TODO Implement logic for dynamically creating user inbox
         cartFragment = new CartFragment();
-        profileFragment = new CookProfile();
+
+        initializeUser();
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,homeFragment).commit();
@@ -163,11 +164,12 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                        switch(user.getRole()){
                            case "Admin":
                                user = new Administrator(user);
-                                profileFragment = new AdminProfile();
+                               profileFragment = new AdminProfile();
                                break;
                            case "Cook":
                                 user = documentSnapshot.toObject(Cook.class);
-                                cook = documentSnapshot.toObject(Cook.class); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
+                                cook = documentSnapshot.toObject(Cook.class);
+                                profileFragment = new CookProfile(cook); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
                                if(cook.getSuspended() == true){
                                    if(cook.getUntil() == null){
                                        //Suspended Permanently
@@ -188,7 +190,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                                        }
                                    }
                                }
-                               profileFragment = new CookProfile();
+                               profileFragment = new CookProfile(cook);
                                 break;
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);
