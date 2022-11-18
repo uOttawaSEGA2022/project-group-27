@@ -81,7 +81,6 @@ public class ManageMenuActivity extends AppCompatActivity {
 
 
         list_meal = getMeals();
-        list_meal.add(new Meal("a", "a", "b", new ArrayList<String>(), new ArrayList<String>(), 123.1, "b"));
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +89,10 @@ public class ManageMenuActivity extends AppCompatActivity {
             }
         });
 
-//        list_meal = new ArrayList<>(5);
-
         ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
+
         listView_meal.setAdapter(ad);
+
         listView_meal.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -137,7 +136,6 @@ public class ManageMenuActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         cook = documentSnapshot.toObject(Cook.class);
-                        Toast.makeText(ManageMenuActivity.this, "Got Cook", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -179,7 +177,7 @@ public class ManageMenuActivity extends AppCompatActivity {
 //                    ArrayList<Meal> meals = cook.get_mealList();
                     Meal meal = new Meal(name, course, cuisine, Ingredients, Allergens, price, description);
                     list_meal.add(meal);
-                    db.collection("meals").add(meal);
+                    db.collection("meals").document(meal.getID()).set(meal);
                     b.dismiss();
                 }
 
@@ -238,8 +236,8 @@ public class ManageMenuActivity extends AppCompatActivity {
                 String name = editName.getText().toString().trim();
                 String course = editCourse.getText().toString().trim();
                 String cuisine = editCuisine.getText().toString().trim();
-                ArrayList<String> Ingredients = new ArrayList<String>(Arrays.asList(editIngredients.getText().toString().trim().split(", ")));
-                ArrayList<String> Allergens = new ArrayList<String>(Arrays.asList(editAllergens.getText().toString().split(", ")));
+                ArrayList<String> Ingredients = new ArrayList<String>(Arrays.asList(editIngredients.getText().toString().trim().split(",")));
+                ArrayList<String> Allergens = new ArrayList<String>(Arrays.asList(editAllergens.getText().toString().trim().split(",")));
                 Double price = Double.valueOf(Double.valueOf(editPrice.getText().toString().trim()));
                 String description = editDescription.getText().toString().trim();
 

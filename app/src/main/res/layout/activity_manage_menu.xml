@@ -31,15 +31,11 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/meal_list"
-        android:layout_width="413dp"
-        android:layout_height="577dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.673" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMeals"
+        android:layout_width="409dp"
+        android:layout_height="580dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="150dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
