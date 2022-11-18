@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
@@ -28,12 +29,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ManageMenuActivity extends AppCompatActivity {
 
@@ -44,23 +49,31 @@ public class ManageMenuActivity extends AppCompatActivity {
     private ArrayList<Meal> list_meal;
     private Button btnAdd;
 
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_menu);
 
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
 
         String cook_uid = getIntent().getStringExtra("Cook_UID");
 
-//
-//
-        getCook(cook_uid);
+
+        Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         listView_meal = (ListView) findViewById(R.id.meal_list);
 
         getCook(cook_uid);
-        list_meal = cook.get_mealList();
+
+
+
+        list_meal = getMeals();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +81,8 @@ public class ManageMenuActivity extends AppCompatActivity {
                 addMeals();
             }
         });
+
+        list_meal = new ArrayList<>(5);
 
         ArrayAdapter ad = new ArrayAdapter(this, R.layout.activity_manage_menu, list_meal);
         listView_meal.setAdapter(ad);
@@ -79,6 +94,46 @@ public class ManageMenuActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    private ArrayList<Meal> getMeals(){
+        ArrayList<Meal> mealList = new ArrayList<>();
+
+
+        db.collection("meals")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                                mealList.add(documentSnapshot.toObject(Meal.class));
+                            }
+                        }else{
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return mealList;
+    }
+
+    private void getCook(String UID) {
+
+        db.
+                collection("users")
+                .document(
+                        UID
+                ).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        cook = documentSnapshot.toObject(Cook.class);
+                        Toast.makeText(ManageMenuActivity.this, "Got Cook", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+        // TODO retrieve cook from Intent or some other means from landing page activity / profile fragment; currently considering passing the userID as an extra in the Intent and fetching using the ID
+
 
     }
 
@@ -113,8 +168,10 @@ public class ManageMenuActivity extends AppCompatActivity {
                 String description = editDescription.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(cuisine) && !TextUtils.isEmpty(description)){
-                    ArrayList<Meal> meals = cook.get_mealList();
-                    meals.add(new Meal(name, course, cuisine, Ingredients, Allergens, price, description));
+//                    ArrayList<Meal> meals = cook.get_mealList();
+                    Meal meal = new Meal(name, course, cuisine, Ingredients, Allergens, price, description);
+                    list_meal.add(meal);
+                    db.collection("meals").add(meal);
                     b.dismiss();
                 }
 
@@ -196,34 +253,36 @@ public class ManageMenuActivity extends AppCompatActivity {
 
     }
     private void updateMeal(Meal meal, String name, String course, String cuisine, ArrayList<String> ingredients, ArrayList<String> allergens, Double price, String description){
-        ArrayList<Meal> meals = cook.get_mealList();
-        meals.set(meals.indexOf(meal), new Meal(name, course, cuisine, ingredients, allergens, price, description));
-        cook.setMeals(meals);
+//        ArrayList<Meal> meals = cook.get_mealList();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", name);
+        data.put("course", course);
+        data.put("cuisine", cuisine);
+        data.put("ingredients", ingredients);
+        data.put("allergens", allergens);
+        data.put("price", price);
+        data.put("description", description);
+
+
+        db.collection("meals").document(meal.getID()).set(data, SetOptions.merge());
+
+
+//        meals.set(meals.indexOf(meal), new Meal(name, course, cuisine, ingredients, allergens, price, description));
+//        cook.setMeals(meals);
     }
     private void deleteMeal(Meal meal){
-        ArrayList<Meal> meals = cook.get_mealList();
-        meals.remove(meal);
-        cook.setMeals(meals);
+//        ArrayList<Meal> meals = cook.get_mealList();
+        list_meal.remove(meal);
+
+        db.collection("meals").document(meal.getID()).delete();
+
+//        cook.setMeals(meals);
     }
 
 
 
-    private void getCook(String UID) {
 
-        FirebaseFirestore.getInstance().
-            collection("users")
-                    .document(
-                        UID
-                    ).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        cook = documentSnapshot.toObject(Cook.class);
-                     }
-                });
-                // TODO retrieve cook from Intent or some other means from landing page activity / profile fragment; currently considering passing the userID as an extra in the Intent and fetching using the ID
-
-
-    }
 
     private void getMenu() {
 
