@@ -8,12 +8,12 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="412dp"
-        android:layout_height="149dp"
+        android:layout_width="418dp"
+        android:layout_height="101dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="48dp">
 
         <TextView
             android:id="@+id/textView10"

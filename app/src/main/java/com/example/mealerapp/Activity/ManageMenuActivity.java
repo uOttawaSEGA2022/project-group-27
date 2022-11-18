@@ -81,6 +81,7 @@ public class ManageMenuActivity extends AppCompatActivity {
 
 
         list_meal = getMeals();
+        list_meal.add(new Meal("a", "a", "b", new ArrayList<String>(), new ArrayList<String>(), 123.1, "b"));
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,14 +90,15 @@ public class ManageMenuActivity extends AppCompatActivity {
             }
         });
 
-        list_meal = new ArrayList<>(5);
+//        list_meal = new ArrayList<>(5);
 
-        ArrayAdapter ad = new ArrayAdapter(this, R.layout.activity_manage_menu, list_meal);
+        ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
         listView_meal.setAdapter(ad);
         listView_meal.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Meal target_meal =list_meal.get(i);
+                ad.notifyDataSetChanged();
                 showUpdateMealDialog(target_meal);
                 return true;
             }
