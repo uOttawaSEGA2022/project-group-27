@@ -27,7 +27,7 @@ public class MealDomain {
         this.description = meal.getDescription();
         this.ingredients = meal.getIngredients();
         this.allergens = meal.getAllergens();
-        this.offered = meal.getOffered();
+        this.offered = meal.isOffered();
     }
 
 

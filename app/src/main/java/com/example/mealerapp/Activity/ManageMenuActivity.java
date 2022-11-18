@@ -56,6 +56,9 @@ public class ManageMenuActivity extends AppCompatActivity {
     private Button btnAdd;
 
     private RecyclerView recycleViewMeals;
+    private MealAdapter adapter;
+
+    private String cookID;
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
@@ -77,19 +80,20 @@ public class ManageMenuActivity extends AppCompatActivity {
 
         recycleViewMeals = (RecyclerView) findViewById(R.id.recyclerViewMeals);
 
-        String cook_uid = getIntent().getStringExtra("Cook_UID");
+        cookID = getIntent().getStringExtra("Cook_UID");
 
 
-        Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
 //        listView_meal = (ListView) findViewById(R.id.meal_list);
 
-        getCook(cook_uid);
+        getCook(cookID);
 
+        list_meal = new ArrayList<>();
+        getMeals();
 
-
-        list_meal = getMeals();
+//        Toast.makeText(this, "Size: " + list_meal.size(), Toast.LENGTH_LONG).show();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +101,7 @@ public class ManageMenuActivity extends AppCompatActivity {
                 addMeals();
             }
         });
+
 
 //        ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
 
@@ -115,17 +120,19 @@ public class ManageMenuActivity extends AppCompatActivity {
         createInitialRecycler();
     }
 
-    private ArrayList<Meal> getMeals(){
-        ArrayList<Meal> mealList = new ArrayList<>();
+    private void getMeals(){
+
 
 
         db.collection("meals")
+                .whereEqualTo("cookID", cookID)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                mealList.add(documentSnapshot.toObject(Meal.class));
+                                Meal meal = documentSnapshot.toObject(Meal.class);
+                                list_meal.add(meal);
                             }
                         }else{
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -133,7 +140,7 @@ public class ManageMenuActivity extends AppCompatActivity {
                     }
                 });
 
-        return mealList;
+
     }
 
     private void getCook(String UID) {
@@ -185,7 +192,7 @@ public class ManageMenuActivity extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(cuisine) && !TextUtils.isEmpty(description)){
 //                    ArrayList<Meal> meals = cook.get_mealList();
-                    Meal meal = new Meal(name, course, cuisine, Ingredients, Allergens, price, description);
+                    Meal meal = new Meal(name, course, cuisine, Ingredients, Allergens, price, description, cookID);
                     list_meal.add(meal);
                     db.collection("meals").document(meal.getID()).set(meal);
                     b.dismiss();
@@ -200,7 +207,7 @@ public class ManageMenuActivity extends AppCompatActivity {
             }
         });
 
-
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -311,7 +318,7 @@ public class ManageMenuActivity extends AppCompatActivity {
             mealDomains.add(new MealDomain(meal));
         }
 
-        MealAdapter adapter = new MealAdapter(mealDomains, this);
+        adapter = new MealAdapter(mealDomains, this);
         recycleViewMeals.setAdapter(adapter);
 
     }
