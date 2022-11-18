@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapp.Activity.ManageMenuActivity;
 import com.example.mealerapp.Domain.ComplaintDomain;
-import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -47,6 +46,15 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_complaint,parent,false);
         return new ViewHolder(inflate);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ComplaintAdapter.ViewHolder holder, int position) {
+
+    }
+    @Override
+    public int getItemCount() {
+        return complaintDomains.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
