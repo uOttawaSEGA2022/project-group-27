@@ -75,4 +75,18 @@
         app:layout_constraintStart_toEndOf="@+id/textViewIngredients"
         app:layout_constraintTop_toBottomOf="@+id/switchOffered" />
 
+    <Button
+        android:id="@+id/btnDeleteMeal"
+        android:layout_width="84dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="14dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMealDesc"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMealName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
