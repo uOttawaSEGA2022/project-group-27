@@ -52,6 +52,13 @@ public class ManageMenuActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
+    //TODO Add meals to UI (Use list views or recyclers whatever you want
+
+
+    /*
+    * Currently, the add meal method works and users can select add meal and fill in the boxes and it will push it to the database succesfully
+    * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +139,6 @@ public class ManageMenuActivity extends AppCompatActivity {
 
                     }
                 });
-        // TODO retrieve cook from Intent or some other means from landing page activity / profile fragment; currently considering passing the userID as an extra in the Intent and fetching using the ID
 
 
     }
