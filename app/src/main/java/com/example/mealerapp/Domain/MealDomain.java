@@ -10,15 +10,17 @@ public class MealDomain {
     private String description;
     private ArrayList<String> ingredients;
     private ArrayList<String> allergens;
+    private String ID;
     private boolean offered;
 
-    public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, boolean offered){
+    public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, boolean offered, String ID){
 
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
         this.allergens = allergens;
         this.offered = offered;
+        this.ID = ID;
 
     }
 
@@ -28,6 +30,7 @@ public class MealDomain {
         this.ingredients = meal.getIngredients();
         this.allergens = meal.getAllergens();
         this.offered = meal.isOffered();
+        this.ID = meal.getID();
     }
 
 
@@ -65,5 +68,17 @@ public class MealDomain {
 
     public void setAllergens(ArrayList<String> allergens) {
         this.allergens = allergens;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public boolean isOffered() {
+        return offered;
     }
 }

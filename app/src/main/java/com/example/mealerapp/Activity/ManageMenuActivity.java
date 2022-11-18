@@ -57,6 +57,7 @@ public class ManageMenuActivity extends AppCompatActivity {
 
     private RecyclerView recycleViewMeals;
     private MealAdapter adapter;
+    private ArrayList<MealDomain> mealDomains;
 
     private String cookID;
 
@@ -90,10 +91,9 @@ public class ManageMenuActivity extends AppCompatActivity {
 
         getCook(cookID);
 
-        list_meal = new ArrayList<>();
+//        list_meal = new ArrayList<>();
         getMeals();
 
-//        Toast.makeText(this, "Size: " + list_meal.size(), Toast.LENGTH_LONG).show();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,10 +117,11 @@ public class ManageMenuActivity extends AppCompatActivity {
 //            }
 //        });
 
-        createInitialRecycler();
     }
 
     private void getMeals(){
+
+        ArrayList<Meal> meals = new ArrayList<>();
 
 
 
@@ -132,8 +133,15 @@ public class ManageMenuActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                 Meal meal = documentSnapshot.toObject(Meal.class);
-                                list_meal.add(meal);
+                                Toast.makeText(ManageMenuActivity.this, "Meal ID: " + meal.getID(), Toast.LENGTH_SHORT).show();
+
+                                meals.add(meal);
+
+
                             }
+                            list_meal = meals;
+                            createInitialRecycler();
+
                         }else{
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -141,9 +149,11 @@ public class ManageMenuActivity extends AppCompatActivity {
                 });
 
 
+
     }
 
     private void getCook(String UID) {
+
 
         db.
                 collection("users")
@@ -196,8 +206,13 @@ public class ManageMenuActivity extends AppCompatActivity {
                     list_meal.add(meal);
                     db.collection("meals").document(meal.getID()).set(meal);
                     b.dismiss();
-                }
 
+                    mealDomains.add(
+                            new MealDomain(meal)
+                    );
+
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
         btn_delete.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +222,7 @@ public class ManageMenuActivity extends AppCompatActivity {
             }
         });
 
-        adapter.notifyDataSetChanged();
+
 
     }
 
@@ -275,6 +290,13 @@ public class ManageMenuActivity extends AppCompatActivity {
 
 
     }
+
+    private void updateAdapter(Meal meal){
+
+
+
+
+    }
     private void updateMeal(Meal meal, String name, String course, String cuisine, ArrayList<String> ingredients, ArrayList<String> allergens, Double price, String description){
 //        ArrayList<Meal> meals = cook.get_mealList();
 
@@ -308,17 +330,22 @@ public class ManageMenuActivity extends AppCompatActivity {
 
 
     private void createInitialRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+
+        Toast.makeText(ManageMenuActivity.this, list_meal.toString(), Toast.LENGTH_SHORT).show();
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
 
         recycleViewMeals.setLayoutManager(linearLayoutManager);
 
-        ArrayList<MealDomain>  mealDomains = new ArrayList<>();
+        mealDomains = new ArrayList<>();
 
         for(Meal meal: list_meal){
             mealDomains.add(new MealDomain(meal));
         }
 
         adapter = new MealAdapter(mealDomains, this);
+
         recycleViewMeals.setAdapter(adapter);
 
     }

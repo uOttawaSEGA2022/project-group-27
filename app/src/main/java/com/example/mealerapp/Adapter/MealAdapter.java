@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealerapp.Activity.ManageMenuActivity;
 import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -36,11 +38,13 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
         mealDomains.add(mealDomain);
     }
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_meal,parent,false);
-        return new MealAdapter.ViewHolder(inflate);
+        return new ViewHolder(inflate);
     }
 
     @Override
@@ -49,22 +53,30 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
 
         holder.textViewMealName.setText(mealDomain.getName());
         holder.textViewDesc.setText(mealDomain.getDescription());
-        holder.listViewIngredients.setAdapter(
-                new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mealDomain.getIngredients())
+        holder.textViewIngredients.setText(
+                String.join(", ", mealDomain.getIngredients())
         );
-        holder.listViewAllergens.setAdapter(
-                new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mealDomain.getAllergens())
+        holder.textViewAllergens.setText(
+                String.join(", ", mealDomain.getAllergens())
         );
 
         holder.switchOffered.setChecked(mealDomain.getOffered());
 
-
+        holder.switchOffered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                FirebaseFirestore.getInstance().collection("meals")
+                        .document(mealDomain.getID())
+                        .update(
+                                "offered", isChecked
+                        );
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mealDomains.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -73,8 +85,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
         private TextView textViewMealName;
         private TextView textViewDesc;
         private Switch switchOffered;
-        private ListView listViewIngredients;
-        private ListView listViewAllergens;
+        private TextView textViewIngredients;
+        private TextView textViewAllergens;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,8 +95,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
             textViewMealName = itemView.findViewById(R.id.textViewMealName);
             textViewDesc = itemView.findViewById(R.id.textViewMealDesc);
             switchOffered = itemView.findViewById(R.id.switchOffered);
-            listViewIngredients = itemView.findViewById(R.id.listViewIngredients);
-            listViewAllergens = itemView.findViewById(R.id.listViewAllergens);
+            textViewIngredients = itemView.findViewById(R.id.textViewIngredients);
+            textViewAllergens = itemView.findViewById(R.id.textViewAllergens);
+
+
 
         }
     }

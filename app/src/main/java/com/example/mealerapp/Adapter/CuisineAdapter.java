@@ -96,5 +96,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
             cuisineIcon=itemView.findViewById(R.id.cuisineIcon);
             mainLayout=itemView.findViewById(R.id.mainLayout);
         }
+
+
     }
 }
