@@ -32,10 +32,8 @@ public class Administrator extends User {
     /*
     Ill leave this for now because the complaint class isnt complete.
     I assume complaint class will have a like delete method which will just remove it from the DB(Which i also dont know how to do
-
+     */
     public void dismissComplaint(Complaint c){
 
     }
-
-     */
 }

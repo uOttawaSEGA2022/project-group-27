@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/complaintCard"
+    android:layout_width="350dp"
+    android:layout_height="200dp">
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="26dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
+        app:layout_constraintEnd_toStartOf="@+id/switchOffered"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCookID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="26dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
+        app:layout_constraintEnd_toStartOf="@+id/switchOffered"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSuspendCook"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#DF0C0C"
+        android:text="Suspend Cook"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <Button
+        android:id="@+id/btnDismiss"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:text="Dismiss"
+        tools:layout_editor_absoluteX="256dp"
+        tools:layout_editor_absoluteY="134dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

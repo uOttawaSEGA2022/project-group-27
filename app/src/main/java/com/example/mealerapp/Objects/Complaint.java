@@ -6,7 +6,7 @@ public class Complaint {
     public String complained_cook_id;  //added by Carl because the activity is needed
     public String description;
     public String _id;
-
+    public boolean isActioned = false;
 
 
 
@@ -29,6 +29,8 @@ public class Complaint {
     public String getId() {
         return _id;
     }
+    public boolean getActioned() { return isActioned; }
+    public void setActioned(boolean actioned) { isActioned = actioned; }
 
 //    public String getName() { return complained_cook.getFirstName() + complained_cook.getLastName(); }
 
