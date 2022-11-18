@@ -33,9 +33,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMeals"
-        android:layout_width="409dp"
-        android:layout_height="580dp"
+        android:layout_width="410dp"
+        android:layout_height="535dp"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="150dp" />
+        tools:layout_editor_absoluteY="195dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

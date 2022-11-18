@@ -1,5 +1,6 @@
 package com.example.mealerapp.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,11 @@ import java.util.ArrayList;
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
 
     private ArrayList<MealDomain> mealDomains;
+    private Context mContext;
 
-    public MealAdapter(ArrayList<MealDomain> mealDomains){
+    public MealAdapter(ArrayList<MealDomain> mealDomains, Context mContext){
         this.mealDomains = mealDomains;
+        this.mContext = mContext;
     }
 
     public MealAdapter(MealDomain mealDomain){
@@ -46,10 +49,16 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder>{
 
         holder.textViewMealName.setText(mealDomain.getName());
         holder.textViewDesc.setText(mealDomain.getDescription());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ManageMenuActivity.class, android.R.layout.activity_list_item, mealDomain.getIngredients());
         holder.listViewIngredients.setAdapter(
-                new ArrayAdapter<String>()
+                new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mealDomain.getIngredients())
         );
+        holder.listViewAllergens.setAdapter(
+                new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, mealDomain.getAllergens())
+        );
+
+        holder.switchOffered.setChecked(mealDomain.getOffered());
+
+
 
     }
 

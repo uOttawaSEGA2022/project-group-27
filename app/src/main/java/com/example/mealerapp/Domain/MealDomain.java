@@ -1,5 +1,7 @@
 package com.example.mealerapp.Domain;
 
+import com.example.mealerapp.Objects.Meal;
+
 import java.util.ArrayList;
 
 public class MealDomain {
@@ -8,15 +10,30 @@ public class MealDomain {
     private String description;
     private ArrayList<String> ingredients;
     private ArrayList<String> allergens;
+    private boolean offered;
 
-    public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens){
+    public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, boolean offered){
 
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
         this.allergens = allergens;
+        this.offered = offered;
 
     }
+
+    public MealDomain(Meal meal){
+        this.name = meal.getName();
+        this.description = meal.getDescription();
+        this.ingredients = meal.getIngredients();
+        this.allergens = meal.getAllergens();
+        this.offered = meal.getOffered();
+    }
+
+
+    public boolean getOffered(){ return this.offered; }
+
+    public void setOffered(boolean offered) { this.offered = offered; }
 
     public String getName() {
         return name;

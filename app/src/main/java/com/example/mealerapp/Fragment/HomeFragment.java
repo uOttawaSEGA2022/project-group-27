@@ -34,6 +34,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void cuisineList(){
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
 
         cuisineList.setLayoutManager(linearLayoutManager);

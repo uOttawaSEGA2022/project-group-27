@@ -8,14 +8,16 @@ import java.util.UUID;
 
 public class Meal {
 
-    protected String name;
-    protected String course;
-    protected String cuisine;
-    protected ArrayList<String> ingredients;
-    protected ArrayList<String> allergens;
-    protected Double price;
-    protected String description;
-    protected String ID;
+    private String name;
+    private String course;
+    private String cuisine;
+    private ArrayList<String> ingredients;
+    private ArrayList<String> allergens;
+    private Double price;
+    private String description;
+    private String ID;
+    private boolean offered;
+
 
     public Meal(){}
 
@@ -28,6 +30,7 @@ public class Meal {
         this.price = price;
         this.description = description;
         this.ID = UUID.randomUUID().toString();
+        this.offered = false;
     }
     public Meal(String name, String course, String cuisine, ArrayList<String> ingredients, ArrayList<String> allergens, Double price, String description, String ID) {
         this.name = name;
@@ -37,9 +40,12 @@ public class Meal {
         this.allergens = allergens;
         this.price = price;
         this.description = description;
+        this.offered = false;
         this.ID = ID;
     }
 
+    public boolean getOffered(){ return this.offered; }
+    public void setOffered(boolean offered) { this.offered = offered; }
 
     public String getID(){
         return ID;

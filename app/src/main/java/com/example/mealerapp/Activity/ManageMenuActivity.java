@@ -2,9 +2,13 @@ package com.example.mealerapp.Activity;
 
 import static android.content.ContentValues.TAG;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.mealerapp.Adapter.MealAdapter;
+import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
 import com.example.mealerapp.R;
@@ -49,6 +55,8 @@ public class ManageMenuActivity extends AppCompatActivity {
     private ArrayList<Meal> list_meal;
     private Button btnAdd;
 
+    private RecyclerView recycleViewMeals;
+
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
@@ -67,6 +75,7 @@ public class ManageMenuActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
+        recycleViewMeals = (RecyclerView) findViewById(R.id.recyclerViewMeals);
 
         String cook_uid = getIntent().getStringExtra("Cook_UID");
 
@@ -74,7 +83,7 @@ public class ManageMenuActivity extends AppCompatActivity {
         Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
-        listView_meal = (ListView) findViewById(R.id.meal_list);
+//        listView_meal = (ListView) findViewById(R.id.meal_list);
 
         getCook(cook_uid);
 
@@ -89,20 +98,21 @@ public class ManageMenuActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
+//        ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
 
-        listView_meal.setAdapter(ad);
+//        listView_meal.setAdapter(ad);
 
-        listView_meal.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Meal target_meal =list_meal.get(i);
-                ad.notifyDataSetChanged();
-                showUpdateMealDialog(target_meal);
-                return true;
-            }
-        });
+//        listView_meal.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Meal target_meal =list_meal.get(i);
+////                ad.notifyDataSetChanged();
+//                showUpdateMealDialog(target_meal);
+//                return true;
+//            }
+//        });
 
+        createInitialRecycler();
     }
 
     private ArrayList<Meal> getMeals(){
@@ -290,21 +300,19 @@ public class ManageMenuActivity extends AppCompatActivity {
 
 
 
-    private void getMenu() {
+    private void createInitialRecycler() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
-        FirebaseFirestore.getInstance()
-                .collection("meals").whereEqualTo("Cook", cook.getUID())
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document: task.getResult()){
-                                menu.add(document.toObject(Meal.class));
-                            }
-                        }
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
+        recycleViewMeals.setLayoutManager(linearLayoutManager);
+
+        ArrayList<MealDomain>  mealDomains = new ArrayList<>();
+
+        for(Meal meal: list_meal){
+            mealDomains.add(new MealDomain(meal));
+        }
+
+        MealAdapter adapter = new MealAdapter(mealDomains, this);
+        recycleViewMeals.setAdapter(adapter);
 
     }
 
