@@ -32,7 +32,6 @@ import java.util.ArrayList;
 
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
-    //TODO rest of listeners, activity.
 
     public ArrayList<ComplaintDomain> complaintDomains;
     private Context mContext;

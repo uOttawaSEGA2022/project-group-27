@@ -39,20 +39,10 @@
                     android:autofillHints="" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewInbox"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:translationY="-10dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-
-
-
-
+                android:layout_height="match_parent" />
 
 
         </LinearLayout>

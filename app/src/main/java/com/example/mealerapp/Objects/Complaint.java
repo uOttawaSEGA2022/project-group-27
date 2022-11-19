@@ -19,22 +19,37 @@ public class Complaint {
         this._id = id;
     }
 
-
-
-    public String get_Cook_ID(){ return complained_cook_id; }
-    public String getDescription(){ return description; }
-    public void setId(String id) {
-        _id = id;
+    public String getComplained_cook_id() {
+        return complained_cook_id;
     }
-    public String getId() {
+
+    public void setComplained_cook_id(String complained_cook_id) {
+        this.complained_cook_id = complained_cook_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String get_id() {
         return _id;
     }
-    public boolean getActioned() { return isActioned; }
-    public void setActioned(boolean actioned) { isActioned = actioned; }
 
-//    public String getName() { return complained_cook.getFirstName() + complained_cook.getLastName(); }
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
+    public boolean isActioned() {
+        return isActioned;
+    }
 
+    public void setActioned(boolean actioned) {
+        isActioned = actioned;
+    }
 
 
 //there should be a list of complaints that the admin can view and it is added to the database

@@ -18,9 +18,9 @@ public class ComplaintDomain {
         this._id = id;
     }
     public ComplaintDomain(Complaint complaint) {
-        this.complained_cook_id = complaint.get_Cook_ID();
+        this.complained_cook_id = complaint.getComplained_cook_id();
         this.description = complaint.getDescription();
-        this._id = complaint.getId();
+        this._id = complaint.get_id();
     }
 
     public boolean getActioned() { return this.getActioned(); }

@@ -24,6 +24,7 @@ import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Fragment.HomeFragment;
 import com.example.mealerapp.Fragment.InboxFragment;
 import com.example.mealerapp.Objects.Cook;
+import com.example.mealerapp.Objects.UserRole;
 import com.example.mealerapp.R;
 import com.example.mealerapp.Objects.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -78,7 +79,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
         homeFragment = new HomeFragment();
-        inboxFragment = new InboxFragment(); //TODO Implement logic for dynamically creating user inbox
+//        inboxFragment = new InboxFragment();
         cartFragment = new CartFragment();
 
 
@@ -95,7 +96,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         user = documentSnapshot.toObject(Cook.class) ;
-                        profileFragment = new CookProfile(user.getUID());
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -107,8 +108,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
 
 
-
-//        initializeUser();
+        initializeUser();
 
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -157,16 +157,19 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         user = documentSnapshot.toObject(User.class);
-
+                        Bundle bundle = new Bundle();
+                        String userType = "";
                        switch(user.getRole()){
                            case "Admin":
                                user = new Administrator(user);
+                                userType = "Admin";
                                profileFragment = new AdminProfile();
                                break;
                            case "Cook":
                                 user = documentSnapshot.toObject(Cook.class);
                                 cook = documentSnapshot.toObject(Cook.class);
-                                profileFragment = new CookProfile(cook.getUID()); // TODO find more elegant solution to convert this user type to cook so that I can be returned in the getCook method
+                               userType = "Cook";
+                                profileFragment = new CookProfile(cook.getUID());
                                if(cook.getSuspended() == true){
                                    if(cook.getUntil() == null){
                                        //Suspended Permanently
@@ -192,9 +195,14 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);
                                profileFragment = new ClientProfile();
+                               userType = "Admin";
                                break;
 
                        }
+
+                        bundle.putString("userType",userType);
+                        inboxFragment = new InboxFragment();
+                        inboxFragment.setArguments(bundle);
 
                     }
                 });

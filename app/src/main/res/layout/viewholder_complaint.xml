@@ -8,55 +8,68 @@
 
     <TextView
         android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="26dp"
+        android:layout_width="143dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="27dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
-        app:layout_constraintEnd_toStartOf="@+id/switchOffered"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnBanCook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewCookID"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewCookID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="26dp"
+        android:layout_width="144dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="22dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
-        app:layout_constraintEnd_toStartOf="@+id/switchOffered"
+        app:layout_constraintBottom_toTopOf="@+id/btnSuspendCook"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSuspendCook"
-        android:layout_width="90dp"
-        android:layout_height="50dp"
+        android:layout_width="109dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="14dp"
         android:backgroundTint="#E66B3A"
         android:text="Suspend Cook"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnBanCook"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCookID" />
 
     <Button
         android:id="@+id/btnBanCook"
         android:layout_width="90dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#DF0C0C"
         android:text="Ban Cook"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDismiss"
+        app:layout_constraintStart_toEndOf="@+id/btnSuspendCook" />
 
     <Button
         android:id="@+id/btnDismiss"
         android:layout_width="90dp"
         android:layout_height="50dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Dismiss"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBanCook"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
