@@ -1,5 +1,7 @@
 package com.example.mealerapp.Adapter;
 
+import static java.lang.Long.getLong;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -27,6 +32,7 @@ import java.util.ArrayList;
 
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
+    //TODO rest of listeners, activity.
 
     public ArrayList<ComplaintDomain> complaintDomains;
     private Context mContext;
@@ -50,7 +56,35 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ComplaintAdapter.ViewHolder holder, int position) {
+        ComplaintDomain complaintDomain = complaintDomains.get(position);
 
+        holder.textViewCookID.setText(complaintDomain.get_Cook_ID());
+        holder.textViewDescription.setText(complaintDomain.getDescription());
+
+        holder.btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                complaintDomain.setActioned(true);
+                FirebaseFirestore.getInstance().collection("complaints")
+                        .document(complaintDomain.getId())
+                        .delete();
+                notifyDataSetChanged();
+            }
+        });
+        holder.btnSuspendCook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                complaintDomain.setActioned(true);
+                FirebaseFirestore.getInstance().collection("users")
+                        .document(complaintDomain.get_Cook_ID())
+                        .update("suspended", true);
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                FirebaseFirestore.getInstance().collection("users")
+                        .document(complaintDomain.get_Cook_ID())
+                        .update("until", new Date(calendar.getTimeInMillis() + 604800000L));
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -62,6 +96,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         TextView textViewCookID;
         TextView textViewDescription;
         Button btnSuspendCook;
+        Button btnBanCook;
         Button btnDismiss;
 
         public ViewHolder(@NonNull View itemView) {
@@ -71,6 +106,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             textViewCookID = itemView.findViewById(R.id.textViewCookID);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             btnSuspendCook = itemView.findViewById(R.id.btnSuspendCook);
+            btnBanCook = itemView.findViewById(R.id.btnBanCook);
             btnDismiss = itemView.findViewById(R.id.btnDismiss);
 
         }

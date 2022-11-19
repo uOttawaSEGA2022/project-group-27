@@ -38,9 +38,18 @@
         android:id="@+id/btnSuspendCook"
         android:layout_width="90dp"
         android:layout_height="50dp"
-        android:backgroundTint="#DF0C0C"
+        android:backgroundTint="#E66B3A"
         android:text="Suspend Cook"
-        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <Button
+        android:id="@+id/btnBanCook"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#DF0C0C"
+        android:text="Ban Cook"
+        tools:layout_editor_absoluteX="165dp"
         tools:layout_editor_absoluteY="134dp" />
 
     <Button
@@ -48,6 +57,6 @@
         android:layout_width="90dp"
         android:layout_height="50dp"
         android:text="Dismiss"
-        tools:layout_editor_absoluteX="256dp"
+        tools:layout_editor_absoluteX="255dp"
         tools:layout_editor_absoluteY="134dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
