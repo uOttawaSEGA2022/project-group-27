@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".CookActivity">
+    tools:context=".Activity.CookActivity">
 
     <Button
         android:id="@+id/btnNext"
@@ -16,7 +16,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_bg"
         android:onClick="onNext"
-        android:text="Next"
+        android:text="SIGN UP"
         android:textColor="@color/grey_100"
         android:textStyle="bold"
         android:translationY="-30px"
@@ -155,7 +155,7 @@
             android:id="@+id/editTextDescription"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:background="@drawable/logout"
+            android:background="@drawable/grey_unfilled_box"
             android:ems="10"
             android:gravity="start|top"
             android:hint="Enter a short description about yourself"

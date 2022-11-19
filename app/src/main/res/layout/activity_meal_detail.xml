@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.meal_detail">
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="726dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtCourse"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Course"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtCuisine"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Cuisine"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtIngredients"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Enter Ingredients Ex. a, b, ..."
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtAllergens"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Enter Allergens Ex. a, b, ..."
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtPrice"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Price"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/txtDescription"
+            android:layout_width="300dp"
+            android:layout_height="131dp"
+            android:layout_gravity="center"
+            android:background="@drawable/grey_unfilled_box"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Description"
+            android:inputType="textMultiLine|text"
+            android:paddingLeft="20dp"
+            android:textAlignment="viewStart" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_bg"
+                android:text="Update/Add"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_bg"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

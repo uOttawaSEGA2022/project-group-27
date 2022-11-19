@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    tools:context=".Activity.landingPage"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+
+            android:layout_height="?attr/actionBarSize" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textViewWelcome"
+                    android:layout_width="358dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text="Welcome"
+                    android:textAlignment="textStart"
+                    android:textColor="#e9982c"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:translationY="-40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.181" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:translationY="-30dp">
+
+                    <EditText
+                        android:id="@+id/search_home"
+                        android:layout_width="350dp"
+                        android:layout_height="55dp"
+                        android:background="@drawable/input_bg"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:hint="What are you craving?"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="20dp"
+                        android:textColorHint="#D6D3D3"
+                        android:textSize="14sp"
+                        android:autofillHints="" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="127dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="158dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginEnd="160dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/grey_unfilled_box"
+                    android:text="LOGOUT"
+                    android:textColor="#B6B6B6"
+                    android:textStyle="bold"
+                    android:translationY="400dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.47"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
+                    app:layout_constraintVertical_bias="0.935" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:translationY="-120dp">
+
+                    <ImageView
+                        android:id="@+id/homepage_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/hamb_menu"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="282dp"
+                    android:orientation="vertical"
+                    android:translationY="-90dp">
+
+                    <TextView
+                        android:id="@+id/cuisines"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:text="Shop by cuisine"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cuisine"
+                        android:layout_width="match_parent"
+                        android:layout_height="115dp"
+                        android:paddingLeft="25dp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:text="Shop by meal type"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="115dp"
+                        android:paddingLeft="25dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_nav" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu" />
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
