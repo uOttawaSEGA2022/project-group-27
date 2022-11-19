@@ -41,10 +41,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         cuisineList.setLayoutManager(linearLayoutManager);
 
         ArrayList<CuisineDomain> cuisine = new ArrayList<>();
-        cuisine.add(new CuisineDomain("Italian","cat_1"));
-        cuisine.add(new CuisineDomain("Chinese","cat_2"));
-        cuisine.add(new CuisineDomain("Greek","cat_3"));
-        cuisine.add(new CuisineDomain("Mexican","cat_4"));
+        cuisine.add(new CuisineDomain("Italian","pizza"));
+        cuisine.add(new CuisineDomain("Chinese","chinese"));
+        cuisine.add(new CuisineDomain("Mexican","mexican"));
+        cuisine.add(new CuisineDomain("Greek","cat_4"));
         cuisine.add(new CuisineDomain("Arabic","cat_5"));
 
         adapter=new CuisineAdapter(cuisine);

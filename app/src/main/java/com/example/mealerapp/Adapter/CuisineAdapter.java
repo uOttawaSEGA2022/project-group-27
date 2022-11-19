@@ -12,8 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.bumptech.glide.Glide;
-
 import com.bumptech.glide.Glide;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.R;
@@ -40,19 +38,19 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
         switch(position){
             case 0:{
-                iconUrl="cat_1";
+                iconUrl="pizza";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background1));
                 break;
             }
 
             case 1:{
-                iconUrl="cat_2";
+                iconUrl="chinese";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 2:{
-                iconUrl="cat_3";
+                iconUrl="mexican";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background3));
                 break;
             }
@@ -72,7 +70,6 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
 
         }
-
         int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(iconUrl,"drawable",holder.itemView.getContext().getPackageName());
 
        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
