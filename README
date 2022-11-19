@@ -1,3 +1,12 @@
 Administrator Login Credentials: Email: admin@email.com Password: 123456
 
-The implementation for CircleCI has been completed but I do not know how to demenostrate that here, the YAML file is included for our CircleCI pipleine. 
+Example Accounts for Suspended Cooks:
+Email: cook@gmail.com Password: 123456 (Temporarily Suspended)
+Email: cooker1@gmail.com Password: 999999 (Temporarily Suspended)
+Email: testing@email.com Password: 123456 (Permenantly Suspended) 
+
+At this time, Admin's can only permenantly suspend cooks (missed from deliverable 2) but their suspension status is stored in the database, Users can also generate random complaints
+from the inbox fragment and they will be stored in the database and appear dynamically for the Admin. 
+
+For testing Cooks meal managment system, create an account as a Cook, in the profile fragment (the profile icon in the nav bar), there will be a manage menu button.
+Any registered cook can make changes to their menu and they are stored in the database accordingly. 
