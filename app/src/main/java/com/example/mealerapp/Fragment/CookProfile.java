@@ -21,6 +21,7 @@ import com.example.mealerapp.R;
 public class CookProfile extends Fragment implements View.OnClickListener {
 
     private Button btnManageMenu;
+    private Button btnLogoutCook;
     private View view;
 
     private String UID;
@@ -36,7 +37,10 @@ public class CookProfile extends Fragment implements View.OnClickListener {
 
         btnManageMenu = (Button) view.findViewById(R.id.btnManageMenu);
 
+        //btnLogoutCook = (Button) view.findViewById(R.id.btnLogoutCook);
+
         btnManageMenu.setOnClickListener(this);
+        //btnLogoutCook.setOnClickListener(this); we need a way to log out from cook profile
 
         return view;
     }
@@ -49,6 +53,8 @@ public class CookProfile extends Fragment implements View.OnClickListener {
                 intent.putExtra("Cook_UID", UID);
                 startActivity(intent);
                 break;
+
+
         }
     }
 }
