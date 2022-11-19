@@ -90,24 +90,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         db = FirebaseFirestore.getInstance();
 
 
-        db.collection("users")
-                .document(mAuth.getCurrentUser().getUid())
-                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        user = documentSnapshot.toObject(Cook.class) ;
-
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        profileFragment = new ClientProfile();
-                    }
-                });
-
-
-
         initializeUser();
 
 
@@ -166,31 +148,9 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                                profileFragment = new AdminProfile();
                                break;
                            case "Cook":
-                                user = documentSnapshot.toObject(Cook.class);
                                 cook = documentSnapshot.toObject(Cook.class);
-                               userType = "Cook";
-                                profileFragment = new CookProfile(cook.getUID());
-                               if(cook.getSuspended() == true){
-                                   if(cook.getUntil() == null){
-                                       //Suspended Permanently
-
-                                       profileFragment = new SuspendedFragment();
-                                       mAuth.signOut();
-                                       break;
-                                   }else{
-                                       if(Calendar.getInstance().after(cook.getUntil())){
-                                           //Suspended temporarily, done.
-                                           cook.setSuspended(false);
-                                           cook.setUntil(null);
-                                       }else{
-                                           //Suspended temporarily, not done.
-                                           profileFragment = new SuspendedFragment();
-                                           mAuth.signOut();
-                                           break;//TODO Check the Suspended Fragment please, idk what im doing
-                                       }
-                                   }
-                               }
-                               profileFragment = new CookProfile(user.getUID());
+                                userType = "Cook";
+                                profileFragment = new CookProfile(cook.getuid());
                                 break;
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);

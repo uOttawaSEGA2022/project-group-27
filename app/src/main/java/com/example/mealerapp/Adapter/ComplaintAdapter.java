@@ -2,6 +2,7 @@ package com.example.mealerapp.Adapter;
 
 import static java.lang.Long.getLong;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,10 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     public ArrayList<ComplaintDomain> complaintDomains;
     private Context mContext;
 
+    private FirebaseFirestore db;
+
+
+
     public ComplaintAdapter(ArrayList<ComplaintDomain> complaintDomains, Context mContext) {
         this.complaintDomains = complaintDomains;
         this.mContext = mContext;
@@ -57,31 +62,64 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     public void onBindViewHolder(@NonNull ComplaintAdapter.ViewHolder holder, int position) {
         ComplaintDomain complaintDomain = complaintDomains.get(position);
 
-        holder.textViewCookID.setText(complaintDomain.get_Cook_ID());
+        db = FirebaseFirestore.getInstance();
+
+        holder.textViewCookID.setText("Target Cook ID: " + complaintDomain.get_Cook_ID());
         holder.textViewDescription.setText(complaintDomain.getDescription());
 
         holder.btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 complaintDomain.setActioned(true);
-                FirebaseFirestore.getInstance().collection("complaints")
+                db.collection("complaints")
                         .document(complaintDomain.getId())
                         .delete();
+                complaintDomains.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
             }
         });
         holder.btnSuspendCook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(mContext, "Method not Implemented!", Toast.LENGTH_SHORT).show();
+
+            // TODO Implement Suspend cook; Must use a dialog or fragment (or some other solution) to allow admin to specify time; Not part of deliverable 3 so I did not finish it
+
+//                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+//                final View dialogView = View.inflate(R.layout.suspend_dialog, null);
+//                final AlertDialog dialog = dialogBuilder.create();
+//
+//
+//
+//                final Button btnCommit = dialog.findViewById(R.id.btnCommit);
+//                final TextView textViewDaysUntil = dialog.findViewById(R.id.editTextDaysUntil);
+//
+//                btnCommit.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        int time = 0;
+//                        if(!textViewDaysUntil.getText().toString().isEmpty()){
+//                            try{
+//                                time = Integer.parseInt(textViewDaysUntil.getText().toString().trim());
+//                            }catch(Exception e){}
+//                        }
+//                    }
+//                });
+
+            }
+        });
+
+        holder.btnBanCook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 complaintDomain.setActioned(true);
-                FirebaseFirestore.getInstance().collection("users")
-                        .document(complaintDomain.get_Cook_ID())
+
+                db.collection("users").document(complaintDomain.get_Cook_ID())
                         .update("suspended", true);
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_YEAR, 7);
-                FirebaseFirestore.getInstance().collection("users")
-                        .document(complaintDomain.get_Cook_ID())
-                        .update("until", new Date(calendar.getTimeInMillis() + 604800000L));
+                db.collection("complaints").document(complaintDomain.getId()).delete();
+                complaintDomains.remove(holder.getAdapterPosition());
+                notifyDataSetChanged();
+
             }
         });
     }
@@ -89,6 +127,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     public int getItemCount() {
         return complaintDomains.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ConstraintLayout complaintCard;

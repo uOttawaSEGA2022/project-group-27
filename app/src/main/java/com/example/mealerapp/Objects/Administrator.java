@@ -16,7 +16,7 @@ public class Administrator extends User {
     //else if Calander.getTime <= c.until then change suspended = false and login.
 
     public Administrator(User user){
-        super(user.getRole(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword(), user.getUID());
+        super(user.getRole(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword(), user.getuid());
     }
 
     public void tempSuspend(Cook c, Date d){

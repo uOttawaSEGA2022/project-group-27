@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mealerapp.Objects.Cook;
+import com.example.mealerapp.Objects.User;
 import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -90,7 +92,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                startActivity(new Intent(MainActivity.this, landingPage.class));
+                                                User user = documentSnapshot.toObject(User.class);
+                                                if(user.getRole().equals("Cook")){
+                                                    Cook cook = documentSnapshot.toObject(Cook.class);
+                                                    if(cook.getSuspended()){
+                                                        Intent intent = new Intent(MainActivity.this, Suspended.class);
+                                                        try{
+                                                            intent.putExtra("until", cook.getUntil().toString());
+
+                                                        }catch(Exception e){
+                                                            intent.putExtra("until", (String) null);
+                                                        }
+                                                        startActivity(intent);
+                                                    }else{
+                                                        startActivity(new Intent(MainActivity.this, landingPage.class));
+                                                    }
+                                                }else{
+                                                    startActivity(new Intent(MainActivity.this, landingPage.class));
+                                                }
                                             }
                                         });
 

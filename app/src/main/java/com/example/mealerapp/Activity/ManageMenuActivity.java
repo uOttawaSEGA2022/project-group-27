@@ -83,7 +83,6 @@ public class ManageMenuActivity extends AppCompatActivity {
 
         cookID = getIntent().getStringExtra("Cook_UID");
 
-
 //        Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
@@ -133,7 +132,6 @@ public class ManageMenuActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                 Meal meal = documentSnapshot.toObject(Meal.class);
-                                Toast.makeText(ManageMenuActivity.this, "Meal ID: " + meal.getID(), Toast.LENGTH_SHORT).show();
 
                                 meals.add(meal);
 
@@ -195,10 +193,57 @@ public class ManageMenuActivity extends AppCompatActivity {
                 String name = editName.getText().toString().trim();
                 String course = editCourse.getText().toString().trim();
                 String cuisine = editCuisine.getText().toString().trim();
-                ArrayList<String> Ingredients = new ArrayList<String>(Arrays.asList(editIngredients.getText().toString().trim().split(", ")));
-                ArrayList<String> Allergens = new ArrayList<String>(Arrays.asList(editAllergens.getText().toString().split(", ")));
-                Double price = Double.valueOf(Double.valueOf(editPrice.getText().toString().trim()));
+                ArrayList<String> Ingredients = new ArrayList<>(Arrays.asList(editIngredients.getText().toString().trim().split(",")));
+                ArrayList<String> Allergens = new ArrayList<>(Arrays.asList(editAllergens.getText().toString().split(",")));
                 String description = editDescription.getText().toString().trim();
+
+                if(name == null || name.isEmpty()){
+                    editName.setError("Name is Required");
+                    editName.requestFocus();
+                    return;
+                }
+
+                if(course == null || course.isEmpty()){
+                    editCourse.setError("Course is Required");
+                    editCourse.requestFocus();
+                    return;
+                }
+                if(cuisine == null || cuisine.isEmpty()){
+                    editCuisine.setError("Cuisine is Required");
+                    editCuisine.requestFocus();
+                    return;
+                }
+                if(editIngredients.getText().toString().isEmpty()){
+                    editIngredients.setError("Ingredients are Required");
+                    editIngredients.requestFocus();
+                    return;
+                }
+                if(editAllergens.getText().toString().isEmpty()){
+                    editAllergens.setError("Allergens must be specified; or enter None");
+                    editAllergens.requestFocus();
+                    return;
+                }
+
+                if(description == null || description.isEmpty()){
+                    editDescription.setError("Description is Required");
+                    editDescription.requestFocus();
+                    return;
+                }
+                Double price = 0.0;
+                try{
+                    price = Double.valueOf(Double.valueOf(editPrice.getText().toString().trim()));
+                }catch (Exception e){
+                    editPrice.setError("Invalid Price");
+                    editPrice.requestFocus();
+                    return;
+                }
+
+
+
+
+
+
+
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(cuisine) && !TextUtils.isEmpty(description)){
 //                    ArrayList<Meal> meals = cook.get_mealList();
@@ -331,7 +376,6 @@ public class ManageMenuActivity extends AppCompatActivity {
 
     private void createInitialRecycler() {
 
-        Toast.makeText(ManageMenuActivity.this, list_meal.toString(), Toast.LENGTH_SHORT).show();
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);

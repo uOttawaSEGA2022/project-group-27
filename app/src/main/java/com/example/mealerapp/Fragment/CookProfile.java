@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mealerapp.Activity.MainActivity;
 import com.example.mealerapp.Activity.ManageMenuActivity;
@@ -41,6 +42,7 @@ public class CookProfile extends Fragment implements View.OnClickListener {
 
         btnManageMenu.setOnClickListener(this);
         //btnLogoutCook.setOnClickListener(this); we need a way to log out from cook profile
+
 
         return view;
     }

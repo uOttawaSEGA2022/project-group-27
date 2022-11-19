@@ -6,11 +6,11 @@ public class User {
 
     private String role;
 
-    private String firstName, lastName, Address, Email, Password, UID;
+    private String firstName, lastName, Address, Email, Password, uid;
 
 
-    public User (String role, String firstName, String lastName, String Address, String Email, String Password, String UID){
-        this.UID = UID;
+    public User (String role, String firstName, String lastName, String Address, String Email, String Password, String uid){
+        this.uid = uid;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,10 +65,10 @@ public class User {
 
     public String getRole(){return this.role;}
 
-    public String getUID() { return this.UID; }
+    public String getuid() { return this.uid; }
 
     public String toString(){
-        return "Name: " + firstName + " " + lastName + " UserID: " + UID + " Role: " + role;
+        return "Name: " + firstName + " " + lastName + " UserID: " + uid + " Role: " + role;
     }
 
 }

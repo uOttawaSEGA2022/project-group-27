@@ -9,7 +9,7 @@ import java.util.Date;
 public class Cook extends User implements Serializable {
 
     private String description;
-    private ArrayList<Meal> meals;
+//    private ArrayList<Meal> meals;
     private boolean suspended = false;
     private Date until = null;
 
@@ -21,7 +21,7 @@ public class Cook extends User implements Serializable {
     }
 
     public Cook(User user, String desc){
-        super(user.getRole(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword(), user.getUID());
+        super(user.getRole(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getEmail(), user.getPassword(), user.getuid());
         this.description = desc;
     }
 
@@ -34,12 +34,12 @@ public class Cook extends User implements Serializable {
 
     public void setUntil(Date d){until = d;}
 
-    public void addMeal(Meal m){
-        meals.add(m);
-    }
-
-    public ArrayList<Meal> get_mealList(){ return meals; }
-    public void setMeals(ArrayList<Meal> new_meals) { meals = new_meals; }
+//    public void addMeal(Meal m){
+//        meals.add(m);
+//    }
+//
+//    public ArrayList<Meal> get_mealList(){ return meals; }
+//    public void setMeals(ArrayList<Meal> new_meals) { meals = new_meals; }
 
 
 }
