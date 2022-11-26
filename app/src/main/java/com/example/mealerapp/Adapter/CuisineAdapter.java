@@ -1,6 +1,7 @@
 package com.example.mealerapp.Adapter;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.mealerapp.Activity.SearchResults;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.R;
 
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolder>{
     ArrayList<CuisineDomain> cuisineDomains;
+
+    private String iconUrl;
 
     public CuisineAdapter(ArrayList<CuisineDomain> cuisineDomains){
         this.cuisineDomains=cuisineDomains;
@@ -33,8 +37,9 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CuisineAdapter.ViewHolder holder, int position) {
+
         holder.cuisineName.setText(cuisineDomains.get(position).getTitle());
-        String iconUrl="";
+        iconUrl="";
 
         switch(position){
             case 0:{
@@ -74,6 +79,15 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
        Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
 
+       holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(holder.itemView.getContext(), SearchResults.class);
+               intent.putExtra("query", iconUrl);
+               holder.itemView.getContext().startActivity(intent);
+
+           }
+       });
     }
 
     @Override
