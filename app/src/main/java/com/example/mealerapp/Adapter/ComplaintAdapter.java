@@ -81,30 +81,17 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         holder.btnSuspendCook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Method not Implemented!", Toast.LENGTH_SHORT).show();
 
-            // TODO Implement Suspend cook; Must use a dialog or fragment (or some other solution) to allow admin to specify time; Not part of deliverable 3 so I did not finish it
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
+                final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View detailView = inflater.inflate(R.layout.suspend_dialog, null);
+                alertDialog.setView(detailView);
+                alertDialog.show();
 
-//                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
-//                final View dialogView = View.inflate(R.layout.suspend_dialog, null);
-//                final AlertDialog dialog = dialogBuilder.create();
-//
-//
-//
-//                final Button btnCommit = dialog.findViewById(R.id.btnCommit);
-//                final TextView textViewDaysUntil = dialog.findViewById(R.id.editTextDaysUntil);
-//
-//                btnCommit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int time = 0;
-//                        if(!textViewDaysUntil.getText().toString().isEmpty()){
-//                            try{
-//                                time = Integer.parseInt(textViewDaysUntil.getText().toString().trim());
-//                            }catch(Exception e){}
-//                        }
-//                    }
-//                });
+                // TODO: Add input field for date format in dialog and reimplement date suspension time in cook class and wherever else necessary (high priority)
+
+                //  TODO: style suspend_dialog layout (low priority)
+
 
             }
         });

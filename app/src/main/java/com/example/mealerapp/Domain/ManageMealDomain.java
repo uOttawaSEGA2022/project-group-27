@@ -4,30 +4,39 @@ import com.example.mealerapp.Objects.Meal;
 
 import java.util.ArrayList;
 
-public class MealDomain {
+public class ManageMealDomain {
 
     private String name;
     private String description;
     private ArrayList<String> ingredients;
     private ArrayList<String> allergens;
     private String ID;
+    private boolean offered;
 
-    public MealDomain(Meal meal){
-        this.name = meal.getName();
-        this.description = meal.getDescription();
-        this.ingredients = meal.getIngredients();
-        this.allergens = meal.getAllergens();
-        this.ID = meal.getID();
-    }
+    public ManageMealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, boolean offered, String ID){
 
-    public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, String ID){
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
         this.allergens = allergens;
+        this.offered = offered;
         this.ID = ID;
 
     }
+
+    public ManageMealDomain(Meal meal){
+        this.name = meal.getName();
+        this.description = meal.getDescription();
+        this.ingredients = meal.getIngredients();
+        this.allergens = meal.getAllergens();
+        this.offered = meal.isOffered();
+        this.ID = meal.getID();
+    }
+
+
+    public boolean getOffered(){ return this.offered; }
+
+    public void setOffered(boolean offered) { this.offered = offered; }
 
     public String getName() {
         return name;
@@ -67,5 +76,9 @@ public class MealDomain {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public boolean isOffered() {
+        return offered;
     }
 }

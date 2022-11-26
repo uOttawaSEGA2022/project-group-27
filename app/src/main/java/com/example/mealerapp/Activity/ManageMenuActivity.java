@@ -2,8 +2,6 @@ package com.example.mealerapp.Activity;
 
 import static android.content.ContentValues.TAG;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,14 +13,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.mealerapp.Adapter.MealAdapter;
+import com.example.mealerapp.Adapter.ManageMealAdapter;
+import com.example.mealerapp.Domain.ManageMealDomain;
 import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
@@ -37,14 +33,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ManageMenuActivity extends AppCompatActivity {
 
@@ -56,8 +49,8 @@ public class ManageMenuActivity extends AppCompatActivity {
     private Button btnAdd;
 
     private RecyclerView recycleViewMeals;
-    private MealAdapter adapter;
-    private ArrayList<MealDomain> mealDomains;
+    private ManageMealAdapter adapter;
+    private ArrayList<ManageMealDomain> mealDomains;
 
     private String cookID;
 
@@ -171,7 +164,7 @@ public class ManageMenuActivity extends AppCompatActivity {
     private void addMeals(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View detailView = inflater.inflate(R.layout.activity_meal_detail, null);
+        final View detailView = inflater.inflate(R.layout.editmeal_dialog, null);
         dialogBuilder.setView(detailView);
 
         final EditText editName = (EditText) detailView.findViewById(R.id.txtName);
@@ -253,7 +246,7 @@ public class ManageMenuActivity extends AppCompatActivity {
                     b.dismiss();
 
                     mealDomains.add(
-                            new MealDomain(meal)
+                            new ManageMealDomain(meal)
                     );
 
                     adapter.notifyDataSetChanged();
@@ -275,7 +268,7 @@ public class ManageMenuActivity extends AppCompatActivity {
     private void showUpdateMealDialog(Meal meal){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View detailView =inflater.inflate(R.layout.activity_meal_detail, null);
+        final View detailView =inflater.inflate(R.layout.editmeal_dialog, null);
         dialogBuilder.setView(detailView);
 
         final EditText editName = (EditText) detailView.findViewById(R.id.txtName);
@@ -385,10 +378,10 @@ public class ManageMenuActivity extends AppCompatActivity {
         mealDomains = new ArrayList<>();
 
         for(Meal meal: list_meal){
-            mealDomains.add(new MealDomain(meal));
+            mealDomains.add(new ManageMealDomain(meal));
         }
 
-        adapter = new MealAdapter(mealDomains, this);
+        adapter = new ManageMealAdapter(mealDomains, this);
 
         recycleViewMeals.setAdapter(adapter);
 

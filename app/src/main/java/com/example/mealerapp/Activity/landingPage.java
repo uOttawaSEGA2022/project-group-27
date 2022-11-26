@@ -1,6 +1,5 @@
 package com.example.mealerapp.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,33 +10,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mealerapp.Fragment.AdminProfile;
 import com.example.mealerapp.Fragment.CartFragment;
 import com.example.mealerapp.Fragment.ClientProfile;
 import com.example.mealerapp.Fragment.CookProfile;
-import com.example.mealerapp.Fragment.SuspendedFragment;
 import com.example.mealerapp.Objects.Administrator;
 import com.example.mealerapp.Objects.Client;
-import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Fragment.HomeFragment;
 import com.example.mealerapp.Fragment.InboxFragment;
 import com.example.mealerapp.Objects.Cook;
-import com.example.mealerapp.Objects.UserRole;
 import com.example.mealerapp.R;
 import com.example.mealerapp.Objects.User;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Calendar;
-import java.util.List;
 
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 

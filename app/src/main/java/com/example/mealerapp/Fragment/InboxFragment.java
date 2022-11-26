@@ -108,7 +108,6 @@ public class InboxFragment extends Fragment {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
                                 Complaint complaint = documentSnapshot.toObject(Complaint.class);
-                                Toast.makeText(getActivity(), "Complaint ID: " + complaint.get_id(), Toast.LENGTH_SHORT).show();
                                 tempComplaints.add(complaint);
                             }
 
