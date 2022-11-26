@@ -9,15 +9,24 @@ import java.util.Date;
 public class Cook extends User implements Serializable {
 
     private String description;
-//    private ArrayList<Meal> meals;
+
+    private int rating;
+
     private boolean suspended = false;
     private Date until = null;
 
     public Cook() {}
 
-    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID){
+    public  Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID){
         super(Role, firstName, lastName, Address, Email, Password, UID);
         this.description = desc;
+        this.rating = 5;
+    }
+
+    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID, int rating){
+        super(Role, firstName, lastName, Address, Email, Password, UID);
+        this.description = desc;
+        this.rating = rating;
     }
 
     public Cook(User user, String desc){
