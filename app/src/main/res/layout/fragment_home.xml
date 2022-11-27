@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.HomeFragment">
+    tools:context=".Fragment.HomeFragment"
+    >
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -24,9 +25,9 @@
                 android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:paddingLeft="15dp"
-                android:text="Welcome"
+                android:text="Welcome back,"
                 android:textAlignment="textStart"
-                android:textColor="#e9982c"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:translationY="-40dp"
@@ -38,7 +39,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="98dp"
+                android:layout_height="70dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:translationY="-30dp">
@@ -50,9 +51,9 @@
                     android:layout_height="55dp"
                     android:background="@drawable/input_bg"
                     android:iconifiedByDefault="false"
+                    android:queryBackground="@null"
                     android:queryHint="What are you craving"
-                    android:textColorHint="#BCB9B9"
-                    android:queryBackground="@null"/>
+                    android:textColorHint="#BCB9B9" />
             </LinearLayout>
 
             <Button
@@ -83,7 +84,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:translationY="-120dp">
+                android:translationY="-100dp">
 
                 <ImageView
                     android:id="@+id/homepage_pic"
@@ -96,9 +97,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="331dp"
+                android:layout_height="398dp"
                 android:orientation="vertical"
-                android:translationY="-90dp">
+                android:translationY="-50dp">
 
                 <TextView
                     android:id="@+id/cuisines"
@@ -109,10 +110,14 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cuisine"
                     android:layout_width="match_parent"
-                    android:layout_height="115dp"
+                    android:layout_height="120dp"
                     android:paddingLeft="25dp" />
 
                 <Space
@@ -128,10 +133,14 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mealType"
                     android:layout_width="match_parent"
-                    android:layout_height="115dp"
+                    android:layout_height="120dp"
                     android:paddingLeft="25dp" />
             </LinearLayout>
 

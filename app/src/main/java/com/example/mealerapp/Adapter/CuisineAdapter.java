@@ -44,7 +44,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
         switch(position){
             case 0:{
                 iconUrl="pizza";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background1));
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
@@ -56,19 +56,19 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
             case 2:{
                 iconUrl="taco";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background3));
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 3:{
                 iconUrl="sushi";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background4));
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 4:{
                 iconUrl="falafel";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background5));
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 

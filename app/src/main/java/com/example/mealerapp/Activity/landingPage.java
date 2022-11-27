@@ -31,10 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
-//    private DrawerLayout drawer;
-//    private NavigationView navigationView;
-//    private Toolbar toolbar;
-
     private Button btnLogout;
     private TextView textViewWelcome;
     private RecyclerView.Adapter adapter;
