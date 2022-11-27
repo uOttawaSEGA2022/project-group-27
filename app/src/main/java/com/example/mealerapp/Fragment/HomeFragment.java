@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         cuisine.add(new CuisineDomain("Italian","pizza"));
         cuisine.add(new CuisineDomain("Chinese","chinese"));
         cuisine.add(new CuisineDomain("Mexican","mexican"));
-        cuisine.add(new CuisineDomain("Greek","cat_4"));
+        cuisine.add(new CuisineDomain("Japanese","cat_4"));
         cuisine.add(new CuisineDomain("Arabic","cat_5"));
 
         adapter=new CuisineAdapter(cuisine);

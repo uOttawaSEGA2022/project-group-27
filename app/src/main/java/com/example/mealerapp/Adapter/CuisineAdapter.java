@@ -49,25 +49,25 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
             }
 
             case 1:{
-                iconUrl="chinese";
+                iconUrl="ramen";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 2:{
-                iconUrl="mexican";
+                iconUrl="taco";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background3));
                 break;
             }
 
             case 3:{
-                iconUrl="cat_4";
+                iconUrl="sushi";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background4));
                 break;
             }
 
             case 4:{
-                iconUrl="cat_5";
+                iconUrl="falafel";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background5));
                 break;
             }

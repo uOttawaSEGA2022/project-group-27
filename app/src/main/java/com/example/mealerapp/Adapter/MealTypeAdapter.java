@@ -43,34 +43,29 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
         switch(position){
             case 0:{
-                iconUrl="pizza";
+                iconUrl="breakfast";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background1));
                 break;
             }
 
             case 1:{
-                iconUrl="chinese";
+                iconUrl="lunch";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 2:{
-                iconUrl="mexican";
+                iconUrl="dinner";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background3));
                 break;
             }
 
             case 3:{
-                iconUrl="cat_4";
+                iconUrl="dessert";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background4));
                 break;
             }
 
-            case 4:{
-                iconUrl="cat_5";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background5));
-                break;
-            }
 
 
 
