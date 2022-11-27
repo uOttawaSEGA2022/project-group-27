@@ -43,20 +43,16 @@
                 android:orientation="horizontal"
                 android:translationY="-30dp">
 
-                <EditText
+
+                <SearchView
                     android:id="@+id/search_home"
                     android:layout_width="350dp"
                     android:layout_height="55dp"
-                    android:autofillHints=""
                     android:background="@drawable/input_bg"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="What are you craving?"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="20dp"
-                    android:textColorHint="#D6D3D3"
-                    android:textSize="14sp" />
+                    android:iconifiedByDefault="false"
+                    android:queryHint="What are you craving"
+                    android:textColorHint="#BCB9B9"
+                    android:queryBackground="@null"/>
             </LinearLayout>
 
             <Button
@@ -100,7 +96,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="282dp"
+                android:layout_height="331dp"
                 android:orientation="vertical"
                 android:translationY="-90dp">
 
@@ -133,6 +129,7 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mealType"
                     android:layout_width="match_parent"
                     android:layout_height="115dp"
                     android:paddingLeft="25dp" />
