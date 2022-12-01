@@ -42,12 +42,9 @@ public class Suspended extends AppCompatActivity {
         });
 
         if(until == null)
-            textViewSuspensionTime.setText("This suspension is permenant");
+            textViewSuspensionTime.setText("This suspension is permanent");
         else
             textViewSuspensionTime.setText("Until: " + until);
-
-
-
 
     }
 }
