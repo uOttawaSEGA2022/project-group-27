@@ -12,6 +12,8 @@ import com.example.mealerapp.R;
 import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Date;
+
 public class Suspended extends AppCompatActivity {
 
     private TextView textViewSuspensionTime;
@@ -26,8 +28,7 @@ public class Suspended extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String until = intent.getStringExtra("until");
-
+        Date until = (Date) intent.getSerializableExtra("until");
 
         textViewSuspensionTime = findViewById(R.id.suspensionTime);
         btnLogOut = findViewById(R.id.btnSuspendedLogout);
