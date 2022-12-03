@@ -141,7 +141,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);
                                profileFragment = new ClientProfile();
-                               userType = "Admin";
+                               userType = "Client";
                                break;
 
                        }
