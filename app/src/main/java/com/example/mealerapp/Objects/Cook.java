@@ -43,6 +43,8 @@ public class Cook extends User implements Serializable {
 
     public void setUntil(Date d){until = d;}
 
+    public String getDescription(){return description;}
+
 //    public void addMeal(Meal m){
 //        meals.add(m);
 //    }

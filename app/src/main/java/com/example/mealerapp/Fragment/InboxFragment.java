@@ -56,7 +56,6 @@ public class InboxFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
         String userType = bundle.getString("userType");
-        System.out.println(userType);
         btnGenerateComplaint = (Button) view.findViewById(R.id.btnGenerateComplaint);
 
         btnGenerateComplaint.setOnClickListener(new View.OnClickListener() {

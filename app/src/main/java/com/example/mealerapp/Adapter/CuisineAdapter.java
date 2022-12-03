@@ -24,6 +24,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
     ArrayList<CuisineDomain> cuisineDomains;
 
     private String iconUrl;
+    private String title;
 
     public CuisineAdapter(ArrayList<CuisineDomain> cuisineDomains){
         this.cuisineDomains=cuisineDomains;
@@ -39,34 +40,40 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
     public void onBindViewHolder(@NonNull CuisineAdapter.ViewHolder holder, int position) {
 
         holder.cuisineName.setText(cuisineDomains.get(position).getTitle());
+        title = "";
         iconUrl="";
 
         switch(position){
             case 0:{
+                title = "Italian";
                 iconUrl="pizza";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 1:{
+                title = "Chinese";
                 iconUrl="ramen";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 2:{
+                title = "Mexican";
                 iconUrl="taco";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 3:{
+                title = "Japanese";
                 iconUrl="sushi";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 4:{
+                title = "Arabic";
                 iconUrl="falafel";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
@@ -84,6 +91,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
            public void onClick(View view) {
                Intent intent = new Intent(holder.itemView.getContext(), SearchResults.class);
                intent.putExtra("query", iconUrl);
+               intent.putExtra("title", title);
                holder.itemView.getContext().startActivity(intent);
 
            }
