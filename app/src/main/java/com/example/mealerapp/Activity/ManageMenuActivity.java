@@ -19,7 +19,6 @@ import android.widget.ListView;
 
 import com.example.mealerapp.Adapter.ManageMealAdapter;
 import com.example.mealerapp.Domain.ManageMealDomain;
-import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
 import com.example.mealerapp.R;

@@ -4,17 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mealerapp.Domain.ManageMealDomain;
 import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.R;
 
@@ -54,7 +49,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
 
         holder.textViewMealName.setText(mealDomain.getName());
-        holder.textViewRating.setText(mealDomain.getRating());
+        holder.textViewRating.setText("" + mealDomain.getRating() + "/5");
         holder.textViewDesc.setText(mealDomain.getDescription());
         holder.textViewIngredients.setText(
                 String.join(", ", mealDomain.getIngredients())
@@ -62,17 +57,23 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         holder.textViewAllergens.setText(
                 String.join(", ", mealDomain.getAllergens())
         );
+        holder.textViewPrice.setText("$" + mealDomain.getPrice());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mealDomains.size();
     }
 
     public void setFilteredList(List<MealDomain> filteredMeals) {
         mealDomains = filteredMeals;
+        notifyDataSetChanged();
+    }
+
+    public void setData(List<MealDomain> data){
+        mealDomains = data;
         notifyDataSetChanged();
     }
 
@@ -84,16 +85,18 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         private TextView textViewDesc;
         private TextView textViewIngredients;
         private TextView textViewAllergens;
+        private TextView textViewPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mealCard = itemView.findViewById(R.id.mealCard);
-            textViewMealName = itemView.findViewById(R.id.textViewMealName);
-            textViewDesc = itemView.findViewById(R.id.textViewMealDesc);
-            textViewIngredients = itemView.findViewById(R.id.textViewIngredients);
-            textViewAllergens = itemView.findViewById(R.id.textViewAllergens);
-            textViewRating = itemView.findViewById(R.id.textViewRating);
+            mealCard = itemView.findViewById(R.id.search_mealCard);
+            textViewMealName = itemView.findViewById(R.id.search_textViewMealName);
+            textViewDesc = itemView.findViewById(R.id.search_textViewMealDesc);
+            textViewIngredients = itemView.findViewById(R.id.search_textViewIngredients);
+            textViewAllergens = itemView.findViewById(R.id.search_textViewAllergens);
+            textViewRating = itemView.findViewById(R.id.search_textViewRating);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
 
 
         }

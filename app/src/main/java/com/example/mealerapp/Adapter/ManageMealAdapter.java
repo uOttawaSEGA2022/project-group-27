@@ -15,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapp.Domain.ManageMealDomain;
-import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -107,12 +106,12 @@ public class ManageMealAdapter extends RecyclerView.Adapter<ManageMealAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mealCard = itemView.findViewById(R.id.mealCard);
-            textViewMealName = itemView.findViewById(R.id.textViewMealName);
-            textViewDesc = itemView.findViewById(R.id.textViewMealDesc);
+            mealCard = itemView.findViewById(R.id.search_mealCard);
+            textViewMealName = itemView.findViewById(R.id.search_textViewMealName);
+            textViewDesc = itemView.findViewById(R.id.search_textViewMealDesc);
             switchOffered = itemView.findViewById(R.id.switchOffered);
-            textViewIngredients = itemView.findViewById(R.id.textViewIngredients);
-            textViewAllergens = itemView.findViewById(R.id.textViewAllergens);
+            textViewIngredients = itemView.findViewById(R.id.search_textViewIngredients);
+            textViewAllergens = itemView.findViewById(R.id.search_textViewAllergens);
             btnDeleteMeal = itemView.findViewById(R.id.btnDeleteMeal);
 
 

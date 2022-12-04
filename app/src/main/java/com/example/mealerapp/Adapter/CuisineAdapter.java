@@ -1,6 +1,8 @@
 package com.example.mealerapp.Adapter;
 
 
+import android.app.appsearch.SearchResults;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mealerapp.Activity.SearchResults;
+import com.example.mealerapp.Activity.SearchResult;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.R;
 
@@ -25,6 +27,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
 
     private String iconUrl;
     private String title;
+
 
     public CuisineAdapter(ArrayList<CuisineDomain> cuisineDomains){
         this.cuisineDomains=cuisineDomains;
@@ -89,10 +92,9 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent = new Intent(holder.itemView.getContext(), SearchResults.class);
-               intent.putExtra("query", iconUrl);
+               Intent intent = new Intent(holder.itemView.getContext(), SearchResult.class);
+               intent.putExtra("query", title);
                holder.itemView.getContext().startActivity(intent);
-
            }
        });
     }

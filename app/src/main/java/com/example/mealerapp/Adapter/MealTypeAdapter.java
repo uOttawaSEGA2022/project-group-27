@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mealerapp.Activity.SearchResults;
+import com.example.mealerapp.Activity.SearchResult;
 import com.example.mealerapp.Domain.MealTypeDomain;
 import com.example.mealerapp.R;
 
@@ -77,7 +77,7 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent = new Intent(holder.itemView.getContext(), SearchResults.class);
+               Intent intent = new Intent(holder.itemView.getContext(), SearchResult.class);
                intent.putExtra("query", iconUrl);
                holder.itemView.getContext().startActivity(intent);
 
