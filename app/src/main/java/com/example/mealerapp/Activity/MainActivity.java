@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                         }
                                                         Intent intent = new Intent(MainActivity.this, Suspended.class);
                                                         try{
-                                                            intent.putExtra("until", cook.getUntil().toString());
+                                                            intent.putExtra("until", cook.getUntil().getTime());
 
                                                         }catch(Exception e){
                                                             intent.putExtra("until", (String) null);
