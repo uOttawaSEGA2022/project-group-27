@@ -91,7 +91,6 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHold
            public void onClick(View view) {
                Intent intent = new Intent(holder.itemView.getContext(), SearchResults.class);
                intent.putExtra("query", iconUrl);
-               intent.putExtra("title", title);
                holder.itemView.getContext().startActivity(intent);
 
            }

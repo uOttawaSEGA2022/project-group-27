@@ -18,11 +18,12 @@ import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
 
-    private ArrayList<MealDomain> mealDomains;
+    private List<MealDomain> mealDomains;
     private Context mContext;
 
 
@@ -53,6 +54,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    public void setFilteredList(List<MealDomain> filteredMeals) {
+        mealDomains = filteredMeals;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
