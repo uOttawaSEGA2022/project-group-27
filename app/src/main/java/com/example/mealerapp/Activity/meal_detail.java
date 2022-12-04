@@ -53,8 +53,11 @@ public class meal_detail extends AppCompatActivity {
 
         mealDetailName = i.getStringExtra("name");
 
+        db = FirebaseFirestore.getInstance();
+        Meal tmp = i.getParcelableExtra("meal");
 
-        FirebaseFirestore.getInstance()  //TODO bugs program doesn't run into line 68 so it cannot get the document from database
+
+        db  //TODO bugs program doesn't run into line 68 so it cannot get the document from database
                 .collection("meals").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -66,10 +69,12 @@ public class meal_detail extends AppCompatActivity {
                                 }
 
                             }
+                        } else{
+                            System.out.println(12334);
                         }
                     }
                 });
-        FirebaseFirestore.getInstance()
+        db
                 .collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -80,30 +85,32 @@ public class meal_detail extends AppCompatActivity {
                                     target_cook = documentSnapshot.toObject(Cook.class);
                                 }
                             }
+                        } else{
+                            System.out.println(22222);
                         }
                     }
                 });
 
         cookName = target_cook.getFirstName() + " " + target_cook.getLastName();
-        cookAddress = target_cook.getAddress();
-        cookDescription = target_cook.getDescription();
-        mealPrice = target_meal.getPrice().toString();
-        mealCourse = target_meal.getCourse();
-        mealCuisine = target_meal.getCuisine();
-        mealIngredient = target_meal.getIngredients().toString();
-        mealAllergens = target_meal.getAllergens().toString();
-        mealDescription = target_meal.getDescription();
+//        cookAddress = target_cook.getAddress();
+//        cookDescription = target_cook.getDescription();
+//        mealPrice = target_meal.getPrice().toString();
+//        mealCourse = target_meal.getCourse();
+//        mealCuisine = target_meal.getCuisine();
+//        mealIngredient = target_meal.getIngredients().toString();
+//        mealAllergens = target_meal.getAllergens().toString();
+//        mealDescription = target_meal.getDescription();
 
 //        txtCookName.setText(cookName);
-        txtCookAddress.setText(cookAddress);
-        txtCookDescription.setText(cookDescription);
-        txtMealDetailName.setText(mealDetailName);
-        txtMealPrice.setText(mealPrice);
-        txtMealCourse.setText(mealCourse);
-        txtMealCuisine.setText(mealCuisine);
-        txtMealIngredient.setText(mealIngredient);
-        txtMealAllergens.setText(mealAllergens);
-        txtMealDescription.setText(mealDescription);
+//        txtCookAddress.setText(cookAddress);
+//        txtCookDescription.setText(cookDescription);
+//        txtMealDetailName.setText(mealDetailName);
+//        txtMealPrice.setText(mealPrice);
+//        txtMealCourse.setText(mealCourse);
+//        txtMealCuisine.setText(mealCuisine);
+//        txtMealIngredient.setText(mealIngredient);
+//        txtMealAllergens.setText(mealAllergens);
+//        txtMealDescription.setText(mealDescription);
 
 
 
