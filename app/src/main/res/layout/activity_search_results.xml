@@ -6,25 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".Activity.SearchResults">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="650dp"
+        android:background="@drawable/input_bg"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@null"
+        android:queryHint="What are you craving?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </SearchView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mealResults"
+        android:layout_width="354dp"
+        android:layout_height="604dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="34dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/search_home" />
 
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:textAlignment="center"
-            android:textSize="34sp" />
-
-        <ListView
-            android:id="@+id/meal_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,7 +50,6 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
         editTextDesc = (EditText)findViewById(R.id.editTextDescription);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
 
     }
