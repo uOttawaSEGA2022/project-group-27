@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
+import com.example.mealerapp.Objects.Purchase;
 import com.example.mealerapp.Objects.User;
 import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +27,7 @@ public class meal_detail extends AppCompatActivity {
     private Meal target_meal;
     private Cook target_cook;
     private String cookName, cookAddress, cookDescription, mealDetailName, mealPrice, mealCourse, mealCuisine, mealIngredient,
-            mealAllergens, mealDescription;
+            mealAllergens, mealDescription, clientID;
 
     private TextView txtCookName, txtCookAddress, txtCookDescription, txtMealDetailName, txtMealPrice, txtMealCourse, txtMealCuisine,
                      txtMealIngredient, txtMealAllergens, txtMealDescription;
@@ -52,6 +53,7 @@ public class meal_detail extends AppCompatActivity {
         i = getIntent();
 
         mealDetailName = i.getStringExtra("name");
+        clientID = i.getStringExtra("clientID");
 
         db = FirebaseFirestore.getInstance();
         Meal tmp = i.getParcelableExtra("meal");
@@ -92,25 +94,27 @@ public class meal_detail extends AppCompatActivity {
                 });
 
         cookName = target_cook.getFirstName() + " " + target_cook.getLastName();
-//        cookAddress = target_cook.getAddress();
-//        cookDescription = target_cook.getDescription();
-//        mealPrice = target_meal.getPrice().toString();
-//        mealCourse = target_meal.getCourse();
-//        mealCuisine = target_meal.getCuisine();
-//        mealIngredient = target_meal.getIngredients().toString();
-//        mealAllergens = target_meal.getAllergens().toString();
-//        mealDescription = target_meal.getDescription();
+        cookAddress = target_cook.getAddress();
+        cookDescription = target_cook.getDescription();
+        mealPrice = target_meal.getPrice().toString();
+        mealCourse = target_meal.getCourse();
+        mealCuisine = target_meal.getCuisine();
+        mealIngredient = target_meal.getIngredients().toString();
+        mealAllergens = target_meal.getAllergens().toString();
+        mealDescription = target_meal.getDescription();
 
-//        txtCookName.setText(cookName);
-//        txtCookAddress.setText(cookAddress);
-//        txtCookDescription.setText(cookDescription);
-//        txtMealDetailName.setText(mealDetailName);
-//        txtMealPrice.setText(mealPrice);
-//        txtMealCourse.setText(mealCourse);
-//        txtMealCuisine.setText(mealCuisine);
-//        txtMealIngredient.setText(mealIngredient);
-//        txtMealAllergens.setText(mealAllergens);
-//        txtMealDescription.setText(mealDescription);
+        txtCookName.setText(cookName);
+        txtCookAddress.setText(cookAddress);
+        txtCookDescription.setText(cookDescription);
+        txtMealDetailName.setText(mealDetailName);
+        txtMealPrice.setText(mealPrice);
+        txtMealCourse.setText(mealCourse);
+        txtMealCuisine.setText(mealCuisine);
+        txtMealIngredient.setText(mealIngredient);
+        txtMealAllergens.setText(mealAllergens);
+        txtMealDescription.setText(mealDescription);
+
+
 
 
 
@@ -121,7 +125,8 @@ public class meal_detail extends AppCompatActivity {
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Purchase new_purchase = new Purchase(target_meal, target_meal.getCookID(), clientID);
+                db.collection("purchase").document(new_purchase.getID()).set(new_purchase);
             }
         });
     }
