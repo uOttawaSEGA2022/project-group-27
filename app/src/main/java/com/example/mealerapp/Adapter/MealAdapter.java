@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -49,6 +50,20 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealDomain mealDomain = mealDomains.get(position);
 
+
+
+
+        holder.textViewMealName.setText(mealDomain.getName());
+        holder.textViewRating.setText(mealDomain.getRating());
+        holder.textViewDesc.setText(mealDomain.getDescription());
+        holder.textViewIngredients.setText(
+                String.join(", ", mealDomain.getIngredients())
+        );
+        holder.textViewAllergens.setText(
+                String.join(", ", mealDomain.getAllergens())
+        );
+
+
     }
 
     @Override
@@ -58,6 +73,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
     public void setFilteredList(List<MealDomain> filteredMeals) {
         mealDomains = filteredMeals;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

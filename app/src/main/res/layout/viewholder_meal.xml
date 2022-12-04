@@ -1,125 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mealCard"
     android:layout_width="350dp"
-    android:layout_height="300dp"
+    android:layout_height="160dp"
     android:layout_gravity="center|top"
     android:layout_margin="8dp"
     android:alpha="1"
-    android:clipToPadding="false"
-    android:translationY="100dp">
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="350dp"
-        android:layout_height="160dp"
-        android:layout_gravity="center|top"
-        android:layout_margin="8dp"
-        android:alpha="1"
-        android:background="@drawable/cuis_background2"
-        android:backgroundTint="#F3F3F3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textViewRating"
-            android:layout_width="60dp"
-            android:layout_height="24dp"
-            android:drawableStart="@drawable/ic_rate"
-            android:gravity="center|center_vertical"
-            android:text="5.0"
-            android:textColor="@color/purple_200"
-            app:drawableTint="#e9982c"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="18dp"
-            tools:layout_editor_absoluteY="16dp" />
-
-        <TextView
-            android:id="@+id/textViewIngredients"
-            android:layout_width="86dp"
-            android:layout_height="88dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="#91959A"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="131dp"
-            tools:layout_editor_absoluteY="62dp" />
-
-        <TextView
-            android:id="@+id/textViewAllergens"
-            android:layout_width="86dp"
-            android:layout_height="88dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="#91959A"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="247dp"
-            tools:layout_editor_absoluteY="61dp" />
-
-        <TextView
-            android:id="@+id/textViewMealDesc"
-            android:layout_width="86dp"
-            android:layout_height="88dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="#91959A"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="61dp" />
-
-        <TextView
-            android:id="@+id/textViewMealName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meal Name"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="146dp"
-            tools:layout_editor_absoluteY="16dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageViewMealType"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:translationX="140dp"
-        android:translationY="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/breakfast" />
+    android:background="@drawable/cuis_background2"
+    android:backgroundTint="#F3F3F3"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
     <TextView
-        android:id="@+id/textViewCuisine"
+        android:id="@+id/textViewMealName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="304dp"
-        android:layout_marginBottom="1dp"
-        android:text="Cuisine"
-        android:textColor="@color/purple_200"
-        android:textSize="20dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="142dp"
+        android:text="Meal Name"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:translationX="30dp"
-        android:translationY="-10dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewRating"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textViewAllergens"
+        android:layout_width="86dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="17dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#91959A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewIngredients"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <TextView
+        android:id="@+id/textViewMealDesc"
+        android:layout_width="86dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="11dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#91959A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewIngredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRating"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textViewIngredients"
+        android:layout_width="86dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="9dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#91959A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAllergens"
+        app:layout_constraintStart_toEndOf="@+id/textViewMealDesc"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMealName"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textViewRating"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="68dp"
+        android:drawableStart="@drawable/ic_rate"
+        android:gravity="center|center_vertical"
+        android:text="5.0"
+        android:textColor="@color/purple_200"
+        app:drawableTint="#e9982c"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMealDesc"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMealName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/constraintLayout"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="160dp"-->
+<!--        android:layout_gravity="center|top"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:alpha="1"-->
+<!--        android:background="@drawable/cuis_background2"-->
+<!--        android:backgroundTint="#F3F3F3"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewMealType"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:scaleX="2"-->
+<!--        android:scaleY="2"-->
+<!--        android:translationX="140dp"-->
+<!--        android:translationY="50dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:srcCompat="@drawable/breakfast" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewCuisine"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginEnd="304dp"-->
+<!--        android:layout_marginBottom="1dp"-->
+<!--        android:text="Cuisine"-->
+<!--        android:textColor="@color/purple_200"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:translationX="30dp"-->
+<!--        android:translationY="-10dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

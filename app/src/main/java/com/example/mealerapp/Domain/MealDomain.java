@@ -10,7 +10,10 @@ public class MealDomain {
     private String description;
     private ArrayList<String> ingredients;
     private ArrayList<String> allergens;
+    private String cookID;
     private String ID;
+    private int rating;
+    private String icon;
 
     public MealDomain(Meal meal){
         this.name = meal.getName();
@@ -18,6 +21,7 @@ public class MealDomain {
         this.ingredients = meal.getIngredients();
         this.allergens = meal.getAllergens();
         this.ID = meal.getID();
+        this.rating = meal.getRating();
     }
 
     public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, String ID){
@@ -68,4 +72,22 @@ public class MealDomain {
     public void setID(String ID) {
         this.ID = ID;
     }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
 }
