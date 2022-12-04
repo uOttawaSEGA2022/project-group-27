@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
+import com.example.mealerapp.Objects.Purchase;
 import com.example.mealerapp.Objects.User;
 import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +27,7 @@ public class meal_detail extends AppCompatActivity {
     private Meal target_meal;
     private Cook target_cook;
     private String cookName, cookAddress, cookDescription, mealDetailName, mealPrice, mealCourse, mealCuisine, mealIngredient,
-            mealAllergens, mealDescription;
+            mealAllergens, mealDescription, clientID;
 
     private TextView txtCookName, txtCookAddress, txtCookDescription, txtMealDetailName, txtMealPrice, txtMealCourse, txtMealCuisine,
                      txtMealIngredient, txtMealAllergens, txtMealDescription;
@@ -52,9 +53,13 @@ public class meal_detail extends AppCompatActivity {
         i = getIntent();
 
         mealDetailName = i.getStringExtra("name");
+        clientID = i.getStringExtra("clientID");
+
+        db = FirebaseFirestore.getInstance();
+        Meal tmp = i.getParcelableExtra("meal");
 
 
-        FirebaseFirestore.getInstance()  //TODO bugs program doesn't run into line 68 so it cannot get the document from database
+        db  //TODO bugs program doesn't run into line 68 so it cannot get the document from database
                 .collection("meals").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -66,10 +71,12 @@ public class meal_detail extends AppCompatActivity {
                                 }
 
                             }
+                        } else{
+                            System.out.println(12334);
                         }
                     }
                 });
-        FirebaseFirestore.getInstance()
+        db
                 .collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -80,6 +87,8 @@ public class meal_detail extends AppCompatActivity {
                                     target_cook = documentSnapshot.toObject(Cook.class);
                                 }
                             }
+                        } else{
+                            System.out.println(22222);
                         }
                     }
                 });
@@ -94,7 +103,7 @@ public class meal_detail extends AppCompatActivity {
         mealAllergens = target_meal.getAllergens().toString();
         mealDescription = target_meal.getDescription();
 
-//        txtCookName.setText(cookName);
+        txtCookName.setText(cookName);
         txtCookAddress.setText(cookAddress);
         txtCookDescription.setText(cookDescription);
         txtMealDetailName.setText(mealDetailName);
@@ -111,10 +120,13 @@ public class meal_detail extends AppCompatActivity {
 
 
 
+
+
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Purchase new_purchase = new Purchase(target_meal, target_meal.getCookID(), clientID);
+                db.collection("purchase").document(new_purchase.getID()).set(new_purchase);
             }
         });
     }
