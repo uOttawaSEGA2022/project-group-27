@@ -102,6 +102,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 alertDialog.show();
                 DatePicker dp = (DatePicker) detailView.findViewById(R.id.datePicker);
                 Calendar c = Calendar.getInstance();
+                dp.setMinDate(c.getTimeInMillis() + 86400000);
                 dp.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener(){
                     @Override
                     public void onDateChanged(DatePicker dp, int year, int month, int day) {
@@ -137,7 +138,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                         db.collection("complaints").document(complaintDomain.getId()).delete();
                         complaintDomains.remove(holder.getAdapterPosition());
                         notifyDataSetChanged();
-
                     }
                 });
                 // TODO: Add input field for date format in dialog and reimplement date suspension time in cook class and wherever else necessary (high priority)
