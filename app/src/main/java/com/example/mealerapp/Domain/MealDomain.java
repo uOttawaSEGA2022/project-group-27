@@ -3,6 +3,8 @@ package com.example.mealerapp.Domain;
 import com.example.mealerapp.Objects.Meal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MealDomain {
 
@@ -15,6 +17,8 @@ public class MealDomain {
     private int rating;
     private String icon;
     private Double price;
+    private String course;
+    private String cuisine;
 
 
 
@@ -26,6 +30,9 @@ public class MealDomain {
         this.ID = meal.getID();
         this.rating = meal.getRating();
         this.price = meal.getPrice();
+        this.course = meal.getCourse();
+        this.cuisine = meal.getCuisine();
+        this.cookID = meal.getCookID();
     }
 
     public MealDomain(String name, String description, ArrayList<String> ingredients, ArrayList<String> allergens, String ID){
@@ -100,6 +107,22 @@ public class MealDomain {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Map<String, String> toHashMap(){
+
+        Map<String, String> data = new HashMap<>();
+        data.put("name", name);
+        data.put("course", course);
+        data.put("cuisine", cuisine);
+        data.put("ingredients", String.join(",", ingredients));
+        data.put("allergens", String.join(",", allergens));
+        data.put("price", "" + price);
+        data.put("description", description);
+        data.put("rating", ""+rating);
+        data.put("cookID", cookID);
+
+        return data;
     }
 
 }
