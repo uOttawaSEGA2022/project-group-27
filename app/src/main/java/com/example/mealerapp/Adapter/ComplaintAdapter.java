@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,19 +100,30 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 final View detailView = inflater.inflate(R.layout.suspend_dialog, null);
                 alertDialog.setView(detailView);
                 alertDialog.show();
-
-                Button btnCommit = (Button) detailView.findViewById(R.id.btnCommit);
-                Button btnSelect = (Button) detailView.findViewById(R.id.btnSelectDate);
-                TextView displaySelected = (TextView) detailView.findViewById(R.id.dateDisplay);
-
-                btnSelect.setOnClickListener(new View.OnClickListener() {
+                DatePicker dp = (DatePicker) detailView.findViewById(R.id.datePicker);
+                Calendar c = Calendar.getInstance();
+                dp.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener(){
                     @Override
-                    public void onClick(View view) {
-                        DialogFragment datePicker = new DatePickerFragment();
-                        //If this doesnt work try getChildFragmentManager
-                        datePicker.show(datePicker.getParentFragmentManager(), "date picker");
+                    public void onDateChanged(DatePicker dp, int year, int month, int day) {
+                        c.set(year, month+1, day);
+                        d = c.getTime();
                     }
                 });
+
+
+
+                Button btnCommit = (Button) detailView.findViewById(R.id.btnCommit);
+//                Button btnSelect = (Button) detailView.findViewById(R.id.btnSelectDate);
+//                TextView displaySelected = (TextView) detailView.findViewById(R.id.dateDisplay);
+
+//                btnSelect.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        DialogFragment datePicker = new DatePickerFragment();
+//                        //If this doesnt work try getChildFragmentManager
+//                        datePicker.show(datePicker.getFragmentManager(), "datePicker");
+//                    }
+//                });
 
                 btnCommit.setOnClickListener(new View.OnClickListener() {
                     @Override
