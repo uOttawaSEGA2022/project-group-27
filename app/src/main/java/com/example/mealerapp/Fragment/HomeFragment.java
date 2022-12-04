@@ -1,5 +1,6 @@
 package com.example.mealerapp.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import com.example.mealerapp.Activity.SearchResult;
 import com.example.mealerapp.Adapter.CuisineAdapter;
 import com.example.mealerapp.Adapter.MealTypeAdapter;
 import com.example.mealerapp.Domain.CuisineDomain;
@@ -24,6 +27,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView cuisineList;
     private RecyclerView mealTypeList;
 
+
+    private SearchView search_home;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -36,6 +42,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mealTypeList = (RecyclerView) view.findViewById(R.id.mealType);
 
         mealTypeList();
+
+        search_home = (SearchView) view.findViewById(R.id.search_home);
+
+        search_home.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Intent intent = new Intent(getContext(), SearchResult.class);
+                intent.putExtra("query", s);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
 
         return view;
     }
