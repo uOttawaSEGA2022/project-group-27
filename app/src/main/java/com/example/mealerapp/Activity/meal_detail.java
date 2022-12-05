@@ -125,7 +125,7 @@ public class meal_detail extends AppCompatActivity {
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Purchase new_purchase = new Purchase(target_meal, target_meal.getCookID(), clientID);
+                Purchase new_purchase = new Purchase(target_meal.getID(), target_meal.getCookID(), clientID);
                 db.collection("purchase").document(new_purchase.getID()).set(new_purchase);
             }
         });

@@ -10,14 +10,18 @@ public class CartItem {
     private Double subtotal;
     private String ID;
     private String mealID;
+    private String cookID;
+    private String clientID;
 
-    public CartItem(Double price, int qty, String mealName, Double subtotal, String ID, String mealID) {
+    public CartItem(Double price, int qty, String mealName, Double subtotal, String ID, String mealID, String cookID, String clientID) {
         this.price = price;
         this.qty = qty;
         this.mealName = mealName;
         this.subtotal = subtotal;
         this.ID = ID;
         this.mealID = mealID;
+        this.cookID = cookID;
+        this.clientID = clientID;
     }
 
     public CartItem() {}
@@ -68,5 +72,21 @@ public class CartItem {
 
     public void setMealID(String mealID) {
         this.mealID = mealID;
+    }
+
+    public String getCookID() {
+        return cookID;
+    }
+
+    public void setCookID(String cookID) {
+        this.cookID = cookID;
+    }
+
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
     }
 }

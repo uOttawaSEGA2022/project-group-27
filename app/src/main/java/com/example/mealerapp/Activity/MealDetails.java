@@ -117,6 +117,7 @@ public class MealDetails extends AppCompatActivity {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String userID = mAuth.getCurrentUser().getUid();
                 String uid = UUID.randomUUID().toString();
                 CartItem item = new CartItem(
                         Double.parseDouble(data.get("price")),
@@ -124,11 +125,13 @@ public class MealDetails extends AppCompatActivity {
                         data.get("name"),
                         subtotal,
                         uid,
-                        data.get("ID")
+                        data.get("ID"),
+                        data.get("cookID"),
+                        userID
 
                 );
 
-                db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("cart")
+                db.collection("users").document(userID).collection("cart")
                                 .document(uid).set(item);
                 finish();
             }

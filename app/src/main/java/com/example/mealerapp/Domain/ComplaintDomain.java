@@ -2,8 +2,6 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Complaint;
 
-import java.util.ArrayList;
-
 public class ComplaintDomain {
 
     public String complained_cook_id;
