@@ -16,10 +16,13 @@ import android.widget.Toast;
 import com.example.mealerapp.Activity.ManageMenuActivity;
 import com.example.mealerapp.Adapter.ComplaintAdapter;
 import com.example.mealerapp.Adapter.CuisineAdapter;
+import com.example.mealerapp.Adapter.PurchaseAdapter;
 import com.example.mealerapp.Domain.ComplaintDomain;
 import com.example.mealerapp.Domain.CuisineDomain;
+import com.example.mealerapp.Domain.PurchaseDomain;
 import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Objects.Notification;
+import com.example.mealerapp.Objects.Purchase;
 import com.example.mealerapp.Objects.User;
 import com.example.mealerapp.Objects.UserRole;
 import com.example.mealerapp.R;
@@ -41,9 +44,17 @@ public class InboxFragment extends Fragment {
 
     private ArrayList<ComplaintDomain> complaintDomains;
 
+    private ArrayList<PurchaseDomain> purchaseDomains;
+
     private ArrayList<Complaint> complaints;
 
+    private ArrayList<Purchase> purchases;
+
     private ComplaintAdapter adapter;
+
+    private PurchaseAdapter purchaseAdapter;
+
+    private String userType, userID;
 
     private RecyclerView recyclerViewInbox;
 
@@ -55,7 +66,8 @@ public class InboxFragment extends Fragment {
         recyclerViewInbox = (RecyclerView) view.findViewById(R.id.recyclerViewInbox);
         Bundle bundle = this.getArguments();
 
-        String userType = bundle.getString("userType");
+        userType = bundle.getString("userType");
+        userID = bundle.getString("userID");
 
         btnGenerateComplaint = (Button) view.findViewById(R.id.btnGenerateComplaint);
 
@@ -72,8 +84,9 @@ public class InboxFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(getActivity(), "Created Example Complaint",Toast.LENGTH_LONG).show();
+
                                 if(userType.equals("Admin")){
+                                    Toast.makeText(getActivity(), "Created Example Complaint",Toast.LENGTH_LONG).show();
                                     complaintDomains.add(new ComplaintDomain(complaint));
                                     adapter.notifyDataSetChanged();
                                 }
@@ -91,12 +104,38 @@ public class InboxFragment extends Fragment {
             case "Admin":
                 getComplaints();
                 break;
+            case "Client":
+                getPurchase();
+                break;
 
         }
 
 
 
         return view;
+    }
+
+    private void getPurchase(){
+        ArrayList<Purchase> tmpPurchases = new ArrayList<>();
+        FirebaseFirestore.getInstance()
+                .collection("purchase").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                Purchase purchase = documentSnapshot.toObject(Purchase.class);
+                                if (purchase.getClient_ID().equals(userID)) {
+                                    tmpPurchases.add(purchase);
+                                }
+                            }
+                            purchases = tmpPurchases;
+                        } else {
+                            purchases = new ArrayList<>();
+                        }
+                        createClientInbox();
+                    }
+                });
+
     }
 
     private void getComplaints(){
@@ -122,6 +161,20 @@ public class InboxFragment extends Fragment {
                 });
 
     }
+
+    private void createClientInbox(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerViewInbox.setLayoutManager(linearLayoutManager);
+
+        purchaseDomains = new ArrayList<>();
+        for(Purchase purchase: purchases){
+            purchaseDomains.add(new PurchaseDomain(purchase));
+        }
+
+        purchaseAdapter = new PurchaseAdapter(purchaseDomains, getActivity());
+        recyclerViewInbox.setAdapter(purchaseAdapter);
+    }
+
     private void createAdminInbox(){
 
 

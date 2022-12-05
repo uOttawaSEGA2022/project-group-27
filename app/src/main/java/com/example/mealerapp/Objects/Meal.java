@@ -18,7 +18,7 @@ public class Meal {
     private String ID;
     private String cookID;
     private boolean offered;
-
+    private int rating;
 
     public Meal(){}
 
@@ -125,5 +125,13 @@ public class Meal {
 
     public void setOffered(boolean offered) {
         this.offered = offered;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }

@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.example.mealerapp.R;
 import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Date;
 
 public class Suspended extends AppCompatActivity {
 
@@ -18,6 +21,9 @@ public class Suspended extends AppCompatActivity {
 
     private Button btnLogOut;
 
+    private FirebaseAuth mAuth;
+
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,8 @@ public class Suspended extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String until = intent.getStringExtra("until");
+//        Date until = (Date) intent.getSerializableExtra("until");
+        Date until = new Date(intent.getLongExtra("until",0));
 
 
         textViewSuspensionTime = findViewById(R.id.suspensionTime);
@@ -40,13 +47,10 @@ public class Suspended extends AppCompatActivity {
             }
         });
 
-        if(until == null)
-            textViewSuspensionTime.setText("This suspension is permenant");
-        else
-            textViewSuspensionTime.setText("Until: " + until);
-
-
-
-
+//        if(until == null)
+//            textViewSuspensionTime.setText("This suspension is permanent");
+//        else
+//            textViewSuspensionTime.setText("Until: " + until);
+        textViewSuspensionTime.setText(until != null ? "Until: " + until : "This suspension is permanent.");
     }
 }

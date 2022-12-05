@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.HomeFragment">
+    tools:context=".Fragment.HomeFragment"
+    >
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -24,9 +25,9 @@
                 android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:paddingLeft="15dp"
-                android:text="Welcome"
+                android:text="Welcome back,"
                 android:textAlignment="textStart"
-                android:textColor="#e9982c"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:translationY="-40dp"
@@ -38,25 +39,21 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="98dp"
+                android:layout_height="70dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:translationY="-30dp">
 
-                <EditText
+
+                <SearchView
                     android:id="@+id/search_home"
                     android:layout_width="350dp"
                     android:layout_height="55dp"
-                    android:autofillHints=""
                     android:background="@drawable/input_bg"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="What are you craving?"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="20dp"
-                    android:textColorHint="#D6D3D3"
-                    android:textSize="14sp" />
+                    android:iconifiedByDefault="false"
+                    android:queryBackground="@null"
+                    android:queryHint="What are you craving?"
+                     />
             </LinearLayout>
 
             <Button
@@ -83,7 +80,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -91,16 +88,19 @@
 
                 <ImageView
                     android:id="@+id/homepage_pic"
-                    android:layout_width="379dp"
+                    android:layout_width="330dp"
                     android:layout_height="134dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/hamb_menu"
-                    tools:srcCompat="@drawable/hamb_menu" />
+                    android:scaleX="4.1"
+                    android:scaleY="4.1"
+                    android:translationY="20dp"
+                    app:srcCompat="@drawable/tab_hd"
+                    tools:srcCompat="@drawable/tab_hd" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="282dp"
+                android:layout_height="398dp"
                 android:orientation="vertical"
                 android:translationY="-90dp">
 
@@ -110,13 +110,18 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="25dp"
                     android:text="Shop by cuisine"
+                    android:textColor="@color/purple_200"
                     android:textSize="18dp"
                     android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cuisine"
                     android:layout_width="match_parent"
-                    android:layout_height="115dp"
+                    android:layout_height="120dp"
                     android:paddingLeft="25dp" />
 
                 <Space
@@ -129,12 +134,18 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="25dp"
                     android:text="Shop by meal type"
+                    android:textColor="@color/purple_200"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <Space
                     android:layout_width="match_parent"
-                    android:layout_height="115dp"
+                    android:layout_height="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mealType"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
                     android:paddingLeft="25dp" />
             </LinearLayout>
 

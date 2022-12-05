@@ -10,6 +10,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"
@@ -18,7 +22,7 @@
 
             <EditText
                 android:id="@+id/search_inbox"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="55dp"
                 android:autofillHints=""
                 android:background="@drawable/input_bg"
@@ -35,14 +39,18 @@
                 android:id="@+id/btnGenerateComplaint"
                 android:layout_width="54dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
                 android:text="+"
-                android:textSize="30sp" />
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:translationX="10dp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewInbox"
-            android:layout_width="match_parent"
-            android:layout_height="566dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
 </FrameLayout>

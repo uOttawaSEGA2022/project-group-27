@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView signUp;
@@ -96,9 +98,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 if(user.getRole().equals("Cook")){
                                                     Cook cook = documentSnapshot.toObject(Cook.class);
                                                     if(cook.getSuspended()){
+                                                        Calendar c = Calendar.getInstance();
+                                                        if(cook.getUntil().before(c.getTime())){
+                                                            cook.setUntil(null);
+                                                            cook.setSuspended(false);
+                                                            startActivity(new Intent(MainActivity.this, landingPage.class));
+                                                        }
                                                         Intent intent = new Intent(MainActivity.this, Suspended.class);
                                                         try{
-                                                            intent.putExtra("until", cook.getUntil().toString());
+                                                            intent.putExtra("until", cook.getUntil().getTime());
 
                                                         }catch(Exception e){
                                                             intent.putExtra("until", (String) null);

@@ -31,10 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class landingPage extends AppCompatActivity implements View.OnClickListener {
 
-//    private DrawerLayout drawer;
-//    private NavigationView navigationView;
-//    private Toolbar toolbar;
-
     private Button btnLogout;
     private TextView textViewWelcome;
     private RecyclerView.Adapter adapter;
@@ -50,6 +46,8 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+
+    private String userID;
 
     private User user;
 
@@ -70,7 +68,7 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
         homeFragment = new HomeFragment();
 //        inboxFragment = new InboxFragment();
-        cartFragment = new CartFragment();
+//        cartFragment = new CartFragment();
 
 
 
@@ -123,14 +121,17 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initializeUser() {
+        userID = mAuth.getCurrentUser().getUid();
         db.collection("users")
-                .document(mAuth.getCurrentUser().getUid())
+                .document(userID)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         user = documentSnapshot.toObject(User.class);
-                        Bundle bundle = new Bundle();
+                        Bundle userTypes = new Bundle();
+                        Bundle userIDs = new Bundle();
                         String userType = "";
+
                        switch(user.getRole()){
                            case "Admin":
                                user = new Administrator(user);
@@ -145,15 +146,18 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                            case "Client":
                                user =  documentSnapshot.toObject(Client.class);
                                profileFragment = new ClientProfile();
-                               userType = "Admin";
+                               userType = "Client";
                                break;
 
                        }
 
-                        bundle.putString("userType",userType);
+                        userTypes.putString("userType",userType);
                         inboxFragment = new InboxFragment();
-                        inboxFragment.setArguments(bundle);
+                        inboxFragment.setArguments(userTypes);
 
+                        userIDs.putString("userID", userID);
+                        cartFragment = new CartFragment();
+                        cartFragment.setArguments(userIDs);
                     }
                 });
     }
@@ -165,4 +169,11 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
     public Cook getCook(){
         return this.cook;
     }
+
+    public String getCurrentUser(){
+
+
+        return new String();
+    }
+
 }

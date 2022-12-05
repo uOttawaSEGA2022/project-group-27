@@ -8,8 +8,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="418dp"
-        android:layout_height="101dp"
+        android:layout_width="415dp"
+        android:layout_height="731dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,25 +20,33 @@
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Meals Manage"
+            android:text="Manage your meals"
             android:textAlignment="center"
-            android:textSize="34sp" />
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:translationY="-60dp" />
 
         <Button
             android:id="@+id/btnAdd"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_bg"
+            android:text="Add new Meal"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:translationY="-30dp" />
+
+        <Space
             android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMeals"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add new Meal" />
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMeals"
-        android:layout_width="410dp"
-        android:layout_height="535dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

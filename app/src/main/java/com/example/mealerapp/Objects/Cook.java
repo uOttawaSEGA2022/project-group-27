@@ -17,7 +17,7 @@ public class Cook extends User implements Serializable {
 
     public Cook() {}
 
-    public  Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID){
+    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID){
         super(Role, firstName, lastName, Address, Email, Password, UID);
         this.description = desc;
         this.rating = 5;
@@ -43,7 +43,17 @@ public class Cook extends User implements Serializable {
 
     public void setUntil(Date d){until = d;}
 
-//    public void addMeal(Meal m){
+    public String getDescription(){return description;}
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    //    public void addMeal(Meal m){
 //        meals.add(m);
 //    }
 //

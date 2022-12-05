@@ -1,8 +1,6 @@
 package com.example.mealerapp.Adapter;
 
 
-import android.app.appsearch.SearchResults;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,103 +15,91 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealerapp.Activity.SearchResult;
-import com.example.mealerapp.Domain.CuisineDomain;
+import com.example.mealerapp.Domain.MealTypeDomain;
 import com.example.mealerapp.R;
 
 import java.util.ArrayList;
 
-public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.ViewHolder>{
-    ArrayList<CuisineDomain> cuisineDomains;
+public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHolder>{
+    ArrayList<MealTypeDomain> mealTypeDomains;
 
     private String iconUrl;
-    private String title;
 
-
-    public CuisineAdapter(ArrayList<CuisineDomain> cuisineDomains){
-        this.cuisineDomains=cuisineDomains;
+    public MealTypeAdapter(ArrayList<MealTypeDomain> mealTypeDomains){
+        this.mealTypeDomains=mealTypeDomains;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cuisine,parent,false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_mealtype,parent,false);
         return new ViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CuisineAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MealTypeAdapter.ViewHolder holder, int position) {
 
-        holder.cuisineName.setText(cuisineDomains.get(position).getTitle());
-        title = "";
+        holder.mealTypeName.setText(mealTypeDomains.get(position).getTitle());
         iconUrl="";
 
         switch(position){
             case 0:{
-                title = "Italian";
-                iconUrl="pizza";
+                iconUrl="breakfast";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 1:{
-                title = "Chinese";
-                iconUrl="ramen";
+                iconUrl="lunch";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 2:{
-                title = "Mexican";
-                iconUrl="taco";
+                iconUrl="dinner";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
             case 3:{
-                title = "Japanese";
-                iconUrl="sushi";
+                iconUrl="dessert";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
                 break;
             }
 
-            case 4:{
-                title = "Arabic";
-                iconUrl="falafel";
-                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.cuis_background2));
-                break;
-            }
 
 
 
         }
         int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(iconUrl,"drawable",holder.itemView.getContext().getPackageName());
 
-       Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.cuisineIcon);
+       Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.mealTypeIcon);
 
        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                Intent intent = new Intent(holder.itemView.getContext(), SearchResult.class);
-               intent.putExtra("query", title);
+               intent.putExtra("query", iconUrl);
                holder.itemView.getContext().startActivity(intent);
+
            }
        });
     }
 
     @Override
     public int getItemCount() {
-        return cuisineDomains.size();
+        return mealTypeDomains.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView cuisineName;
-        ImageView cuisineIcon;
+        TextView mealTypeName;
+        ImageView mealTypeIcon;
         ConstraintLayout mainLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cuisineName=itemView.findViewById(R.id.cuisineName);
-            cuisineIcon=itemView.findViewById(R.id.cuisineIcon);
+            mealTypeName=itemView.findViewById(R.id.mealTypeName);
+            mealTypeIcon=itemView.findViewById(R.id.mealTypeIcon);
             mainLayout=itemView.findViewById(R.id.mainLayout);
         }
 

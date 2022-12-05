@@ -19,7 +19,6 @@ import android.widget.ListView;
 
 import com.example.mealerapp.Adapter.ManageMealAdapter;
 import com.example.mealerapp.Domain.ManageMealDomain;
-import com.example.mealerapp.Domain.MealDomain;
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
 import com.example.mealerapp.R;
@@ -57,7 +56,6 @@ public class ManageMenuActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
-    //TODO Add meals to UI (Use list views or recyclers whatever you want
 
 
     /*
@@ -76,14 +74,10 @@ public class ManageMenuActivity extends AppCompatActivity {
 
         cookID = getIntent().getStringExtra("Cook_UID");
 
-//        Toast.makeText(this, "Cook UID: " + cook_uid, Toast.LENGTH_LONG).show();
-
         btnAdd = (Button) findViewById(R.id.btnAdd);
-//        listView_meal = (ListView) findViewById(R.id.meal_list);
 
         getCook(cookID);
 
-//        list_meal = new ArrayList<>();
         getMeals();
 
 
@@ -95,19 +89,6 @@ public class ManageMenuActivity extends AppCompatActivity {
         });
 
 
-//        ArrayAdapter ad = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_meal);
-
-//        listView_meal.setAdapter(ad);
-
-//        listView_meal.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Meal target_meal =list_meal.get(i);
-////                ad.notifyDataSetChanged();
-//                showUpdateMealDialog(target_meal);
-//                return true;
-//            }
-//        });
 
     }
 
