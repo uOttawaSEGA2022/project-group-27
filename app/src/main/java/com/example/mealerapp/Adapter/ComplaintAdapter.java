@@ -106,7 +106,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 dp.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener(){
                     @Override
                     public void onDateChanged(DatePicker dp, int year, int month, int day) {
-                        c.set(year, month+1, day);
+                        c.set(year, month, day);
                         d = c.getTime();
                     }
                 });
@@ -129,7 +129,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 btnCommit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (!(complaintDomain.getActioned())) {
                             complaintDomain.setActioned(true);
 
                             db.collection("users").document(complaintDomain.get_Cook_ID())
@@ -140,7 +139,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                             complaintDomains.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
                         }
-                    }
+
                 });
                 // TODO: Add input field for date format in dialog and reimplement date suspension time in cook class and wherever else necessary (high priority)
 
