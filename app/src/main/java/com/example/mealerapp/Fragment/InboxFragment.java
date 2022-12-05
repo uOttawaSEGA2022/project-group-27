@@ -46,8 +46,6 @@ public class InboxFragment extends Fragment {
 
     private ArrayList<PurchaseDomain> purchaseDomains;
 
-
-
     private ArrayList<Complaint> complaints;
 
     private ArrayList<Purchase> purchases;

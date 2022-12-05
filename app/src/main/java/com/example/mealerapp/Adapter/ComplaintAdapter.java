@@ -95,10 +95,11 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
                 final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View detailView = inflater.inflate(R.layout.suspend_dialog, null);
-                alertDialog.setView(detailView);
+                alertDialogBuilder.setView(detailView);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
                 DatePicker dp = (DatePicker) detailView.findViewById(R.id.datePicker);
                 Calendar c = Calendar.getInstance();
@@ -114,17 +115,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
 
                 Button btnCommit = (Button) detailView.findViewById(R.id.btnCommit);
-//                Button btnSelect = (Button) detailView.findViewById(R.id.btnSelectDate);
-//                TextView displaySelected = (TextView) detailView.findViewById(R.id.dateDisplay);
-
-//                btnSelect.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        DialogFragment datePicker = new DatePickerFragment();
-//                        //If this doesnt work try getChildFragmentManager
-//                        datePicker.show(datePicker.getFragmentManager(), "datePicker");
-//                    }
-//                });
+//
 
                 btnCommit.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -137,6 +128,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                                     .update("until", d);
                             db.collection("complaints").document(complaintDomain.getId()).delete();
                             complaintDomains.remove(holder.getAdapterPosition());
+                            alertDialog.dismiss();
                             notifyDataSetChanged();
                         }
 
