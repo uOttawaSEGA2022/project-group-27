@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.mealerapp.Activity.SearchResult;
 import com.example.mealerapp.Adapter.CuisineAdapter;
@@ -18,6 +19,9 @@ import com.example.mealerapp.Adapter.MealTypeAdapter;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.Domain.MealTypeDomain;
 import com.example.mealerapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -28,7 +32,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView mealTypeList;
 
 
+    private TextView textViewWelcome;
+
     private SearchView search_home;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +52,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mealTypeList();
 
         search_home = (SearchView) view.findViewById(R.id.search_home);
+
+        textViewWelcome = (TextView) view.findViewById(R.id.textViewWelcome);
+
 
         search_home.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
