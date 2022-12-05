@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MealDetails">
+
+    <TextView
+        android:id="@+id/textViewCookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="25dp"
+        android:text="Cook: "
+        app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMealName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewIngredients"
+        android:layout_width="82dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="434dp"
+        android:text="Ingredients"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAllergens"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCookName" />
+
+    <TextView
+        android:id="@+id/textViewAllergens"
+        android:layout_width="74dp"
+        android:layout_height="89dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="34dp"
+        android:text="Allergens"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSubtotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewIngredients"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMealName" />
+
+    <TextView
+        android:id="@+id/textViewMealName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="25dp"
+        android:text="Meal"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAllergens"
+        app:layout_constraintEnd_toStartOf="@+id/textViewRating"
+        app:layout_constraintStart_toEndOf="@+id/textViewCookName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="173dp"
+        android:text="Rating"
+        app:layout_constraintBottom_toTopOf="@+id/btnIncreaseQty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewMealName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnDecreaseQty"
+        android:layout_width="54dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="171dp"
+        android:layout_marginBottom="316dp"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextQty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSubtotal" />
+
+    <Button
+        android:id="@+id/btnIncreaseQty"
+        android:layout_width="54dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginBottom="316dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextQty"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
+
+    <EditText
+        android:id="@+id/editTextQty"
+        android:layout_width="44dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="374dp"
+        android:layout_marginBottom="312dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnIncreaseQty"
+        app:layout_constraintStart_toEndOf="@+id/btnDecreaseQty"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSubtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="171dp"
+        android:layout_marginEnd="181dp"
+        android:text="Subtotal: "
+        app:layout_constraintBottom_toTopOf="@+id/btnDecreaseQty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllergens" />
+
+    <TextView
+        android:id="@+id/textViewMealPrice"
+        android:layout_width="47dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="342dp"
+        android:layout_marginBottom="378dp"
+        android:text="Price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIngredients" />
+
+    <TextView
+        android:id="@+id/textViewDesc"
+        android:layout_width="77dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="23dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMealPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewAllergens"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
+
+    <Button
+        android:id="@+id/btnAddToCart"
+        android:layout_width="126dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginBottom="116dp"
+        android:text="Add To Cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextQty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
