@@ -30,8 +30,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import kotlin.random.AbstractPlatformRandom;
-
 public class CartFragment extends Fragment {
 
 
@@ -70,11 +68,34 @@ public class CartFragment extends Fragment {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Purchase> purchases = new ArrayList<>();
                 for(CartItem item: cartItems){
-                    Purchase purchase = new Purchase(item.)
+                    Purchase purchase = new Purchase(item.getMealID(), item.getCookID(), userID);
+                    db.collection("users").document(item.getClientID())
+                            .collection("purchases")
+                            .document(purchase.getID()).set(purchase);
 
                 }
+
+
+                db.collection("users").document(userID)
+                        .collection("cart").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                        db.collection("users").document(userID)
+                                                .collection("cart")
+                                                .document((String)documentSnapshot.get("id")).delete();
+                                    }
+                                }
+                            }
+                        });
+
+                cartItemDomains = new ArrayList<>();
+                adapter.notifyDataSetChanged();
+
+
             }
         });
 
