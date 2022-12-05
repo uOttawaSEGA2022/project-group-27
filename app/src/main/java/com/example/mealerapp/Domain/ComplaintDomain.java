@@ -2,7 +2,7 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Complaint;
 
-public class ComplaintDomain {
+public class ComplaintDomain extends NotificationDomain{
 
     public String complained_cook_id;
     public String description;

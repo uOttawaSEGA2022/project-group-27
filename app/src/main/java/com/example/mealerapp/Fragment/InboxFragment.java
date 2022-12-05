@@ -16,9 +16,11 @@ import android.widget.Toast;
 import com.example.mealerapp.Activity.ManageMenuActivity;
 import com.example.mealerapp.Adapter.ComplaintAdapter;
 import com.example.mealerapp.Adapter.CuisineAdapter;
+import com.example.mealerapp.Adapter.NotificationAdapter;
 import com.example.mealerapp.Adapter.PurchaseAdapter;
 import com.example.mealerapp.Domain.ComplaintDomain;
 import com.example.mealerapp.Domain.CuisineDomain;
+import com.example.mealerapp.Domain.NotificationDomain;
 import com.example.mealerapp.Domain.PurchaseDomain;
 import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Objects.Notification;
@@ -51,6 +53,8 @@ public class InboxFragment extends Fragment {
     private ArrayList<Purchase> purchases;
 
     private ComplaintAdapter adapter;
+
+    private NotificationAdapter testAdapter;
 
     private PurchaseAdapter purchaseAdapter;
 
@@ -88,7 +92,7 @@ public class InboxFragment extends Fragment {
                                 if(userType.equals("Admin")){
                                     Toast.makeText(getActivity(), "Created Example Complaint",Toast.LENGTH_LONG).show();
                                     complaintDomains.add(new ComplaintDomain(complaint));
-                                    adapter.notifyDataSetChanged();
+                                    testAdapter.notifyDataSetChanged();
                                 }
 
                             }
@@ -102,6 +106,7 @@ public class InboxFragment extends Fragment {
 
         switch (userType){
             case "Admin":
+                getPurchase();
                 getComplaints();
                 break;
             case "Client":
@@ -118,7 +123,8 @@ public class InboxFragment extends Fragment {
     private void getPurchase(){
         ArrayList<Purchase> tmpPurchases = new ArrayList<>();
         FirebaseFirestore.getInstance()
-                .collection("purchase").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .collection("users").document(userID)
+                .collection("purchases").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
@@ -132,7 +138,7 @@ public class InboxFragment extends Fragment {
                         } else {
                             purchases = new ArrayList<>();
                         }
-                        createClientInbox();
+                        createInbox();
                     }
                 });
 
@@ -156,11 +162,45 @@ public class InboxFragment extends Fragment {
                         }else{
                             complaints = new ArrayList<>();
                         }
-                        createAdminInbox();
+                        getPurchase();
                     }
                 });
 
     }
+
+    private void createInbox(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+
+        recyclerViewInbox.setLayoutManager(linearLayoutManager);
+
+        complaintDomains = new ArrayList<>();
+
+        ArrayList<NotificationDomain> notificationDomains = new ArrayList<>();
+
+        if(!complaints.isEmpty()){
+            for(Complaint complaint: complaints){
+                complaintDomains.add(new ComplaintDomain(complaint));
+                notificationDomains.add(new ComplaintDomain(complaint));
+            }
+
+        }
+
+        if(!purchases.isEmpty()){
+            for(Purchase purchase: purchases){
+                notificationDomains.add(new PurchaseDomain(purchase));
+            }
+        }
+
+//        adapter = new ComplaintAdapter(complaintDomains, getActivity());
+
+        Toast.makeText(getActivity(), "Size: " + notificationDomains.size(), Toast.LENGTH_SHORT).show();
+        testAdapter = new NotificationAdapter(notificationDomains, getActivity());
+
+        recyclerViewInbox.setAdapter(testAdapter);
+    }
+
+
+
 
     private void createClientInbox(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -185,14 +225,24 @@ public class InboxFragment extends Fragment {
 
         complaintDomains = new ArrayList<>();
 
+        ArrayList<NotificationDomain> notificationDomains = new ArrayList<>();
+
         for(Complaint complaint: complaints){
             complaintDomains.add(new ComplaintDomain(complaint));
+            notificationDomains.add(new ComplaintDomain(complaint));
+        }
+
+        for(Purchase purchase: purchases){
+            notificationDomains.add(new PurchaseDomain(purchase));
         }
 
 
-        adapter = new ComplaintAdapter(complaintDomains, getActivity());
 
-        recyclerViewInbox.setAdapter(adapter);
+//        adapter = new ComplaintAdapter(complaintDomains, getActivity());
+
+        testAdapter = new NotificationAdapter(notificationDomains, getActivity());
+
+        recyclerViewInbox.setAdapter(testAdapter);
 
 
     }

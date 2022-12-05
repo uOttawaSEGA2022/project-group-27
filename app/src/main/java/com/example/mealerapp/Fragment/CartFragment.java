@@ -93,8 +93,7 @@ public class CartFragment extends Fragment {
                             }
                         });
 
-                cartItemDomains = new ArrayList<>();
-                adapter.notifyDataSetChanged();
+                adapter.clearData();
 
 
             }

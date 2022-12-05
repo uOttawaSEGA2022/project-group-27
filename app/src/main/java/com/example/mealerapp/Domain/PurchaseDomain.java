@@ -2,7 +2,7 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Purchase;
 
-public class PurchaseDomain {
+public class PurchaseDomain extends NotificationDomain {
 
     public String purchase_meal_id;
     public String status;

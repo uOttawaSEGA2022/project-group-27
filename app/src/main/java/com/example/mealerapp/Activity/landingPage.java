@@ -145,6 +145,7 @@ public class landingPage extends AppCompatActivity {
                        }
 
                         userTypes.putString("userType",userType);
+                        userTypes.putString("userID", userID);
                         inboxFragment = new InboxFragment();
                         inboxFragment.setArguments(userTypes);
 
