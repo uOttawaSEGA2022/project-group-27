@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.icu.util.BuddhistCalendar;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,9 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class landingPage extends AppCompatActivity implements View.OnClickListener {
+public class landingPage extends AppCompatActivity {
 
-    private Button btnLogout;
     private TextView textViewWelcome;
     private RecyclerView.Adapter adapter;
     private RecyclerView cuisineList;
@@ -61,8 +61,6 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        btnLogout = (Button) findViewById(R.id.btnLogout2);
-        btnLogout.setOnClickListener(this);
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -108,16 +106,11 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
 
 
 
-
     }
 
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.btnLogout2:
-                mAuth.signOut();
-                startActivity(new Intent(this, MainActivity.class));
-        }
+    public void signOut(){
+        mAuth.signOut();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     private void initializeUser() {
@@ -158,6 +151,19 @@ public class landingPage extends AppCompatActivity implements View.OnClickListen
                         userIDs.putString("userID", userID);
                         cartFragment = new CartFragment();
                         cartFragment.setArguments(userIDs);
+
+                        profileFragment.setArguments(userIDs);
+
+                        String userName = user.getFirstName();
+
+                        Bundle userNames = new Bundle();
+
+                        userNames.putString("userName", userName);
+
+                        homeFragment.setArguments(userNames);
+
+
+
                     }
                 });
     }

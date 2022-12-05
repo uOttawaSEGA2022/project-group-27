@@ -70,7 +70,8 @@ public class CartFragment extends Fragment {
             public void onClick(View view) {
                 for(CartItem item: cartItems){
                     Purchase purchase = new Purchase(item.getMealID(), item.getCookID(), userID);
-                    db.collection("users").document(item.getClientID())
+                   
+                   db.collection("users").document(userID)
                             .collection("purchases")
                             .document(purchase.getID()).set(purchase);
 
