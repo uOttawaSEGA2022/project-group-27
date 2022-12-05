@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mealerapp.Adapter.CartItemAdapter;
@@ -18,6 +19,7 @@ import com.example.mealerapp.Domain.CartItemDomain;
 import com.example.mealerapp.Domain.ComplaintDomain;
 import com.example.mealerapp.Objects.CartItem;
 import com.example.mealerapp.Objects.Complaint;
+import com.example.mealerapp.Objects.Purchase;
 import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import kotlin.random.AbstractPlatformRandom;
 
 public class CartFragment extends Fragment {
 
@@ -38,6 +42,8 @@ public class CartFragment extends Fragment {
     private CartItemAdapter adapter;
 
     private RecyclerView recyclerViewCart;
+
+    private Button btnCheckout;
 
     private FirebaseFirestore db;
 
@@ -58,6 +64,19 @@ public class CartFragment extends Fragment {
         userID = bundle.getString("userID");
 
         getCart();
+
+        btnCheckout = (Button) view.findViewById(R.id.btnCheckout);
+
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Purchase> purchases = new ArrayList<>();
+                for(CartItem item: cartItems){
+                    Purchase purchase = new Purchase(item.)
+
+                }
+            }
+        });
 
         return view;
 
