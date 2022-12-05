@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.mealerapp.Objects.CartItem;
 import com.example.mealerapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.w3c.dom.Text;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class MealDetails extends AppCompatActivity {
 
@@ -36,7 +38,7 @@ public class MealDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private int qty;
-
+    private Double subtotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class MealDetails extends AppCompatActivity {
 
         editTextQty.setText("" + qty);
 
-        double subtotal = Double.parseDouble(data.get("price")) * qty;
+        subtotal = Double.parseDouble(data.get("price")) * qty;
 
         textViewSubtotal.setText( "Subtotal: " + subtotal);
 
@@ -93,8 +95,8 @@ public class MealDetails extends AppCompatActivity {
             public void onClick(View view) {
                 qty += 1;
                 editTextQty.setText("" + qty);
-                double subtotal = Double.parseDouble(data.get("price")) * qty;
-                textViewSubtotal.setText(""+ subtotal);
+                subtotal = Double.parseDouble(data.get("price")) * qty;
+                textViewSubtotal.setText("Subtotal: "+ subtotal);
             }
         });
 
@@ -107,21 +109,27 @@ public class MealDetails extends AppCompatActivity {
 
                 qty -= 1;
                 editTextQty.setText("" + qty);
-                double subtotal = Double.parseDouble(data.get("price")) * qty;
-                textViewSubtotal.setText(""+ subtotal);
+                subtotal = Double.parseDouble(data.get("price")) * qty;
+                textViewSubtotal.setText("Subtotal: "+ subtotal);
             }
         });
 
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                data.put("qty", ""+qty);
-                data.put("subtotal", ""+subtotal);
+                String uid = UUID.randomUUID().toString();
+                CartItem item = new CartItem(
+                        Double.parseDouble(data.get("price")),
+                        qty,
+                        data.get("name"),
+                        subtotal,
+                        uid,
+                        data.get("ID")
+
+                );
 
                 db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("cart")
-                        .add(
-                              data
-                        );
+                                .document(uid).set(item);
                 finish();
             }
         });

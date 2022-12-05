@@ -120,6 +120,7 @@ public class MealDomain {
         data.put("price", "" + price);
         data.put("description", description);
         data.put("rating", ""+rating);
+        data.put("ID", ID);
         data.put("cookID", cookID);
 
         return data;

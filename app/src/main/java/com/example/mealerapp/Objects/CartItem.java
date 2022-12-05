@@ -1,33 +1,26 @@
-package com.example.mealerapp.Domain;
+package com.example.mealerapp.Objects;
 
-import com.example.mealerapp.Objects.CartItem;
+import com.example.mealerapp.Domain.MealDomain;
 
-public class CartItemDomain {
+public class CartItem {
 
     private Double price;
     private int qty;
     private String mealName;
     private Double subtotal;
-    private String mealID;
     private String ID;
+    private String mealID;
 
-    public CartItemDomain(Double price, int qty, String mealName, Double subtotal, String mealID, String ID) {
+    public CartItem(Double price, int qty, String mealName, Double subtotal, String ID, String mealID) {
         this.price = price;
         this.qty = qty;
         this.mealName = mealName;
         this.subtotal = subtotal;
-        this.mealID = mealID;
         this.ID = ID;
+        this.mealID = mealID;
     }
 
-    public CartItemDomain(CartItem item){
-        this.price = item.getPrice();
-        this.qty = item.getQty();
-        this.mealName = item.getMealName();
-        this.subtotal = item.getSubtotal();
-        this.mealID = item.getMealID();
-        this.ID = item.getID();
-    }
+    public CartItem() {}
 
     public Double getPrice() {
         return price;
@@ -61,19 +54,19 @@ public class CartItemDomain {
         this.subtotal = subtotal;
     }
 
-    public String getMealID() {
-        return mealID;
-    }
-
-    public void setMealID(String mealID) {
-        this.mealID = mealID;
-    }
-
     public String getID() {
         return ID;
     }
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getMealID() {
+        return mealID;
+    }
+
+    public void setMealID(String mealID) {
+        this.mealID = mealID;
     }
 }
