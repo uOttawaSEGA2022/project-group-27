@@ -76,6 +76,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
             super(itemView);
             txtPurchaseName = itemView.findViewById(R.id.txtPurchaseName);
             txtStatus = itemView.findViewById(R.id.txtStatus);
+            btnDeletePurchase = itemView.findViewById(R.id.btnDeletePurchase);
         }
     }
 

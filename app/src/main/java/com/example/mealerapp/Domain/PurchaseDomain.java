@@ -14,7 +14,10 @@ public class PurchaseDomain {
         this._id = id;
     }
     public PurchaseDomain(Purchase purchase){
+        this.purchase_meal_id = purchase.getMealID();
+
         this.purchase_meal_id = purchase.getID();
+
         this.status = purchase.getStatus();
         this._id = purchase.getID();
     }
