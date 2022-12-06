@@ -21,6 +21,7 @@ import com.example.mealerapp.Adapter.PurchaseAdapter;
 import com.example.mealerapp.Domain.ComplaintDomain;
 import com.example.mealerapp.Domain.CuisineDomain;
 import com.example.mealerapp.Domain.NotificationDomain;
+import com.example.mealerapp.Domain.PurchaseCookDomain;
 import com.example.mealerapp.Domain.PurchaseDomain;
 import com.example.mealerapp.Objects.Complaint;
 import com.example.mealerapp.Objects.Notification;
@@ -51,6 +52,8 @@ public class InboxFragment extends Fragment {
     private ArrayList<Complaint> complaints;
 
     private ArrayList<Purchase> purchases;
+
+    private ArrayList<Purchase> purchaseCook;
 
     private ComplaintAdapter adapter;
 
@@ -84,7 +87,7 @@ public class InboxFragment extends Fragment {
                 int random = new Random().nextInt(UID.length);
                 Complaint complaint = new Complaint(UID[random], "Test Description", UUID.randomUUID().toString());
 
-                FirebaseFirestore.getInstance().collection("complaints").document(complaint.get_id()).set(complaint)
+                FirebaseFirestore.getInstance().collection("complaints").document(complaint.getID()).set(complaint)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -112,6 +115,9 @@ public class InboxFragment extends Fragment {
             case "Client":
                 getPurchase();
                 break;
+            case "Cook":
+                getPurchaseCook();
+                break;
 
         }
 
@@ -120,11 +126,36 @@ public class InboxFragment extends Fragment {
         return view;
     }
 
+    private void getPurchaseCook(){
+
+        ArrayList<Purchase> tmpPurchases = new ArrayList<>();
+        FirebaseFirestore.getInstance()
+                .collection("purchases")
+                .whereEqualTo("cook_ID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                                Purchase purchase = documentSnapshot.toObject(Purchase.class);
+                                    tmpPurchases.add(purchase);
+
+                            }
+                            purchaseCook = tmpPurchases;
+                        } else {
+                            purchaseCook = new ArrayList<>();
+                        }
+                        createInbox();
+                    }
+                });
+
+
+
+    }
     private void getPurchase(){
         ArrayList<Purchase> tmpPurchases = new ArrayList<>();
         FirebaseFirestore.getInstance()
-                .collection("users").document(userID)
-                .collection("purchases").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .collection("purchases")
+                .whereEqualTo("client_ID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
@@ -177,23 +208,28 @@ public class InboxFragment extends Fragment {
 
         ArrayList<NotificationDomain> notificationDomains = new ArrayList<>();
 
-        if(!complaints.isEmpty()){
+        if(purchaseCook != null){
+            for(Purchase purchase: purchaseCook){
+                notificationDomains.add(new PurchaseCookDomain(purchase));
+            }
+        }
+
+        if(complaints != null){
             for(Complaint complaint: complaints){
                 complaintDomains.add(new ComplaintDomain(complaint));
                 notificationDomains.add(new ComplaintDomain(complaint));
             }
-
         }
 
-        if(!purchases.isEmpty()){
+        if(purchases != null){
             for(Purchase purchase: purchases){
                 notificationDomains.add(new PurchaseDomain(purchase));
             }
         }
 
+
 //        adapter = new ComplaintAdapter(complaintDomains, getActivity());
 
-        Toast.makeText(getActivity(), "Size: " + notificationDomains.size(), Toast.LENGTH_SHORT).show();
         testAdapter = new NotificationAdapter(notificationDomains, getActivity());
 
         recyclerViewInbox.setAdapter(testAdapter);

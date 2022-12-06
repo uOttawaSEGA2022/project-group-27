@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        search_home.clearFocus();
         return view;
     }
 

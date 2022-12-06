@@ -3,28 +3,26 @@ package com.example.mealerapp.Objects;
 
 public class Complaint {
 
-    public String complained_cook_id;  //added by Carl because the activity is needed
-    public String description;
-    public String _id;
-    public boolean isActioned = false;
+    private String cookID;  //added by Carl because the activity is needed
+    private String description;
+    private String ID;
+    private boolean actioned;
 
+    public Complaint() {}
 
-
-
-    public Complaint(){}
-
-    public Complaint(String target_cook_id, String details, String id) {
-        this.complained_cook_id = target_cook_id;
-        this.description = details;
-        this._id = id;
+    public Complaint(String cookID, String description, String ID) {
+        this.cookID = cookID;
+        this.description = description;
+        this.ID = ID;
+        this.actioned = false;
     }
 
-    public String getComplained_cook_id() {
-        return complained_cook_id;
+    public String getCookID() {
+        return cookID;
     }
 
-    public void setComplained_cook_id(String complained_cook_id) {
-        this.complained_cook_id = complained_cook_id;
+    public void setCookID(String cookID) {
+        this.cookID = cookID;
     }
 
     public String getDescription() {
@@ -35,25 +33,19 @@ public class Complaint {
         this.description = description;
     }
 
-    public String get_id() {
-        return _id;
+    public String getID() {
+        return ID;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public boolean isActioned() {
-        return isActioned;
+        return actioned;
     }
 
     public void setActioned(boolean actioned) {
-        isActioned = actioned;
+        this.actioned = actioned;
     }
-
-
-//there should be a list of complaints that the admin can view and it is added to the database
-//with an add_complaints() method, each time a client makes a complaint, it's added here
-
-
 }

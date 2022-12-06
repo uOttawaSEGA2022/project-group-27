@@ -2,8 +2,7 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Purchase;
 
-public class PurchaseDomain extends NotificationDomain {
-
+public class PurchaseCookDomain extends NotificationDomain{
     private String mealID;
     private String cookID;
     private String status;
@@ -12,7 +11,7 @@ public class PurchaseDomain extends NotificationDomain {
 
 
 
-    public PurchaseDomain(Purchase purchase){
+    public PurchaseCookDomain(Purchase purchase){
         this.mealID = purchase.getMealID();
 
         this.status = purchase.getStatus();

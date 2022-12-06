@@ -12,7 +12,7 @@
     android:backgroundTint="#F3F3F3">
 
     <TextView
-        android:id="@+id/search_textViewMealName"
+        android:id="@+id/textViewOrderMealName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="146dp"
@@ -41,7 +41,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/search_textViewAllergens"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search_textViewMealName"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrderMealName"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -76,7 +76,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/search_textViewAllergens"
         app:layout_constraintStart_toEndOf="@+id/search_textViewMealDesc"
-        app:layout_constraintTop_toBottomOf="@+id/search_textViewMealName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderMealName" />
 
     <TextView
         android:id="@+id/search_textViewAllergens"
@@ -109,7 +109,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/search_textViewMealDesc"
-        app:layout_constraintEnd_toStartOf="@+id/search_textViewMealName"
+        app:layout_constraintEnd_toStartOf="@+id/textViewOrderMealName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

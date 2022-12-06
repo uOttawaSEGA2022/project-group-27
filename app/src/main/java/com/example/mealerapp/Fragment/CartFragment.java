@@ -71,7 +71,7 @@ public class CartFragment extends Fragment {
                 for(CartItem item: cartItems){
                     Purchase purchase = new Purchase(item.getMealID(), item.getCookID(), userID);
                    
-                   db.collection("users").document(userID)
+                   db
                             .collection("purchases")
                             .document(purchase.getID()).set(purchase);
 

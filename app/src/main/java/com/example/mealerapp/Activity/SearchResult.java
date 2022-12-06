@@ -73,7 +73,7 @@ public class SearchResult extends AppCompatActivity {
     private void getMeals() {
         ArrayList<Meal> tempMeals = new ArrayList<>();
 
-        db.collection("meals").get()
+        db.collection("meals").whereEqualTo("offered", true).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
