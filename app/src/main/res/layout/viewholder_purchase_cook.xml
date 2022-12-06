@@ -20,11 +20,11 @@
 
     <TextView
         android:id="@+id/textViewOrderMealName"
-        android:layout_width="94dp"
+        android:layout_width="132dp"
         android:layout_height="20dp"
         android:layout_marginTop="28dp"
         android:text="Meal Name"
-        android:textColor="@color/black"
+        android:textColor="@color/purple_200"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.167"
@@ -34,18 +34,18 @@
 
     <TextView
         android:id="@+id/textViewTotalOrderPrice"
-        android:layout_width="153dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="42dp"
+        android:layout_width="148dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="83dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="14dp"
         android:text="Total Price: "
         app:layout_constraintBottom_toTopOf="@+id/textViewOrderQty"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@+id/textViewOrderMealName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
 
     <Button
         android:id="@+id/btnOrderApprove"
@@ -55,7 +55,10 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
         android:text="Approve"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnOrderReject"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +73,10 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="84dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/button_2"
         android:text="Reject"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnOrderApprove"
@@ -79,28 +85,26 @@
 
     <TextView
         android:id="@+id/textViewOrderClientName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="21dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="14dp"
         android:text="Client Name"
         app:layout_constraintBottom_toTopOf="@+id/btnOrderApprove"
-        app:layout_constraintEnd_toStartOf="@+id/textViewOrderQty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOrderMealName" />
 
     <TextView
         android:id="@+id/textViewOrderQty"
-        android:layout_width="113dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="58dp"
+        android:layout_width="145dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="17dp"
         android:text="Qty: "
-        app:layout_constraintBottom_toTopOf="@+id/btnOrderReject"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewOrderClientName"
-        app:layout_constraintTop_toBottomOf="@+id/btnOrderReject" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalOrderPrice" />
 
     <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
     <!--        android:id="@+id/constraintLayout"-->

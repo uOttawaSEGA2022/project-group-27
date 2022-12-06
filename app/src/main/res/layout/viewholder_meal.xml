@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/textViewOrderMealName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="83dp"
+        android:layout_height="22dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="142dp"
@@ -101,8 +101,8 @@
 
     <TextView
         android:id="@+id/textViewTotalOrderPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="28dp"
         android:layout_marginStart="42dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="83dp"
@@ -110,8 +110,10 @@
         android:text="$"
         app:layout_constraintBottom_toTopOf="@+id/search_textViewAllergens"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toEndOf="@+id/textViewOrderMealName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--        android:id="@+id/constraintLayout"-->

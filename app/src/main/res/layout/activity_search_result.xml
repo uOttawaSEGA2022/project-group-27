@@ -4,17 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    app:layout_anchorGravity="center"
     tools:context=".Activity.SearchResult">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_gravity="center"
             android:layout_marginTop="48dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -35,7 +41,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewMeals"
             android:layout_width="408dp"
-            android:layout_height="611dp" />
+            android:layout_height="611dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

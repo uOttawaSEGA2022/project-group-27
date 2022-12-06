@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cart_itemCard"
-    android:layout_width="350dp"
-    android:layout_height="100dp"
+    android:layout_width="370dp"
+    android:layout_height="130dp"
     android:layout_gravity="center|top"
-    android:layout_margin="8dp"
+    android:layout_margin="10dp"
     android:alpha="1"
     android:background="@drawable/cuis_background2"
     android:backgroundTint="#F3F3F3"
@@ -17,69 +17,79 @@
 
     <Button
         android:id="@+id/btnDeleteItem"
-        android:layout_width="44dp"
-        android:layout_height="39dp"
+        android:layout_width="40dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/button_2"
         android:text="X"
+        android:textColor="@color/purple_200"
+        android:translationX="-10dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewCartSubtotal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewCartItemName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintStart_toEndOf="@+id/textViewCartItemName" />
 
     <TextView
         android:id="@+id/textViewCartItemName"
-        android:layout_width="80dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="226dp"
+        android:layout_width="168dp"
+        android:layout_height="21dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="Meal Name"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnDecrementQty"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteItem"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnIncrementQty"
-        android:layout_width="37dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="118dp"
+        android:layout_width="40dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/button_bg"
         android:text="+"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:translationY="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCartSubtotal"
         app:layout_constraintStart_toEndOf="@+id/editTextCartQty"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
 
     <Button
         android:id="@+id/btnDecrementQty"
-        android:layout_width="37dp"
-        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button_bg"
         android:text="-"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:translationY="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextCartQty"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCartItemName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextCartQty"
         android:layout_width="48dp"
         android:layout_height="38dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnIncrementQty"
         app:layout_constraintStart_toEndOf="@+id/btnDecrementQty"
         app:layout_constraintTop_toBottomOf="@+id/textViewCartItemName" />
 
     <TextView
         android:id="@+id/textViewCartSubtotal"
-        android:layout_width="110dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="34dp"
+        android:layout_width="147dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="8dp"
         android:text="Subtotal: "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDeleteItem" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
