@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 User user = documentSnapshot.toObject(User.class);
                                                 if(user.getRole().equals("Cook")){
                                                     Cook cook = documentSnapshot.toObject(Cook.class);
-                                                    if(cook.getSuspended()){
+                                                    if(cook.isSuspended()){
                                                         Calendar c = Calendar.getInstance();
                                                         if(cook.getUntil().before(c.getTime())){
                                                             cook.setUntil(null);

@@ -27,7 +27,7 @@
             android:layout_height="20dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnAccountInfo"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:background="@drawable/button_bg"

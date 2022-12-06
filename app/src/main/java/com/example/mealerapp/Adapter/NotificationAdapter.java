@@ -2,13 +2,13 @@ package com.example.mealerapp.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +17,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapp.Domain.ComplaintDomain;
-import com.example.mealerapp.Domain.ManageMealDomain;
 import com.example.mealerapp.Domain.NotificationDomain;
 import com.example.mealerapp.Domain.PurchaseCookDomain;
 import com.example.mealerapp.Domain.PurchaseDomain;
 import com.example.mealerapp.Objects.Complaint;
+import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.Meal;
-import com.example.mealerapp.Objects.Notification;
-import com.example.mealerapp.Objects.Purchase;
 import com.example.mealerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,15 +30,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -214,6 +212,82 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     });
 
 
+                    if(!purchaseDomain.getStatus().equals("Approved"))
+                        purchaseHolder.btnCreateReview.setVisibility(View.INVISIBLE);
+
+
+                    purchaseHolder.btnCreateReview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                            final LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            final View detailView = inflater.inflate(R.layout.dialog_create_review, null);
+
+                            alertDialogBuilder.setView(detailView);
+                            final AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+
+                            Button btnSubmitReview = detailView.findViewById(R.id.btnSubmitReview);
+
+                            RatingBar ratingBar = detailView.findViewById(R.id.ratingBar);
+
+                            btnSubmitReview.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(ratingBar.getRating() == 0){
+                                        Toast.makeText(holder.itemView.getContext(), "Please Enter a Rating.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    double review = ratingBar.getRating();
+
+
+                                    DocumentReference cookRef = db.collection("users").document(purchaseDomain.getCookID());
+
+                                    cookRef
+                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                    Cook cook = documentSnapshot.toObject(Cook.class);
+
+                                                    ArrayList<Double> ratings = cook.getRatings();
+                                                    ratings.add(review);
+
+
+                                                   double rating = 0;
+
+                                                   for(double rate: ratings){
+                                                       rating += rate;
+                                                   }
+
+
+                                                   rating /= ratings.size();
+
+
+                                                   Map<String, Object> updates = new HashMap<>();
+
+                                                   updates.put("ratings", ratings);
+                                                   updates.put("rating", rating);
+
+                                                   cookRef.update(updates);
+
+                                                   Toast.makeText(holder.itemView.getContext(), "Sucessfully Submitted Review.", Toast.LENGTH_SHORT).show();
+
+                                                   notifs.remove(holder.getAdapterPosition());
+                                                   notifyDataSetChanged();
+
+                                                   alertDialog.dismiss();
+
+                                                }
+                                            });
+
+                                }
+
+
+                            });
+                        }
+                    });
+
                     purchaseHolder.btnCreateComplaint.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -312,6 +386,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView txtStatus;
         private Button btnDeletePurchase;
         private Button btnCreateComplaint;
+        private Button btnCreateReview;
 
         public PurchaseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -319,6 +394,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             txtStatus = itemView.findViewById(R.id.txtStatus);
             btnDeletePurchase = itemView.findViewById(R.id.btnDeletePurchase);
             btnCreateComplaint = itemView.findViewById(R.id.btnCreateComplaint);
+            btnCreateReview = itemView.findViewById(R.id.btnCreateReview);
+
         }
     }
 
@@ -326,12 +403,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ComplaintViewHolder extends RecyclerView.ViewHolder {
 
-        ConstraintLayout complaintCard;
-        TextView textViewCookID;
-        TextView textViewDescription;
-        Button btnSuspendCook;
-        Button btnBanCook;
-        Button btnDismiss;
+        private ConstraintLayout complaintCard;
+        private TextView textViewCookID;
+        private TextView textViewDescription;
+        private Button btnSuspendCook;
+        private Button btnBanCook;
+        private Button btnDismiss;
+
+
 
         public ComplaintViewHolder(@NonNull View itemView) {
             super(itemView);

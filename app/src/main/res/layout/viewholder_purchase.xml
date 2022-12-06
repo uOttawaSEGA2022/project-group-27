@@ -38,8 +38,8 @@
         android:id="@+id/btnDeletePurchase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPurchaseName" />
@@ -48,13 +48,25 @@
         android:id="@+id/btnCreateComplaint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="40dp"
         android:text="Complaint"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeletePurchase"
+        app:layout_constraintEnd_toStartOf="@+id/btnCreateReview"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPurchaseName" />
+
+    <Button
+        android:id="@+id/btnCreateReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="40dp"
+        android:text="Review"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeletePurchase"
+        app:layout_constraintStart_toEndOf="@+id/btnCreateComplaint"
         app:layout_constraintTop_toBottomOf="@+id/txtPurchaseName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
