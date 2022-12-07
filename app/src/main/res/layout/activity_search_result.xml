@@ -42,8 +42,8 @@
             android:id="@+id/recycleViewMeals"
             android:layout_width="408dp"
             android:layout_height="611dp"
-            android:layout_gravity="center"
-            android:foregroundGravity="center" />
+            android:layout_gravity="center_horizontal"
+            android:foregroundGravity="clip_horizontal" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
