@@ -18,8 +18,8 @@ public class PurchaseCookDomain extends NotificationDomain{
 
         this.ID= purchase.getID();
 
-        this.clientID = purchase.getClient_ID();
-        this.cookID = purchase.getCook_ID();
+        this.clientID = purchase.getClientID();
+        this.cookID = purchase.getCookID();
 
 
 

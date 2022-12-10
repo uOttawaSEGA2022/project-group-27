@@ -9,6 +9,7 @@ public class PurchaseDomain extends NotificationDomain {
     private String status;
     private String clientID;
     private String ID;
+    private String mealName;
 
 
 
@@ -19,8 +20,10 @@ public class PurchaseDomain extends NotificationDomain {
 
         this.ID= purchase.getID();
 
-        this.clientID = purchase.getClient_ID();
-        this.cookID = purchase.getCook_ID();
+        this.clientID = purchase.getClientID();
+        this.cookID = purchase.getCookID();
+
+        this.mealName = purchase.getMealName();
 
 
 
@@ -64,5 +67,13 @@ public class PurchaseDomain extends NotificationDomain {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
     }
 }

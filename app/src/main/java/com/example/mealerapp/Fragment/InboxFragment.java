@@ -131,7 +131,7 @@ public class InboxFragment extends Fragment {
         ArrayList<Purchase> tmpPurchases = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .collection("purchases")
-                .whereEqualTo("cook_ID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .whereEqualTo("cookID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
@@ -155,13 +155,13 @@ public class InboxFragment extends Fragment {
         ArrayList<Purchase> tmpPurchases = new ArrayList<>();
         FirebaseFirestore.getInstance()
                 .collection("purchases")
-                .whereEqualTo("client_ID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .whereEqualTo("clientID", userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
                                 Purchase purchase = documentSnapshot.toObject(Purchase.class);
-                                if (purchase.getClient_ID().equals(userID)) {
+                                if (purchase.getClientID().equals(userID)) {
                                     tmpPurchases.add(purchase);
                                 }
                             }

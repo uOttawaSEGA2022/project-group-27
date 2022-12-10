@@ -198,13 +198,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     PurchaseViewHolder purchaseHolder = (PurchaseViewHolder) holder;
 
 
-                    purchaseHolder.txtPurchaseName.setText("Target Meal ID: " + purchaseDomain.getMealID());
+                    String mealID = purchaseDomain.getMealID().substring(0,10);
+
+                    Toast.makeText(mContext, "Meal ID: " + mealID, Toast.LENGTH_SHORT).show();
+
+
+                    purchaseHolder.txtPurchaseName.setText(purchaseDomain.getMealName());
                     purchaseHolder.txtStatus.setText(purchaseDomain.getStatus());
 
                     purchaseHolder.btnDeletePurchase.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            db.collection("purchase").document(purchaseDomain.getID())
+                            db.collection("purchases").document(purchaseDomain.getID())
                                     .delete();
                             notifs.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
@@ -309,7 +314,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 public void onClick(View view) {
                                     Toast.makeText(holder.itemView.getContext(), "Complaint Submitted!", Toast.LENGTH_SHORT).show();
                                     Complaint complaint = new Complaint(
-                                            purchaseDomain.getMealID(),
+                                            purchaseDomain.getCookID(),
                                             editTextComplaintDescription.getText().toString(),
                                             UUID.randomUUID().toString()
 
@@ -317,8 +322,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                                    db.collection("complaints").document(complaint.getID()).set(complaint);
 
-                                   notifs.add(new ComplaintDomain(complaint));
-                                   notifyDataSetChanged();
                                 }
                             });
 

@@ -69,7 +69,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 for(CartItem item: cartItems){
-                    Purchase purchase = new Purchase(item.getMealID(), item.getCookID(), userID);
+                    Purchase purchase = new Purchase(item.getMealID(), item.getCookID(), userID, item.getMealName());
                    
                    db
                             .collection("purchases")
