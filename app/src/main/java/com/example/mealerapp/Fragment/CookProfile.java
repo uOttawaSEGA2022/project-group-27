@@ -18,6 +18,7 @@ import com.example.mealerapp.Activity.landingPage;
 import com.example.mealerapp.Objects.Cook;
 import com.example.mealerapp.Objects.User;
 import com.example.mealerapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class CookProfile extends Fragment implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class CookProfile extends Fragment implements View.OnClickListener {
     private Button btnLogoutCook;
     private Button btnAccountInfo;
     private View view;
+    private FirebaseFirestore db;
 
     private String UID;
 
@@ -68,7 +70,7 @@ public class CookProfile extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
 
-            case(R.id.btnLogout):
+            case(R.id.btnLogoutCook):
                 landingPage activity = (landingPage) getActivity();
                 activity.signOut();
                 break;
