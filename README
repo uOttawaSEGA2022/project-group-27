@@ -1,12 +1,15 @@
 Administrator Login Credentials: Email: admin@email.com Password: 123456
 
-Example Accounts for Suspended Cooks:
-Email: cook@gmail.com Password: 123456 (Temporarily Suspended)
-Email: cooker1@gmail.com Password: 999999 (Temporarily Suspended)
-Email: testing@email.com Password: 123456 (Permenantly Suspended) 
+Example Accounts: 
+client1@gmail.com
+clent2@gmail.com
+client3@gmail.com
 
-At this time, Admin's can only permenantly suspend cooks (missed from deliverable 2) but their suspension status is stored in the database, Users can also generate random complaints
-from the inbox fragment and they will be stored in the database and appear dynamically for the Admin. 
+cook1@gmail.com
+cook2@gmail.com
+cook3@gmail.com
 
-For testing Cooks meal managment system, create an account as a Cook, in the profile fragment (the profile icon in the nav bar), there will be a manage menu button.
-Any registered cook can make changes to their menu and they are stored in the database accordingly. 
+You can also create new cooks and clients to test functionality. Notifcations were implemented as well, however it is hard to test notifactions on a single device because
+they will be sent to the logged in User so when an update is made you will not recieve it on your account thats logged in. Please refer to our services folder that contains
+our Firebase Cloud Messaging implementation (FirebaseMessagingService.java). 
+
