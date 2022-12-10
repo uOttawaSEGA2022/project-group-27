@@ -37,9 +37,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealerapp.Activity.ManageMenuActivity;
 import com.example.mealerapp.Domain.ComplaintDomain;
 import com.example.mealerapp.Fragment.DatePickerFragment;
+import com.example.mealerapp.Objects.Meal;
 import com.example.mealerapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -127,6 +132,21 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                             db.collection("users").document(complaintDomain.get_Cook_ID())
                                     .update("until", d);
                             db.collection("complaints").document(complaintDomain.getId()).delete();
+
+                            db.collection("meals").whereEqualTo("cookID",complaintDomain.get_Cook_ID())
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                                Meal meal = documentSnapshot.toObject(Meal.class);
+                                                if(meal.isOffered())
+                                                    db.collection("meals").document(meal.getID()).update("offered", false);
+                                            }
+                                        }
+                                    }
+                                });
+
                             complaintDomains.remove(holder.getAdapterPosition());
                             alertDialog.dismiss();
                             notifyDataSetChanged();

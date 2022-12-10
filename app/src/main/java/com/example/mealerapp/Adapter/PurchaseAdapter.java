@@ -45,13 +45,13 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
         PurchaseDomain purchaseDomain = purchaseDomains.get(position);
         db = FirebaseFirestore.getInstance();
 
-        holder.txtPurchaseName.setText("Target Meal ID: " + purchaseDomain.purchase_meal_id);
+        holder.txtPurchaseName.setText("Target Meal ID: " + purchaseDomain.getMealID());
         holder.txtStatus.setText(purchaseDomain.getStatus());
 
         holder.btnDeletePurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("purchase").document(purchaseDomain.get_id())
+                db.collection("purchase").document(purchaseDomain.getID())
                         .delete();
                 purchaseDomains.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();

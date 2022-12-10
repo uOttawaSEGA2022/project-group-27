@@ -106,12 +106,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             super(itemView);
 
             mealCard = itemView.findViewById(R.id.search_mealCard);
-            textViewMealName = itemView.findViewById(R.id.search_textViewMealName);
+            textViewMealName = itemView.findViewById(R.id.textViewOrderMealName);
             textViewDesc = itemView.findViewById(R.id.search_textViewMealDesc);
             textViewIngredients = itemView.findViewById(R.id.search_textViewIngredients);
             textViewAllergens = itemView.findViewById(R.id.search_textViewAllergens);
             textViewRating = itemView.findViewById(R.id.search_textViewRating);
-            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            textViewPrice = itemView.findViewById(R.id.textViewTotalOrderPrice);
 
 
         }

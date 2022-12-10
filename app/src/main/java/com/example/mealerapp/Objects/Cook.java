@@ -10,17 +10,20 @@ public class Cook extends User implements Serializable {
 
     private String description;
 
-    private int rating;
+    private double rating;
+
+    private ArrayList<Double> ratings;
 
     private boolean suspended = false;
     private Date until = null;
 
     public Cook() {}
 
-    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID){
+    public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID, double rating, ArrayList<Double> ratings){
         super(Role, firstName, lastName, Address, Email, Password, UID);
         this.description = desc;
-        this.rating = 5;
+        this.rating = rating;
+        this.ratings = ratings;
     }
 
     public Cook(String Role, String firstName, String lastName, String Address, String Email, String Password, String desc, String UID, int rating){
@@ -35,17 +38,15 @@ public class Cook extends User implements Serializable {
     }
 
 
-    public boolean getSuspended(){return suspended;}
+    public String getDescription() {
+        return description;
+    }
 
-    public Date getUntil(){return until;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setSuspended(boolean s){suspended = s;}
-
-    public void setUntil(Date d){until = d;}
-
-    public String getDescription(){return description;}
-
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -53,12 +54,27 @@ public class Cook extends User implements Serializable {
         this.rating = rating;
     }
 
-    //    public void addMeal(Meal m){
-//        meals.add(m);
-//    }
-//
-//    public ArrayList<Meal> get_mealList(){ return meals; }
-//    public void setMeals(ArrayList<Meal> new_meals) { meals = new_meals; }
+    public ArrayList<Double> getRatings() {
+        return ratings;
+    }
 
+    public void setRatings(ArrayList<Double> ratings) {
+        this.ratings = ratings;
+    }
 
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
+    }
+
+    public Date getUntil() {
+        return until;
+    }
+
+    public void setUntil(Date until) {
+        this.until = until;
+    }
 }

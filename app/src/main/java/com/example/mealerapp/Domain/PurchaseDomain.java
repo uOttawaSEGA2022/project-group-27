@@ -2,47 +2,78 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Purchase;
 
-public class PurchaseDomain {
+public class PurchaseDomain extends NotificationDomain {
 
-    public String purchase_meal_id;
-    public String status;
-    public String _id;
+    private String mealID;
+    private String cookID;
+    private String status;
+    private String clientID;
+    private String ID;
+    private String mealName;
 
-    public PurchaseDomain(String purchase_meal_id, String status, String id){
-        this.purchase_meal_id = purchase_meal_id;
-        this.status = status;
-        this._id = id;
-    }
+
+
     public PurchaseDomain(Purchase purchase){
-        this.purchase_meal_id = purchase.getMealID();
-
-        this.purchase_meal_id = purchase.getID();
+        this.mealID = purchase.getMealID();
 
         this.status = purchase.getStatus();
-        this._id = purchase.getID();
+
+        this.ID= purchase.getID();
+
+        this.clientID = purchase.getClientID();
+        this.cookID = purchase.getCookID();
+
+        this.mealName = purchase.getMealName();
+
+
+
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getMealID() {
+        return mealID;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setMealID(String mealID) {
+        this.mealID = mealID;
     }
 
-    public String get_id() {
-        return _id;
+    public String getCookID() {
+        return cookID;
+    }
+
+    public void setCookID(String cookID) {
+        this.cookID = cookID;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public String getPurchase_meal_id() {
-        return purchase_meal_id;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setPurchase_meal_id(String purchase_meal_id) {
-        this.purchase_meal_id = purchase_meal_id;
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
     }
 }

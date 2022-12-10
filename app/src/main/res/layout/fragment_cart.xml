@@ -4,20 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    app:layout_anchorGravity="center"
     tools:context=".Fragment.CartFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center|center_horizontal|center_vertical"
+        android:foregroundGravity="clip_horizontal|center_horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCart"
-            android:layout_width="364dp"
-            android:layout_height="512dp"
-            android:layout_marginStart="23dp"
+            android:layout_width="389dp"
+            android:layout_height="514dp"
             android:layout_marginTop="87dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginBottom="132dp"
+            android:foregroundGravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +35,10 @@
             android:layout_marginTop="38dp"
             android:layout_marginEnd="141dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/button_bg"
             android:text="Checkout"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

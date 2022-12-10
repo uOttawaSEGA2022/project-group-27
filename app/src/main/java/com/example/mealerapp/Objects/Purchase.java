@@ -6,27 +6,21 @@ import java.util.UUID;
 public class Purchase {
     //this is the meals which offered by clients
     private String mealID;
-    private String cook_ID;
+    private String cookID;
     private String status;
-    private String client_ID;
+    private String clientID;
     private String ID;
+    private String mealName;
 
     public Purchase(){}
 
-    public Purchase(String mealID, String cook_ID, String client_ID){
+    public Purchase(String mealID, String cook_ID, String client_ID, String mealName){
         this.mealID = mealID;
-        this.cook_ID = cook_ID;
-        this.client_ID = client_ID;
+        this.cookID = cook_ID;
+        this.clientID = client_ID;
         this.status = "Pending";
         this.ID = UUID.randomUUID().toString();
-    }
-
-    public Purchase(String mealID, String cook_ID, String client_ID, String ID){
-        this.mealID = mealID;
-        this.client_ID = client_ID;
-        this.cook_ID = cook_ID;
-        this.status = "Pending";
-        this.ID = ID;
+        this.mealName = mealName;
     }
 
 
@@ -38,12 +32,12 @@ public class Purchase {
         this.mealID = mealID;
     }
 
-    public String getCook_ID() {
-        return cook_ID;
+    public String getCookID() {
+        return cookID;
     }
 
-    public void setCook_ID(String cook_ID) {
-        this.cook_ID = cook_ID;
+    public void setCookID(String cookID) {
+        this.cookID = cookID;
     }
 
     public String getStatus() {
@@ -54,12 +48,12 @@ public class Purchase {
         this.status = status;
     }
 
-    public String getClient_ID() {
-        return client_ID;
+    public String getClientID() {
+        return clientID;
     }
 
-    public void setClient_ID(String client_ID) {
-        this.client_ID = client_ID;
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
     }
 
     public String getID() {
@@ -68,5 +62,13 @@ public class Purchase {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
     }
 }

@@ -107,7 +107,7 @@ public class ManageMealAdapter extends RecyclerView.Adapter<ManageMealAdapter.Vi
             super(itemView);
 
             mealCard = itemView.findViewById(R.id.search_mealCard);
-            textViewMealName = itemView.findViewById(R.id.search_textViewMealName);
+            textViewMealName = itemView.findViewById(R.id.textViewOrderMealName);
             textViewDesc = itemView.findViewById(R.id.search_textViewMealDesc);
             switchOffered = itemView.findViewById(R.id.switchOffered);
             textViewIngredients = itemView.findViewById(R.id.search_textViewIngredients);

@@ -1,11 +1,20 @@
 package com.example.mealerapp.Activity;
 
 
+import static android.content.ContentValues.TAG;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +31,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Calendar;
 
@@ -97,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 User user = documentSnapshot.toObject(User.class);
                                                 if(user.getRole().equals("Cook")){
                                                     Cook cook = documentSnapshot.toObject(Cook.class);
-                                                    if(cook.getSuspended()){
+                                                    if(cook.isSuspended()){
                                                         Calendar c = Calendar.getInstance();
                                                         if(cook.getUntil().before(c.getTime())){
                                                             cook.setUntil(null);

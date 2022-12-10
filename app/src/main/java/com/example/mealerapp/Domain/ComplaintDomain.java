@@ -2,7 +2,7 @@ package com.example.mealerapp.Domain;
 
 import com.example.mealerapp.Objects.Complaint;
 
-public class ComplaintDomain {
+public class ComplaintDomain extends NotificationDomain{
 
     public String complained_cook_id;
     public String description;
@@ -16,9 +16,9 @@ public class ComplaintDomain {
         this._id = id;
     }
     public ComplaintDomain(Complaint complaint) {
-        this.complained_cook_id = complaint.getComplained_cook_id();
+        this.complained_cook_id = complaint.getCookID();
         this.description = complaint.getDescription();
-        this._id = complaint.get_id();
+        this._id = complaint.getID();
     }
 
     public boolean getActioned() { return this.getActioned(); }

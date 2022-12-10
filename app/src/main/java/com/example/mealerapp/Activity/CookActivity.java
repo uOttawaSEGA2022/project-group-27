@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class CookActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button next;
@@ -171,7 +173,9 @@ public class CookActivity extends AppCompatActivity implements View.OnClickListe
                                     email,
                                     password,
                                     desc,
-                                    mAuth.getCurrentUser().getUid()
+                                    mAuth.getCurrentUser().getUid(),
+                                    5,
+                                    new ArrayList<Double>()
                             );
 
                             db.collection("users").document(mAuth.getCurrentUser().getUid())

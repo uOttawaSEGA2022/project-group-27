@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orderCard"
+    android:layout_width="350dp"
+    android:layout_height="160dp"
+    android:layout_gravity="center|top"
+    android:layout_margin="8dp"
+    android:alpha="1"
+    android:background="@drawable/cuis_background2"
+    android:backgroundTint="#F3F3F3"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/textViewOrderMealName"
+        android:layout_width="132dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="28dp"
+        android:text="Meal Name"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textViewTotalOrderPrice"
+        android:layout_width="148dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="14dp"
+        android:text="Total Price: "
+        app:layout_constraintBottom_toTopOf="@+id/textViewOrderQty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrderMealName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/btnOrderApprove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
+        android:text="Approve"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnOrderReject"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderClientName"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnOrderReject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_2"
+        android:text="Reject"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnOrderApprove"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderQty"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewOrderClientName"
+        android:layout_width="120dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="14dp"
+        android:text="Client Name"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrderApprove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderMealName" />
+
+    <TextView
+        android:id="@+id/textViewOrderQty"
+        android:layout_width="145dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="17dp"
+        android:text="Qty: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrderClientName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalOrderPrice" />
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/constraintLayout"-->
+    <!--        android:layout_width="350dp"-->
+    <!--        android:layout_height="160dp"-->
+    <!--        android:layout_gravity="center|top"-->
+    <!--        android:layout_margin="8dp"-->
+    <!--        android:alpha="1"-->
+    <!--        android:background="@drawable/cuis_background2"-->
+    <!--        android:backgroundTint="#F3F3F3"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageViewMealType"-->
+    <!--        android:layout_width="35dp"-->
+    <!--        android:layout_height="35dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:scaleX="2"-->
+    <!--        android:scaleY="2"-->
+    <!--        android:translationX="140dp"-->
+    <!--        android:translationY="50dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.0"-->
+    <!--        app:srcCompat="@drawable/breakfast" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewCuisine"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        android:layout_marginEnd="304dp"-->
+    <!--        android:layout_marginBottom="1dp"-->
+    <!--        android:text="Cuisine"-->
+    <!--        android:textColor="@color/purple_200"-->
+    <!--        android:textSize="20dp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:translationX="30dp"-->
+    <!--        android:translationY="-10dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
